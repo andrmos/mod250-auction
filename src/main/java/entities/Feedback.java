@@ -34,14 +34,29 @@ public class Feedback implements Serializable {
     @OneToOne
     @JoinColumn(name="AUCTION_ID", referencedColumnName="AUCTION_ID")
     protected Auction auction;
-    /*
-    Need to implement user and auction
-    private Long AuctionId;
-    private Long UserId;
-    */
+    
+    @OneToOne
+    @JoinColumn(name="USER_ID", referencedColumnName="USER_ID")
+    protected AuctionUser user;
 
     public Feedback(){
         
+    }
+
+    public AuctionUser getUser() {
+        return user;
+    }
+
+    public void setUser(AuctionUser user) {
+        this.user = user;
+    }
+    
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
     
     public String getComment() {

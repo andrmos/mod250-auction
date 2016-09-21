@@ -27,21 +27,21 @@ public class Product implements Serializable {
     @Column(name="PRODUCT_ID")
     private Long id;
     
-    private String product_name;
+    private String productName;
     private String description;
-    private String picture_path;
+    private String picturePath;
     private int category;
 
     private Product(){
     
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String product_name) {
+        this.productName = product_name;
     }
 
     public String getDescription() {
@@ -52,12 +52,12 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public String getPicture_path() {
-        return picture_path;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setPicture_path(String picture_path) {
-        this.picture_path = picture_path;
+    public void setPicturePath(String picture_path) {
+        this.picturePath = picture_path;
     }
 
     public int getCategory() {
