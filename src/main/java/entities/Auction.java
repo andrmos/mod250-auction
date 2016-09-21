@@ -40,10 +40,65 @@ public class Auction implements Serializable {
     @OneToOne
     @JoinColumn(name="USER_ID", referencedColumnName="USER_ID")
     protected AuctionUser user;
-    /*
-    product_id
-    */
+    
+    @OneToOne
+    @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
+    protected Product product;
+    
+    public Auction(){
+        
+    }
 
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Long duration) {
+        this.duration = duration;
+    }
+
+    public double getInitPrice() {
+        return initPrice;
+    }
+
+    public void setInitPrice(double initPrice) {
+        this.initPrice = initPrice;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
+    public AuctionUser getUser() {
+        return user;
+    }
+
+    public void setUser(AuctionUser user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
