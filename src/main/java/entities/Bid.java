@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -32,6 +34,10 @@ public class Bid implements Serializable {
     private double amount;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date bidDate;
+    
+    @ManyToOne
+    @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
+    protected AuctionUser auctionUser;
 
     public Long getId() {
         return id;
