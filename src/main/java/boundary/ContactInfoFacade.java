@@ -5,7 +5,7 @@
  */
 package boundary;
 
-import entities.Address;
+import entities.ContactInfo;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author oleeskild
  */
 @Stateless
-public class AddressFacade extends AbstractFacade<Address> {
+public class ContactInfoFacade extends AbstractFacade<ContactInfo> {
 
     @PersistenceContext(unitName = "no.mod250_mod250_auction_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class AddressFacade extends AbstractFacade<Address> {
         return em;
     }
 
-    public AddressFacade() {
-        super(Address.class);
+    public ContactInfoFacade() {
+        super(ContactInfo.class);
     }
     
 }
