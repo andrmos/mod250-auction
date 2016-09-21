@@ -38,7 +38,7 @@ public class Auction implements Serializable {
     private boolean open;
     
     @OneToOne
-    @JoinColumn(name="USER_ID", referencedColumnName="USER_ID")
+    @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
     protected AuctionUser user;
     
     @OneToOne
