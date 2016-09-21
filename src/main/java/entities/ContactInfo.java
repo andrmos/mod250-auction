@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,19 +20,24 @@ import javax.persistence.Table;
  * @author andre
  */
 @Entity
-@Table(name="ADDRESS")
-public class Address implements Serializable {
+@Table(name="CONTACT_INFO")
+public class ContactInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ADDRESS_ID")
+    @Column(name="CONTACT_INFO_ID")
     private Long id;
-    private String street;
-    private String city;
-    private int zip;
     
-    public Address() {
+    private String name;
+    private int phoneNumber;
+    private String email;
+    
+    @OneToOne
+    @JoinColumn(name="ADDRESS_ID", referencedColumnName="ADDRESS_ID")
+    protected Address address;
+    
+    public ContactInfo() {
         
     }
 
@@ -42,28 +49,36 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public String getStreet() {
-        return street;
+    public String getName() {
+        return name;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public int getZip() {
-        return zip;
+    public String getEmail() {
+        return email;
     }
 
-    public void setZip(int zip) {
-        this.zip = zip;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
@@ -76,10 +91,10 @@ public class Address implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Address)) {
+        if (!(object instanceof ContactInfo)) {
             return false;
         }
-        Address other = (Address) object;
+        ContactInfo other = (ContactInfo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -88,7 +103,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Address[ id=" + id + " ]";
+        return "entities.ContactInfo[ id=" + id + " ]";
     }
     
 }
