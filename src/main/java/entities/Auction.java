@@ -12,7 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,12 +31,16 @@ public class Auction implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="AUCTION_ID")
     private Long id;
+    @Temporal(TemporalType.DATE)
     private Date startTime;
     private Long duration;
     private double initPrice;
     private boolean open;
+    
+    @OneToOne
+    @JoinColumn(name="USER_ID", referencedColumnName="USER_ID")
+    protected AuctionUser user;
     /*
-    user_id
     product_id
     */
 
