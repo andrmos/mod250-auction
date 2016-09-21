@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AuctionUserView;
+package manageBeans;
 
 import boundary.AuctionUserFacade;
 import javax.inject.Named;
