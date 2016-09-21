@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +30,10 @@ public class Feedback implements Serializable {
     private Long id;
     private String comment;
     private int starAmount;
+    
+    @OneToOne
+    @JoinColumn(name="AUCTION_ID", referencedColumnName="AUCTION_ID")
+    protected Auction auction;
     /*
     Need to implement user and auction
     private Long AuctionId;
