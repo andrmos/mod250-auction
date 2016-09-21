@@ -20,13 +20,13 @@ import javax.persistence.Table;
  * @author DidrikKvanvik
  */
 @Entity
-@Table(name="USER")
+@Table(name="AUCTION_USER")
 public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="USER_ID")
+    @Column(name="AUCTION_USER_ID")
     private Long id;
     private String username;
     private String password;
