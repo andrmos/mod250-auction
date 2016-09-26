@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    </h:head>
+
+    <h:body>       
+       <div id="navBarDiv">
+           <b:navBar brandHref="#" inverse="true">
+               <b:navbarLinks styleClass="navbar-left" >
+                   <b:navLink value="Home"  href="#"></b:navLink>
+                   <ui:insert name="userDependentLink">                       
+                   </ui:insert>
+                   
+               </b:navbarLinks>
+               <b:navbarLinks styleClass="navbar-right">
+                   <ui:insert name="loginLink">
+                       <b:navLink href="/mod250-auction/login.xhtml">Login</b:navLink>
+                   </ui:insert> 
+               </b:navbarLinks>
+           </b:navBar>
+       </div>
+        <div style="padding-left: 10px; padding-right: 10px">
+            <ui:insert name="contentDiv">
+                conetent
+            </ui:insert>
+        </div>
+       
+
+    </h:body>
+
+</html>
