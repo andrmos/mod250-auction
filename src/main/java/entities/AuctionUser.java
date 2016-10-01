@@ -33,10 +33,16 @@ public class AuctionUser implements Serializable {
     private String username;
     private String password;
     private int sellers_rating;
-    
-    private enum Roles{
-        SELLER, BUYER;
+    private String role;
+
+    public String getRole() {
+        return role;
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
     
     @OneToOne
     @JoinColumn(name="CONTACT_INFO_ID", referencedColumnName="CONTACT_INFO_ID")
