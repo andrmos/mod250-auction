@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +51,7 @@ public class AuctionUser implements Serializable {
     
     // mapped by auctionUser field in class Bid
     @OneToMany(mappedBy="auctionUser")
-    protected ArrayList<Bid> bids;
+    protected List<Bid> bids;
     
     public AuctionUser(){
     

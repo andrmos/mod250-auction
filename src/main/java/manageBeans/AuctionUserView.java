@@ -11,6 +11,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+
 
 /**
  *
@@ -31,7 +34,7 @@ public class AuctionUserView implements Serializable {
     }
     
     public int getAllUsers(){
-        return 12;
+        return 12;            
     }
     
 }
