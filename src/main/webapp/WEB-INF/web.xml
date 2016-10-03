@@ -20,14 +20,13 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>
-    
+    </welcome-file-list>    
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>authenticationRealm </realm-name>
+        <realm-name>authenticationRealm</realm-name>
         <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
-            <form-error-page>/loginError.xhtml</form-error-page>
+            <form-error-page>/login.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-constraint>
@@ -52,5 +51,34 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
+     <security-constraint>
+        <display-name>Customer Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected customer area</web-resource-name>
+            <description></description>
+            <url-pattern>/SellerViews/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>seller</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+     <security-role>
+         <description>user security role</description>
+         <role-name>customer</role-name>
+     </security-role>
+     <security-role>
+         <description>user security role</description>
+         <role-name>seller</role-name>
+     </security-role>          
 </web-app>
