@@ -27,36 +27,63 @@ import javax.persistence.TemporalType;
 public class Auction implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    @OneToOne
+    @JoinColumn(name="BID_ID", referencedColumnName="BID_ID")
+    protected Bid bid;
+    private int currentBid;
+    private Long duration;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="AUCTION_ID")
     private Long id;
-    @Temporal(TemporalType.DATE)
-    private Date startTime;
-    private Long duration;
     private double initPrice;
     // True if auction is published and visible to users
     private boolean published;   
     
     @OneToOne
-    @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
-    protected AuctionUser user;
-    
-    @OneToOne
     @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
     protected Product product;
+    @Temporal(TemporalType.DATE)    
+    private Date startTime;
+    
+    @OneToOne
+    @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
+    protected AuctionUser user;
     
     public Auction(){
         
     }
-
-    public Date getStartTime() {
-        return startTime;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Auction)) {
+            return false;
+        }
+        Auction other = (Auction) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+    
+    public Bid getBid() {
+        return bid;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setBid(Bid bid) {
+        this.bid = bid;
     }
+    
+    public int getCurrentBid() {
+        return currentBid;
+    }
+
+    public void setCurrentBid(int currentBid) {
+        this.currentBid = currentBid;
+    }
+
 
     public Long getDuration() {
         return duration;
@@ -64,6 +91,14 @@ public class Auction implements Serializable {
 
     public void setDuration(Long duration) {
         this.duration = duration;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public double getInitPrice() {
@@ -78,16 +113,8 @@ public class Auction implements Serializable {
         return published;
     }
 
-    public void setOpen(boolean published) {
+    public void setPublished(boolean published) {
         this.published = published;
-    }
-
-    public AuctionUser getUser() {
-        return user;
-    }
-
-    public void setUser(AuctionUser user) {
-        this.user = user;
     }
 
     public Product getProduct() {
@@ -97,15 +124,21 @@ public class Auction implements Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
-
     
-    
-    public Long getId() {
-        return id;
+    public Date getStartTime() {
+        return startTime;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+    
+    public AuctionUser getUser() {
+        return user;
+    }
+    
+    public void setUser(AuctionUser user) {
+        this.user = user;
     }
 
     @Override
@@ -113,19 +146,6 @@ public class Auction implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Auction)) {
-            return false;
-        }
-        Auction other = (Auction) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
     }
 
     @Override
