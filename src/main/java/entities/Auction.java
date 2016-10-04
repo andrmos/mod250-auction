@@ -39,8 +39,9 @@ public class Auction implements Serializable {
     @Column(name="AUCTION_ID")
     private Long id;
     private double initPrice;
+    private boolean isOpen;
     // True if auction is published and visible to users
-    private boolean published;   
+    private boolean published;
     
     @OneToOne
     @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
