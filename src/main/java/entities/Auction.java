@@ -74,15 +74,6 @@ public class Auction implements Serializable {
     public void setBid(Bid bid) {
         this.bid = bid;
     }
-    
-    public int getCurrentBid() {
-        return currentBid;
-    }
-
-    public void setCurrentBid(int currentBid) {
-        this.currentBid = currentBid;
-    }
-
 
     public Long getDuration() {
         return duration;
