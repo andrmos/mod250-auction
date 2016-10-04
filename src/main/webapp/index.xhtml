@@ -15,24 +15,15 @@
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">            
             <ui:define name="contentDiv">
                 <ui:include src="/Templates/searchBar.xhtml"></ui:include>
-              
-                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
-                                       profile="Hans olav" title="Pen bil"/>
+                
+                <ui:repeat value="#{auctionListManagedBean.auctions}" var="auction">
+                
+                    <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" timeLeft="#{auction.duration}"
+                                       profile="" title="#{auction.product.description}"/>
                     <br/>
-                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
-                                       profile="Hans olav" title="Pen bil"/>
-                     <br/>
-                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
-                                       profile="Hans olav" title="Pen bil"/>
-                     <br/>
-                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
-                                       profile="Hans olav" title="Pen bil"/>
-                     <br/>
-                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
-                                       profile="Hans olav" title="Pen bil"/>
-                     <br/>
-                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
-                                       profile="Hans olav" title="Pen bil"/> 
+                    
+                </ui:repeat>
+              
             </ui:define>
         </ui:composition>           
     </h:body>
