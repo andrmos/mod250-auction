@@ -1,19 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Customer Profile</title>
+        <h:outputStylesheet library="css" name ="customer.css"/> 
     </h:head>
     <h:body>
-        Hello customer        
-        <f:view>
-            <h:form>
-                <h:outputLabel value="#{auctionUserView.getAllUsers()}"/>
-            </h:form>
-        </f:view>
-      
+        <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
+            <h1>Overview over bids</h1>
+            <ui:define name="contentDiv">
+                                            
+                    <ez:auctionElement pictureFilePath="/resources/images/car.png" price="599" timeLeft="19:29"
+                                       profile="Hans olav" title="Pen bil"/>
+                    <br/>                                   
+
+            </ui:define>
+            
+        </ui:composition>                       
     </h:body>
 </html>
