@@ -37,6 +37,10 @@ public class AuctionUserView implements Serializable {
     public AuctionUserView() {
     }
     
+    public int getNumber(){
+        return 12;
+    }
+    
     public ArrayList<Auction> getWinnerAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
         arr.addAll(this.userFacade.getAllWinningAuctions());

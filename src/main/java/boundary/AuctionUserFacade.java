@@ -47,7 +47,7 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     public int getAuctionUserId(){
         String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
         int id = em.createQuery(
-                "SELECT a.auction_user_id FROM auction_user AS a WHERE a.auction_user_id = " + username
+                "SELECT A.id FROM AuctionUser AS A WHERE A.username = '" + username + "'"
         ).setMaxResults(1).getFirstResult();
         return id;
     }
@@ -80,10 +80,13 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         DateTime nowDate = new DateTime();
         DateTime dateTime = new DateTime();
         
+        
+        AuctionUser user = em.find(AuctionUser.class, Long.valueOf(id));
+        
         list.addAll(em.createQuery( //query to retrieve all bids
-                "SELECT a.auction_id FROM auction AS a, auction_user AS au, bid AS b"
-                        + " WHERE a.auction_id = b.auction_id AND b.auction_user_id = " + 
-                        id + " AND a.bid_id = b.bid_id").getResultList());
+                "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id = 78" //user.getId()
+        ).getResultList());
+        
         
         //Adding winning auctions to the winningList
         for(int i = 0; i < list.size(); i++){
