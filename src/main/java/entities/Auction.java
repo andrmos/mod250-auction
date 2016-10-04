@@ -39,7 +39,7 @@ public class Auction implements Serializable {
     @Column(name="AUCTION_ID")
     private Long id;
     private double initPrice;
-    private boolean open;
+    private boolean isOpen;
     
     @OneToOne
     @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
