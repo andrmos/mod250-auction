@@ -35,7 +35,8 @@ public class Auction implements Serializable {
     private Date startTime;
     private Long duration;
     private double initPrice;
-    private boolean open;
+    // True if auction is published and visible to users
+    private boolean published;   
     
     @OneToOne
     @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
@@ -73,12 +74,12 @@ public class Auction implements Serializable {
         this.initPrice = initPrice;
     }
 
-    public boolean isOpen() {
-        return open;
+    public boolean isPublished() {
+        return published;
     }
 
-    public void setOpen(boolean open) {
-        this.open = open;
+    public void setOpen(boolean published) {
+        this.published = published;
     }
 
     public AuctionUser getUser() {
