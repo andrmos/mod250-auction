@@ -31,7 +31,6 @@ public class Auction implements Serializable {
     @OneToOne
     @JoinColumn(name="BID_ID", referencedColumnName="BID_ID")
     protected Bid bid;
-    private int currentBid;
     private Long duration;
     
     @Id
@@ -39,7 +38,6 @@ public class Auction implements Serializable {
     @Column(name="AUCTION_ID")
     private Long id;
     private double initPrice;
-    private boolean isOpen;
     // True if auction is published and visible to users
     private boolean published;
     
