@@ -40,6 +40,8 @@ public class Auction implements Serializable {
     private Long id;
     private double initPrice;
     private boolean isOpen;
+    // True if auction is published and visible to users
+    private boolean published;
     
     @OneToOne
     @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
@@ -108,6 +110,13 @@ public class Auction implements Serializable {
         this.initPrice = initPrice;
     }
 
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
 
     public Product getProduct() {
         return product;
@@ -138,14 +147,6 @@ public class Auction implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }
-    
-    public boolean isOpen() {
-        return open;
-    }
-    
-    public void setOpen(boolean open) {
-        this.open = open;
     }
 
     @Override
