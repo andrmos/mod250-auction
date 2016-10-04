@@ -5,6 +5,7 @@
  */
 package entities;
 
+import enums.Category;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,9 +31,9 @@ public class Product implements Serializable {
     private String productName;
     private String description;
     private String picturePath;
-    private int category;
+    private Category category;
 
-    private Product(){
+    public Product(){
     
     }
 
@@ -60,11 +61,11 @@ public class Product implements Serializable {
         this.picturePath = picture_path;
     }
 
-    public int getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
    
