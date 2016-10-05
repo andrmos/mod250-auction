@@ -13,17 +13,25 @@
         <cc:attribute name="timeLeft" required="true"/>
         <cc:attribute name="pictureFilePath" required="true"/>
         <cc:attribute name="profile" required="true"/>  
-        <cc:attribute name="showRating" required="true"/>  
+        <cc:attribute name="showRating" required="true"/> 
+        <cc:attribute name="deleteAuction" required="true"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <div style="border: thin black solid">
-            <b:modal id="amodal" title="Modal Example" styleClass="ratingModal" rendered="#{cc.attrs.showRating}">
+            <b:modal id="amodal" title="Rate Product" styleClass="ratingModal" rendered="#{cc.attrs.showRating}">
                 <p>Modal body</p>
                 <f:facet name="footer">
-                    <b:button value="close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
+                    <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
                     <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
+                </f:facet>
+            </b:modal>
+            <b:modal id="amodal" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
+                <p>Are you sure you want to delete this auction?</p>
+                <f:facet name="footer">
+                    <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
+                    <b:button value="Delete" look="primary" dismiss="modal" onclick="return false;"/>
                 </f:facet>
             </b:modal>
             <b:container fluid="true" >
@@ -58,6 +66,7 @@
                             <b:column span="6">
                                 <b:button id="auctionButton" value="View"  />
                                 <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating}"/>
+                                <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction}"/>
                             </b:column>
                         </b:row>
                     </b:column>
