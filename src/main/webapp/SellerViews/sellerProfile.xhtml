@@ -19,24 +19,21 @@
                     <ui:repeat value="#{auctionUserView.getWinnerAuctions()}" var="auction">
                        
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()"/>
+                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="true"/>
                         <br/>  
                     </ui:repeat>
-                   
                 </div> 
                 
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
                     <h1>History</h1>
                     <ui:repeat value="#{AuctionUserView.getCurrentBids()}" var="auction">
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()"/>
+                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="false"/>
                         <br/>     
                     </ui:repeat>
                    
                 </div> 
-
             </ui:define>
-            
         </ui:composition>                       
     </h:body>
 </html>
