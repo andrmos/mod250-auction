@@ -49,25 +49,37 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     }
     
     /**
-     * Method returns all the winning auctions of a given customer.
+     * Method returns all the finished auctions.
      * @return winningList
-     *          LinkedList of winning auctions
+     *          LinkedList of finished auctions
      * 
      */
-    public List getAllWinningAuctions(){
+    public List getFinishedAuctions(){
         return getAuctions(true);
     }
     
     /**
-     * Method returns all the current auctions of a given customer
+     * Method returns all the current ongoing auctions
      * @return auctionList
      *          LinkedList of current bids on auctions
      */
-    public List getAllCurrentBids(){
+    public List getCurrentAuctions(){
        return getAuctions(false);
     }
+         
     
-    
+    /**
+     * Method returns a list of auctions. If '@isOver' is true and the user
+     * is a customer, it returns a list of auctions the customer has won, else if
+     * false it returns auctions ongoing the customer has bid on. 
+     * If '@isOver' is true and user is seller, method returns a list of finished
+     * auctions published by the seller, else a list of ongoing auctions. 
+     * 
+     * @param isOver
+     *        boolean variable to check if auction is finished
+     * @return 
+     *      LinkedList of auctions
+     */
     public List getAuctions(boolean isOver){
         int id = getAuctionUserId();
         LinkedList<Integer> list = new LinkedList<Integer>();
@@ -75,14 +87,19 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         Auction auction;
         DateTime nowDate = new DateTime();
         DateTime dateTime = new DateTime();
-        
-        
+       
         AuctionUser user = em.find(AuctionUser.class, Long.valueOf(id));
         
-        list.addAll(em.createQuery( //query to retrieve all bids
+        if(user.getRole().equals("customer")){
+            list.addAll(em.createQuery( //query to retrieve all auctions with bids
                 "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id = 78" //user.getId()
-        ).getResultList());
-        
+            ).getResultList());
+            
+        }else{
+            list.addAll(em.createQuery( //query to retrieve all auctions
+                 "SELECT a.auction.id FROM Auction as a WHERE a.auctionUser.id = " + user.getId()
+            ).getResultList());
+        }
         
         //Adding winning auctions to the winningList
         for(int i = 0; i < list.size(); i++){
@@ -90,18 +107,16 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
            dateTime = new DateTime(auction.getStartTime());
            dateTime.plusSeconds(auction.getDuration().intValue());
            
-           if(isOver){
+           if(isOver){ //if auction is done
                 if(dateTime.compareTo(nowDate) < 0){
                     auctionList.add(auction);
                 }
-           }else{
+           }else{ //if auction is still ongoing
                if(dateTime.compareTo(nowDate) > 0){
                     auctionList.add(auction);
                 }
            }
         }
-        return auctionList;
-    
+        return auctionList; 
     }
-    
-}
+ }

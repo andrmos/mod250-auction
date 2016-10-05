@@ -41,15 +41,15 @@ public class AuctionUserView implements Serializable {
         return 12;
     }
     
-    public ArrayList<Auction> getWinnerAuctions(){
+    public ArrayList<Auction> getFinishedAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
-        arr.addAll(this.userFacade.getAllWinningAuctions());
+        arr.addAll(this.userFacade.getFinishedAuctions());
         return arr;
     }
     
-    public ArrayList<Auction> getCurrentBids(){
+    public ArrayList<Auction> getCurrentAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
-        arr.addAll(this.userFacade.getAllCurrentBids());
+        arr.addAll(this.userFacade.getCurrentAuctions());
         return arr;
     }
     
