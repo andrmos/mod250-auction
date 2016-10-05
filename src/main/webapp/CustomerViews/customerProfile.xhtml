@@ -16,7 +16,7 @@
                 <h:outputText value="#{auctionUserView.getNumber()}"/>
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
 
-                    <ui:repeat value="#{auctionUserView.getWinnerAuctions()}" var="auction">
+                    <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">
                        
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
                                            profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()"/>
@@ -27,7 +27,7 @@
                 
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
                     
-                    <ui:repeat value="#{AuctionUserView.getCurrentBids()}" var="auction">
+                    <ui:repeat value="#{AuctionUserView.getCurrentAuctions()}" var="auction">
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
                                            profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()"/>
                         <br/>  

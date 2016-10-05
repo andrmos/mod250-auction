@@ -49,12 +49,12 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     }
     
     /**
-     * Method returns all the winning auctions of a given customer.
+     * Method returns all the finished auctions of a given customer.
      * @return winningList
-     *          LinkedList of winning auctions
+     *          LinkedList of finished auctions
      * 
      */
-    public List getAllWinningAuctions(){
+    public List getFinishedAuctions(){
         return getAuctions(true);
     }
     
@@ -63,10 +63,10 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
      * @return auctionList
      *          LinkedList of current bids on auctions
      */
-    public List getAllCurrentBids(){
+    public List getCurrentAuctions(){
        return getAuctions(false);
     }
-    
+         
     
     public List getAuctions(boolean isOver){
         int id = getAuctionUserId();
@@ -79,10 +79,16 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         
         AuctionUser user = em.find(AuctionUser.class, Long.valueOf(id));
         
-        list.addAll(em.createQuery( //query to retrieve all bids
+        if(user.getRole().equals("customer")){
+            list.addAll(em.createQuery( //query to retrieve all bids
                 "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id = 78" //user.getId()
-        ).getResultList());
-        
+            ).getResultList());
+            
+        }else{
+            list.addAll(em.createQuery(
+                 "SELECT a.auction.id FROM Auction as a WHERE a.auctionUser.id = " + user.getId()
+            ).getResultList());
+        }
         
         //Adding winning auctions to the winningList
         for(int i = 0; i < list.size(); i++){
@@ -90,18 +96,16 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
            dateTime = new DateTime(auction.getStartTime());
            dateTime.plusSeconds(auction.getDuration().intValue());
            
-           if(isOver){
+           if(isOver){ //if auction is done
                 if(dateTime.compareTo(nowDate) < 0){
                     auctionList.add(auction);
                 }
-           }else{
+           }else{ //if auction is still ongoing
                if(dateTime.compareTo(nowDate) > 0){
                     auctionList.add(auction);
                 }
            }
         }
-        return auctionList;
-    
+        return auctionList; 
     }
-    
-}
+ }
