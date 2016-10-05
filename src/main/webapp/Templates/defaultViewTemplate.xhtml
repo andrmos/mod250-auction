@@ -17,7 +17,8 @@
                    <b:navLink value="Home"  href="/mod250_auction/index.xhtml"></b:navLink>
                    <b:navLink value="Bid overview"  href="/mod250_auction/CustomerViews/customerProfile.xhtml" rendered="#{facesContext.externalContext.isUserInRole('customer')}"></b:navLink>
                    <b:navLink value="Auction overview" href="/mod250_auction/SellerViews/sellerProfile.xhtml" rendered="#{facesContext.externalContext.isUserInRole('seller')}"></b:navLink>
-                   <ui:insert name="userDependentLink">                       
+                   <b:navLink value="Login" href="/mod250_auction/login.xhtml" style="float:right"></b:navLink>
+                   <ui:insert name="userDependentLink">
                    </ui:insert>                   
                </b:navbarLinks>
                <b:navbarLinks styleClass="navbar-right">
