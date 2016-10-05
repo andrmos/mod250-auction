@@ -109,7 +109,7 @@ public class AuctionListManagedBean implements Serializable {
     }
     
     public void createAuction() {
-        /*System.out.println("heymama");
+       /* System.out.println("heymama");
         
         Long kk= 123L;
     
@@ -130,6 +130,6 @@ public class AuctionListManagedBean implements Serializable {
         auctionUser.create(user);
         auction1.setUser(user);
         auction1.setDuration(123L);
-        auction.create(auction1);*/        
+        auction.create(auction1);*/
     }           
 }
