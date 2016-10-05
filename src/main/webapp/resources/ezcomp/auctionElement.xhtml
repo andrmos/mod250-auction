@@ -12,13 +12,14 @@
         <cc:attribute name="title" required="true"/>
         <cc:attribute name="timeLeft" required="true"/>
         <cc:attribute name="pictureFilePath" required="true"/>
-        <cc:attribute name="profile" required="true"/>        
+        <cc:attribute name="profile" required="true"/>  
+        <cc:attribute name="showRating" required="true"/>  
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <div style="border: thin black solid">
-            <b:modal id="amodal" title="Modal Example" styleClass="ratingModal">
+            <b:modal id="amodal" title="Modal Example" styleClass="ratingModal" rendered="#{cc.attrs.showRating}">
                 <p>Modal body</p>
                 <f:facet name="footer">
                     <b:button value="close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
@@ -56,7 +57,7 @@
                             </b:column>
                             <b:column span="6">
                                 <b:button id="auctionButton" value="View"  />
-                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;"/>
+                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating}"/>
                             </b:column>
                         </b:row>
                     </b:column>
