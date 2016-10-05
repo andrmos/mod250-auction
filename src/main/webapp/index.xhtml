@@ -19,7 +19,7 @@
                 <ui:repeat value="#{auctionListManagedBean.auctions}" var="auction">
                 
                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" timeLeft="#{auction.duration}"
-                                       profile="" title="#{auction.product.description}" showRating="false"/>
+                                       profile="" title="#{auction.product.description}" showRating="false" deleteAuction="false"/>
                     <br/>
                     
                 </ui:repeat>
