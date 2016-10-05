@@ -7,7 +7,6 @@ package boundary;
 
 import entities.Auction;
 import entities.AuctionUser;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,9 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.Instant;
-import org.joda.time.Interval;
 
 /**
  *

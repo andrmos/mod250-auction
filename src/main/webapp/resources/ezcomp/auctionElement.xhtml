@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <!-- INTERFACE -->
     <cc:interface>
@@ -17,6 +18,13 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <div style="border: thin black solid">
+            <b:modal id="amodal" title="Rate Product" styleClass="modalPseudoClass">
+                    <p>Modal body</p>
+                    <f:facet name="footer">
+                        <b:button value="Close" dismiss="modal" onclick="return false;"/>
+                        <b:button value="Submit" look="primary" dismiss="modal" onclick="return false;"/> <!-- legg til i onclick paa send inn skjema info -->
+                    </f:facet>
+                    </b:modal>
             <b:container fluid="true" >
                 <b:row>
                     <b:column span="4">
@@ -47,7 +55,8 @@
 
                             </b:column>
                             <b:column span="6">
-                                <b:button id="auctionButton" value="View"  />                                                                    
+                                <b:button id="auctionButton" value="View"  />
+                                <a id="atrigger" class="btn btn-primary" href="#amodal" data-toggle="modal">Rate</a>
                             </b:column>
                         </b:row>
                     </b:column>

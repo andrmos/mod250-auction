@@ -2,10 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp">
-    <h:head>
+      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
+      <h:head>
         <h:outputStylesheet name ="css/customer.css"/> 
         <title>Customer Profile</title>
     </h:head>
@@ -16,8 +15,7 @@
                          
                 <h:outputText value="#{auctionUserView.getNumber()}"/>
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
-                    
-                    
+
                     <ui:repeat value="#{auctionUserView.getWinnerAuctions()}" var="auction">
                        
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
