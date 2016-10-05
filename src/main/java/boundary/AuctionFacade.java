@@ -59,8 +59,8 @@ public class AuctionFacade extends AbstractFacade<Auction> {
            category){
        List<Auction> tempList= getAuctionByCategory(category);
        for(int i=0; i<tempList.size(); i++){
-           if(!tempList.get(i).getProduct().getProductName().contains(keyword)||
-                !tempList.get(i).getProduct().getDescription().contains(keyword)){
+           if((!tempList.get(i).getProduct().getProductName().contains(keyword))||
+                   (!tempList.get(i).getProduct().getDescription().contains(keyword))){
                tempList.remove(i);
            }
        }
