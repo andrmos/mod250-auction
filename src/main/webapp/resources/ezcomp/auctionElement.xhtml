@@ -18,13 +18,13 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <div style="border: thin black solid">
-            <b:modal id="amodal" title="Rate Product" styleClass="modalPseudoClass">
-                    <p>Modal body</p>
-                    <f:facet name="footer">
-                        <b:button value="Close" dismiss="modal" onclick="return false;"/>
-                        <b:button value="Submit" look="primary" dismiss="modal" onclick="return false;"/> <!-- legg til i onclick paa send inn skjema info -->
-                    </f:facet>
-                    </b:modal>
+            <b:modal id="amodal" title="Modal Example" styleClass="ratingModal">
+                <p>Modal body</p>
+                <f:facet name="footer">
+                    <b:button value="close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
+                    <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
+                </f:facet>
+            </b:modal>
             <b:container fluid="true" >
                 <b:row>
                     <b:column span="4">
@@ -56,7 +56,7 @@
                             </b:column>
                             <b:column span="6">
                                 <b:button id="auctionButton" value="View"  />
-                                <a id="atrigger" class="btn btn-primary" href="#amodal" data-toggle="modal">Rate</a>
+                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;"/>
                             </b:column>
                         </b:row>
                     </b:column>
