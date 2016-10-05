@@ -39,16 +39,16 @@ public class AuctionListManagedBean implements Serializable {
     
     private List<Auction> currentListOfAuctions;
     private String selectedCategory;
-    private String searhKeyword;
+    private String searchKeyword;
     
 
 
-    public String getSearhKeyword() {
-        return searhKeyword;
+    public String getSearchKeyword() {
+        return searchKeyword;
     }
 
-    public void setSearhKeyword(String searhKeyword) {
-        this.searhKeyword = searhKeyword;
+    public void setSearchKeyword(String searhKeyword) {
+        this.searchKeyword = searhKeyword;
     }
 
     public String getSelectedCategory() {
@@ -62,11 +62,14 @@ public class AuctionListManagedBean implements Serializable {
         this.selectedCategory=selectedCategory;
     }
     
-    public List getSelectedCategories(){
+    public List<SelectItem> getSelectedCategories(){
         List selectedCategories=new ArrayList();
-        selectedCategories.add(new SelectItem("value1", "All Items"));
-        selectedCategories.add(new SelectItem("value2", "Electronics"));
-        selectedCategories.add(new SelectItem("value2", "Guns"));
+        selectedCategories.add(new SelectItem("10", "All Items"));
+        selectedCategories.add(new SelectItem("0", "Clothing"));
+        selectedCategories.add(new SelectItem("1", "Electronics"));
+        selectedCategories.add(new SelectItem("2", "White Wear"));
+        selectedCategories.add(new SelectItem("3", "Jewlerry"));        
+        selectedCategories.add(new SelectItem("4", "Guns"));        
         return selectedCategories;
     }
     
@@ -77,14 +80,28 @@ public class AuctionListManagedBean implements Serializable {
      
     }
     
+    private Category getEnumFromSelectedCatagory(){        
+        return Category.fromInt(Integer.parseInt(selectedCategory));
+    }
+    
     public void  search(){       
-        currentListOfAuctions=auction.getAuctionsByKeyword(searhKeyword);
+        if(selectedCategory.equals("10")||selectedCategory.equals("")){
+        currentListOfAuctions=auction.getAuctionsByKeyword(searchKeyword);
+        }
+        else if((!selectedCategory.equals("10")||!selectedCategory.equals(""))
+                && searchKeyword==null||searchKeyword.equals("")){
+            currentListOfAuctions=auction.getAuctionByCategory(getEnumFromSelectedCatagory());
+        }
+        else {
+            currentListOfAuctions=auction.getAuctionsByKeywordAndCategory
+        (searchKeyword, getEnumFromSelectedCatagory());
+        }        
     }
     
     
     public List<Auction> getAuctions() {
-        if(currentListOfAuctions==null||searhKeyword.equals("")){
-        return auction.findAll();
+        if(currentListOfAuctions==null){
+            return auction.findAll();
         }
         else{
             return currentListOfAuctions;
@@ -92,16 +109,16 @@ public class AuctionListManagedBean implements Serializable {
     }
     
     public void createAuction() {
-        System.out.println("heymama");
+       /* System.out.println("heymama");
         
         Long kk= 123L;
     
         Product product = new Product();
-        product.setCategory(Category.GUNS);
+        product.setCategory(Category.JEWLERRY);
         product.setPicturePath("/resources/images/car.png");
         product.setProductName("Sexy necklace");
         product.setDescription("Sweet baby");
-        //productFacade.create(product);
+        productFacade.create(product);
         Auction auction1 = new Auction();
         auction1.setDuration(3600L);
         auction1.setProduct(product);
@@ -110,15 +127,9 @@ public class AuctionListManagedBean implements Serializable {
         user.setPassword("a4279eae47aaa7417da62434795a011ccb0ec870f7f56646d181b5500a892a9a");
         user.setUsername("seller");
         user.setRole("seller");    
-        //auctionUser.create(user);
+        auctionUser.create(user);
         auction1.setUser(user);
         auction1.setDuration(123L);
-        //auction.create(auction1);
-        
-    }
-    
-    //public List<Auction> getAuctionsByCategory(int category) {
-        
-    //}
-    
+        auction.create(auction1);*/
+    }           
 }
