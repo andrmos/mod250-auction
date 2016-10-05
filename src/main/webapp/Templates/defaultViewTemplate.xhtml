@@ -17,7 +17,7 @@
                    <b:navLink value="Bid overview"  href="/mod250_auction/CustomerViews/customerProfile.xhtml" rendered="#{facesContext.externalContext.isUserInRole('customer')}"></b:navLink>
                    <b:navLink value="Auction overview" href="/mod250_auction/SellerViews/sellerProfile.xhtml" rendered="#{facesContext.externalContext.isUserInRole('seller')}"></b:navLink>
                    <b:navLink value="Login" href="/mod250_auction/login.xhtml" style="float: right" rendered="#{not (facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer'))}"/> <!-- Render if not logged in-->
-                   <b:navLink value="Logout" href="/mod250_auction/index.xhtml" style="float: right" rendered="#{facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer')}" action="#{auctionUserView.logout}"/> <!-- Render only if logged in-->
+                   <b:navLink value="Logout" href="#{auctionUserView.logout()}" style="float: right" rendered="#{facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer')}"/> <!-- Render only if logged in-->
                    <ui:insert name="userDependentLink">
                    </ui:insert>                   
                </b:navbarLinks>

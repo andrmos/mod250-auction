@@ -55,8 +55,7 @@ public class AuctionUserView implements Serializable {
     
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index?faces-redirect=true";
-        //ikke helt fungerende
+        return "/mod250_auction/index.xhtml";
     }
     
 }
