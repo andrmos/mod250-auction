@@ -90,14 +90,16 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
        
         AuctionUser user = em.find(AuctionUser.class, Long.valueOf(id));
         
-        if(user.getRole().equals("customer")){
-            list.addAll(em.createQuery( //query to retrieve all auctions with bids
-                "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id = 78" //user.getId()
-            ).getResultList());
+        if(user != null){
+           if(user.getRole().equals("customer")){
+                list.addAll(em.createQuery( //query to retrieve all auctions with bids
+                    "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id = 78" //user.getId()
+                ).getResultList());
             
+            } 
         }else{
             list.addAll(em.createQuery( //query to retrieve all auctions
-                 "SELECT a.auction.id FROM Auction as a WHERE a.auctionUser.id = " + user.getId()
+                 "SELECT a.id FROM Auction as a WHERE a.user.id = 2" //+ user.getId()
             ).getResultList());
         }
         
