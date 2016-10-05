@@ -7,12 +7,13 @@
       <description>Keep a copy of the generated servlet class' java code.</description>
     </property>
   </jsp-config>
+  <context-root>/mod250_auction</context-root>
   <security-role-mapping>
-        <role-name>customer</role-name>
-        <group-name>customer</group-name>
-    </security-role-mapping>
-      <security-role-mapping>
-        <role-name>seller</role-name>
-        <group-name>seller</group-name>
-    </security-role-mapping>
+    <role-name>customer</role-name>
+    <group-name>customer</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>seller</role-name>
+    <group-name>seller</group-name>
+  </security-role-mapping>
 </glassfish-web-app>

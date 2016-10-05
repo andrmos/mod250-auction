@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp">
+      <h:head>
+        <h:outputStylesheet name ="css/customer.css"/> 
+        <title>Seller Profile</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
+            <h1>Overview over Auctions</h1>
+            <ui:define name="contentDiv">
+                <div class="auction-list" style="height: 400px; overflow-y: auto">
+                    <h1>Ongoing</h1>
+                    <ui:repeat value="#{AuctionUserView.getWinnerAuctions()}" var="auction">
+                       
+                        <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
+                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="true"/>
+                        <br/>  
+                    </ui:repeat>
+                </div> 
+                
+                <div class="auction-list" style="height: 400px; overflow-y: auto">
+                    <h1>History</h1>
+                    <ui:repeat value="#{AuctionUserView.getCurrentBids()}" var="auction">
+                        <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
+                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="false"/>
+                        <br/>     
+                    </ui:repeat>
+                   
+                </div> 
+            </ui:define>
+        </ui:composition>                       
+    </h:body>
+</html>

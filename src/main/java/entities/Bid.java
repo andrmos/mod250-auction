@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -38,6 +39,26 @@ public class Bid implements Serializable {
     @ManyToOne
     @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
     protected AuctionUser auctionUser;
+    
+    @OneToOne
+    @JoinColumn(name="AUCTION_ID", referencedColumnName="AUCTION_ID")
+    protected Auction auction;
+
+    public AuctionUser getAuctionUser() {
+        return auctionUser;
+    }
+
+    public void setAuctionUser(AuctionUser auctionUser) {
+        this.auctionUser = auctionUser;
+    }
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
 
     public Long getId() {
         return id;

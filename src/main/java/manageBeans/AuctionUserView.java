@@ -6,11 +6,15 @@
 package manageBeans;
 
 import boundary.AuctionUserFacade;
+import entities.Auction;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -33,8 +37,20 @@ public class AuctionUserView implements Serializable {
     public AuctionUserView() {
     }
     
-    public int getAllUsers(){
-        return 12;            
+    public int getNumber(){
+        return 12;
+    }
+    
+    public ArrayList<Auction> getFinishedAuctions(){
+        ArrayList<Auction> arr = new ArrayList<Auction>();
+        arr.addAll(this.userFacade.getFinishedAuctions());
+        return arr;
+    }
+    
+    public ArrayList<Auction> getCurrentAuctions(){
+        ArrayList<Auction> arr = new ArrayList<Auction>();
+        arr.addAll(this.userFacade.getCurrentAuctions());
+        return arr;
     }
     
 }

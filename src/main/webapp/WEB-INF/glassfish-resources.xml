@@ -11,4 +11,5 @@
         <property name="driverClass" value="org.postgresql.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/autcion_db" object-type="user" pool-name="post-gre-sql_db2016_grp14_grp14Pool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/securityDatasource" object-type="user" pool-name="post-gre-sql_db2016_grp14_grp14Pool"/>
 </resources>
