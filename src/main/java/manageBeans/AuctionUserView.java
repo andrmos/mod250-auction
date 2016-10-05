@@ -53,4 +53,10 @@ public class AuctionUserView implements Serializable {
         return arr;
     }
     
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/index?faces-redirect=true";
+        //ikke helt fungerende
+    }
+    
 }
