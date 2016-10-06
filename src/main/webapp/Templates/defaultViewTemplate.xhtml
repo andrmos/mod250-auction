@@ -14,9 +14,12 @@
            <b:navBar brandHref="#" inverse="true">
                <b:navbarLinks styleClass="navbar-left" >
                    <b:navLink value="Home"  href="/mod250_auction/index.xhtml"></b:navLink>
+
                    <b:navLink value="Bid overview"  href="/mod250_auction/CustomerViews/customerProfile.xhtml" rendered="#{facesContext.externalContext.isUserInRole('customer')}"></b:navLink>
+
                    <b:navLink value="Auction overview" href="/mod250_auction/SellerViews/sellerProfile.xhtml" rendered="#{facesContext.externalContext.isUserInRole('seller')}"></b:navLink>
-                   <b:navLink value="Login" href="/mod250_auction/login.xhtml" style="float: right" rendered="#{not (facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer'))}"/> <!-- Render if not logged in-->
+
+                   <b:navLink value="Login" href="/mod250_auction/login.xhtml" style="float: right" rendered="#{not (facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer'))}"></b:navLink> <!-- Render if not logged in-->
                    
                    <ui:insert name="userDependentLink">
                    </ui:insert>                   
@@ -26,7 +29,7 @@
                       
                    </ui:insert> 
                </b:navbarLinks>
-           </b:navBar>
+           </b:navBar>  
        </div>
         <div style="padding-left: 10px; padding-right: 10px">
             <ui:insert name="contentDiv">
