@@ -21,6 +21,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
+import javax.faces.view.facelets.FaceletContext;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -76,9 +79,11 @@ public class AuctionListManagedBean implements Serializable {
     /**
      * Creates a new instance of AuctionListManagedBean
      */
-    public AuctionListManagedBean() {
-     
+    public AuctionListManagedBean() {        
+        
     }
+    
+    
     
     private Category getEnumFromSelectedCatagory(){        
         return Category.fromInt(Integer.parseInt(selectedCategory));

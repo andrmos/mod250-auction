@@ -34,34 +34,58 @@ public class AuctionFacade extends AbstractFacade<Auction> {
     }
     
     public List<Auction> getAuctionByCategory(Category category){
+        return filterAuctionListByCategory(findAll(), category);        
+    }
+
+    private List<Auction> filterAuctionListByCategory(List<Auction> auctionList, Category category) {
         List<Auction> tempList= new ArrayList<>();
-        for(int i=0;i<findAll().size();i++){
-            if(findAll().get(i).getProduct().getCategory()==category){
-                tempList.add(findAll().get(i));
+        for(int i=0;i<auctionList.size();i++){
+            if(auctionList.get(i).getProduct().getCategory()==category){
+                tempList.add(auctionList.get(i));
             }
         }
         return tempList;
     }
     
     public List<Auction> getAuctionsByKeyword(String keyword){
+        return filterAuctionListByKeywords(findAll(), keyword);
+    }
+    
+   public List<Auction> getAuctionsByKeywordAndCategory(String keyword, Category
+           category){       
+       return filterAuctionListByKeywords(getAuctionByCategory(category), keyword);
+   }
+
+    private List<Auction> filterAuctionListByKeywords(List<Auction> auctionList, String keyword) {
         List<Auction> tempList= new ArrayList<>();
-        for(int i=0;i<findAll().size();i++){
-            if(findAll().get(i).getProduct().getProductName().contains(keyword)
-                || findAll().get(i).getProduct().getDescription().
-                        contains(keyword)){                
-                tempList.add(findAll().get(i));
+        for(int i=0; i<auctionList.size(); i++){
+            if(auctionList.get(i).getProduct().getProductName().contains(keyword)||
+                    auctionList.get(i).getProduct().getDescription().contains(keyword)){
+                tempList.add(auctionList.get(i));
             }
         }
         return tempList;
     }
+   
+    public List<Auction> getActiveAuctionsByKeyword(String keyword){
+        return filterAuctionListByKeywords(getActiveAuctions(), keyword);
+    }
     
-   public List<Auction> getAuctionsByKeywordAndCategory(String keyword, Category
-           category){
-       List<Auction> tempList= getAuctionByCategory(category);
-       for(int i=0; i<tempList.size(); i++){
-           if((!tempList.get(i).getProduct().getProductName().contains(keyword))||
-                   (!tempList.get(i).getProduct().getDescription().contains(keyword))){
-               tempList.remove(i);
+    public List<Auction> getActiveAuctionsByCategory(Category category){
+        return filterAuctionListByCategory(getActiveAuctions(), category);        
+    }
+    
+     public List<Auction> getActiveAuctionsByKeywordAndCategory(String keyword, Category
+           category){       
+       return filterAuctionListByKeywords(getActiveAuctionsByCategory(category), keyword);
+   }
+   
+   
+   public List<Auction> getActiveAuctions(){
+       List<Auction> tempList= new ArrayList<>();
+       for(int i=0; i< findAll().size();i++){
+           if(findAll().get(i).isPublished()){
+               tempList.add(findAll().get(i));
            }
        }
        return tempList;
