@@ -17,6 +17,7 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -54,7 +55,8 @@ public class AuctionUserView implements Serializable {
     }
     
     public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);session.invalidate();
+        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/mod250_auction/index.xhtml";
     }
     
