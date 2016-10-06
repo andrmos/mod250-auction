@@ -21,6 +21,7 @@
 
                    <b:navLink value="Login" href="/mod250_auction/login.xhtml" style="float: right" rendered="#{not (facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer'))}"></b:navLink> <!-- Render if not logged in-->
                    
+                   <b:navLink value="Logout" href="${request.contextPath}/logout" style="float: right" rendered="#{facesContext.externalContext.isUserInRole('seller') or facesContext.externalContext.isUserInRole('customer')}"></b:navLink> <!-- Render only if logged in-->
                    <ui:insert name="userDependentLink">
                    </ui:insert>                   
                </b:navbarLinks>
