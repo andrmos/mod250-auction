@@ -90,4 +90,28 @@ public class AuctionFacade extends AbstractFacade<Auction> {
        }
        return tempList;
    }
+   
+   public List<Auction> getActiveAuctionsBasedOnUserID(String id){    
+       List<Auction> tempList= new ArrayList<>();
+       for(int i= 0; i<getActiveAuctions().size();i++){
+           if(getActiveAuctions().get(i).getUser().getId()==Long.parseLong(id, 10)){
+               tempList.add(getActiveAuctions().get(i));
+           }
+       }
+       return tempList;      
+   }
+   public List<Auction> getFinishedAuctionsBasedOnUserID(String id){    
+       /*TODO
+       Check if published, and if times up
+       */
+       List<Auction> tempList= new ArrayList<>();
+       for(int i= 0; i<findAll().size();i++){
+           if(findAll().get(i).getUser().getId()==Long.parseLong(id, 10)){
+               tempList.add(findAll().get(i));
+           }
+       }
+       return tempList;      
+   }
+   
+   
 }

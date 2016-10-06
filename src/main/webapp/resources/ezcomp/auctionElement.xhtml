@@ -4,7 +4,8 @@
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <!-- INTERFACE -->
     <cc:interface>
@@ -15,6 +16,7 @@
         <cc:attribute name="profile" required="true"/>  
         <cc:attribute name="showRating" required="true"/> 
         <cc:attribute name="deleteAuction" required="true"/>
+        <cc:attribute name="userID" required="true"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
@@ -53,14 +55,23 @@
                                 <h:outputText id="timeLeft" value="time left #{cc.attrs.timeLeft}"/>                                                                    
                             </b:column>
                         </b:row>
-                        <b:row id="profileAndButtonRow">
+                        <b:row id="profileAndButtonRow">                            
                             <b:column span="6">
-                                <h:form>
-                                    <h:graphicImage id="proflieImage" width="50" 
-                                                    height="50" 
-                                                    value="/resources/images/profileImage.png" onclick=""/>
-                                    <h:outputText value="#{cc.attrs.profile}"></h:outputText>
-                                </h:form>
+                                <h:link outcome="/GeneralViews/sellerCatalogue.xhtml">
+                                     <h:graphicImage value="/resources/images/profileImage.png" width="50" 
+                                                    height="50"/>
+                                     <f:param name="uID" value="#{cc.attrs.userID}"></f:param>
+                                </h:link>
+                                <h:outputText value="#{cc.attrs.profile}"></h:outputText> 
+                                <!--<h:form>                                    
+                                    <h:commandLink action="/GeneralViews/sellerCatalogue.xhtml" > 
+                                        <h:graphicImage value="/resources/images/profileImage.png" width="50" 
+                                                    height="50"/>
+                                        <f:param name="lol" value="kk"></f:param>
+                                    </h:commandLink>
+                                    <h:outputText value="#{cc.attrs.profile}"></h:outputText>                                  
+                                    
+                                </h:form>-->
 
                             </b:column>
                             <b:column span="6">

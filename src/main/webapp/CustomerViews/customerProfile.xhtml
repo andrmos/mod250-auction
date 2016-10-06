@@ -16,10 +16,10 @@
                 <h:outputText value="#{auctionUserView.getNumber()}"/>
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
                     <h1>Auctions won</h1>
-                    <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">
-                       
-                        <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="true" deleteAuction="false"/>
+                    <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
+                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"
+                                           profile="#{auction.getUser().getContactInfo().getName()}" title="#{auction.getProduct().getProductName()}" showRating="true" deleteAuction="false"
+                                           userID="auction."/>
                         <br/>  
                     </ui:repeat>
                    
@@ -28,8 +28,9 @@
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
                     <h1>Ongoing auctions with bids</h1>
                     <ui:repeat value="#{AuctionUserView.getCurrentAuctions()}" var="auction">
-                        <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="false"/>
+                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"
+                                           profile="#{auction.getUser().getContactInfo().getName()}" title="#{auction.getProduct().getProductName()}"
+                                           showRating="false" deleteAuction="false" userID=""/>
                         <br/>  
                     </ui:repeat>
                    
