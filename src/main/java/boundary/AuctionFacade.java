@@ -13,6 +13,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.joda.time.DateTime;
+import support.AuctionSupport;
 
 /**
  *
@@ -102,16 +104,17 @@ public class AuctionFacade extends AbstractFacade<Auction> {
    }
    public List<Auction> getFinishedAuctionsBasedOnUserID(String id){    
        /*TODO
-       Check if published, and if times up
+       Check if published, and if times up      
        */
+       
        List<Auction> tempList= new ArrayList<>();
        for(int i= 0; i<findAll().size();i++){
-           if(findAll().get(i).getUser().getId()==Long.parseLong(id, 10)){
+           if(findAll().get(i).getUser().getId()==Long.parseLong(id, 10) && 
+                   AuctionSupport.isAuctionFinished(findAll().get(i))){
                tempList.add(findAll().get(i));
            }
        }
        return tempList;      
-   }
-   
+   }   
    
 }
