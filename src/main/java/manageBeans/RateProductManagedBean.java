@@ -6,7 +6,9 @@
 package manageBeans;
 
 import boundary.AuctionFacade;
+import boundary.AuctionUserFacade;
 import boundary.FeedbackFacade;
+import entities.Auction;
 import entities.AuctionUser;
 import entities.Feedback;
 import javax.ejb.EJB;
@@ -22,13 +24,20 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class RateProductManagedBean {
 
+    private Feedback feedback;
+    
     @EJB
     FeedbackFacade feedbackFacade;
-    AuctionFacade auction;
-    Feedback feedback = new Feedback();
-
+    @EJB
+    AuctionUserFacade userFacade;
+    @EJB
+    AuctionFacade auctionFacade;
+    
+    
     private Double rating;
     private String comment;
+    private Auction auction;
+    private AuctionUser user;
     
     /**
      * Creates a new instance of RateProductManagedBean
@@ -52,9 +61,14 @@ public class RateProductManagedBean {
         this.comment = comment;
     }
     
-    public void addFeedback(Feedback feedback){
-       
-       //feedbackFacade.addFeedback(feedback);
+    public void addFeedback(long auctionID, long userID){
+        user = userFacade.find(userID);
+        auction = auctionFacade.find(auctionID);
+        
+        feedback.setAuction(auction);
+        feedback.setUser(user);
+        
+        feedbackFacade.createFeedback(feedback);
     }
     
 }

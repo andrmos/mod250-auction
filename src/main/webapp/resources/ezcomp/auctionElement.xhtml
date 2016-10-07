@@ -34,7 +34,7 @@
                 </b:well>
                 <f:facet name="footer">
                     <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{RateProductManagedBean.addFeedback}"/>
+                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{RateProductManagedBean.addFeedback(userID, auctionId)}"/>
                 </f:facet>
             </b:modal>
             <b:modal id="amodal2" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
