@@ -5,6 +5,7 @@
  */
 package boundary;
 
+import entities.Auction;
 import entities.Feedback;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,4 +30,7 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
         super(Feedback.class);
     }
     
+    public void addFeedback(Feedback feedback){
+        em.persist(feedback);
+    }
 }
