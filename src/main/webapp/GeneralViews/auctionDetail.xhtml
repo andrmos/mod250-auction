@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
       <h:head>
         <!--<h:outputStylesheet name ="css/customer.css"/> -->
         <title>Auction Detail</title>
@@ -26,11 +27,23 @@
 
                             <b:well>
                                 <h3>Description</h3>
-                                <h:outputText value="#{auctionDetail.getProductDesciption()}"/>
+                                <h:outputLabel value="#{auctionDetail.getProductDesciption()}"/>
                             </b:well>
                         </b:column>
                         
                         <b:column medium-screen="6">
+                            
+                            <div class="pull-right text-center">
+                                
+                                <h:graphicImage value="/resources/images/profileImage.png" 
+                                                width="50" 
+                                                height="50"/>
+                                <br/>
+                                <h:outputText value="#{auctionDetail.getAuctionOwnerName()}"/>
+                                <br />
+                                <p:rating value="#{auctionDetail.getSellerRating()}" stars="5" />
+                            </div>
+                            
                             <h4>Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
                         </b:column>
                     </b:row>

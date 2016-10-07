@@ -8,6 +8,7 @@ package manageBeans;
 import boundary.AuctionFacade;
 import entities.Auction;
 import entities.Bid;
+import entities.ContactInfo;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -71,6 +72,19 @@ public class AuctionDetail extends UIInput implements Serializable {
         }else{
             return bid.getAmount();
         }
+    }
+    
+    public String getAuctionOwnerName(){
+        ContactInfo contactInfo = this.auction.getUser().getContactinfo();
+        if(contactInfo == null){
+            return this.auction.getUser().getUsername();
+        }else{
+            return contactInfo.getName();
+        }               
+    }
+    
+    public int getSellerRating(){
+        return (int)this.auction.getUser().getSellers_rating();
     }
     
 }
