@@ -17,7 +17,7 @@
                     <ui:repeat value="#{AuctionUserView.getWinnerAuctions()}" var="auction">
                        
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="true"/>
+                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="true" userID="Auction.auctionseller.id"/>
                         <br/>  
                     </ui:repeat>
                 </div> 
@@ -26,7 +26,7 @@
                     <h1>History</h1>
                     <ui:repeat value="#{AuctionUserView.getCurrentBids()}" var="auction">
                         <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="false"/>
+                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" showRating="false" deleteAuction="false" userID="Auction.auctionseller.id"/>
                         <br/>     
                     </ui:repeat>
                    
