@@ -21,7 +21,7 @@
                 
                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" timeLeft="#{auction.duration}"
                                        profile="#{auction.user.username}" title="#{auction.product.description}" showRating="false" deleteAuction="false" 
-                                       userID="#{auction.user.id}"/>
+                                       userID="#{auction.user.id}" auctionId="#{auction.id}"/>
                     <br/>                    
                 </ui:repeat>              
             </ui:define>

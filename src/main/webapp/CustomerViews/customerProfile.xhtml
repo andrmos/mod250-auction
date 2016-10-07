@@ -19,7 +19,7 @@
                     <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
                         <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"
                                            profile="#{auction.getUser().getContactInfo().getName()}" title="#{auction.getProduct().getProductName()}" showRating="true" deleteAuction="false"
-                                           userID="auction."/>
+                                           userID="auction.user.id" auctionId="#{auction.id}"/>
                         <br/>  
                     </ui:repeat>
                    
@@ -28,9 +28,11 @@
                 <div class="auction-list" style="height: 400px; overflow-y: auto">
                     <h1>Ongoing auctions with bids</h1>
                     <ui:repeat value="#{AuctionUserView.getCurrentAuctions()}" var="auction">
-                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"
-                                           profile="#{auction.getUser().getContactInfo().getName()}" title="#{auction.getProduct().getProductName()}"
-                                           showRating="false" deleteAuction="false" userID=""/>
+                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" 
+                                           timeLeft="19:29" profile="#{auction.getUser().getContactInfo().getName()}" 
+                                           title="#{auction.getProduct().getProductName()}"
+                                           showRating="false" deleteAuction="false" 
+                                           userID="auction.user.id" auctionId="#{auction.id}"/>
                         <br/>  
                     </ui:repeat>
                    

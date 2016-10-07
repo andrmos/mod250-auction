@@ -3,16 +3,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp">
+      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
       <h:head>
         <!--<h:outputStylesheet name ="css/customer.css"/> -->
         <title>Auction Detail</title>
+        <f:metadata>
+            <f:viewParam name="auctionId" value="#{auctionDetail.auctionId}" />
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
             <h1>Overview over Auctions</h1>
             <ui:define name="contentDiv">
-                <h1>Auction Detail</h1>
+                <b:container>
+                    <b:row>
+                        <b:column medium-screen="6">
+                            <h1><h:outputText value="#{auctionDetail.getProductTitle()}" /></h1>
+
+                            <h:graphicImage value="#{auctionDetail.getProductImage()}" height="350px"/>
+
+                            <b:well>
+                                <h3>Description</h3>
+                                <h:outputText value="#{auctionDetail.getProductDesciption()}"/>
+                            </b:well>
+                        </b:column>
+                        
+                        <b:column medium-screen="6">
+                            <h4>Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
+                        </b:column>
+                    </b:row>
+                </b:container>
+                
             </ui:define>
         </ui:composition>                       
     </h:body>

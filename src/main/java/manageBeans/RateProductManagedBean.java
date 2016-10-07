@@ -54,7 +54,7 @@ public class RateProductManagedBean {
     
     public void addFeedback(Feedback feedback){
        
-       feedbackFacade.addFeedback(feedback);
+       //feedbackFacade.addFeedback(feedback);
     }
     
 }
