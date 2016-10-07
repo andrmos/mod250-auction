@@ -5,9 +5,14 @@
  */
 package manageBeans;
 
+import boundary.AuctionFacade;
+import boundary.FeedbackFacade;
+import entities.AuctionUser;
+import entities.Feedback;
+import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+
 
 /**
  *
@@ -16,6 +21,11 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "rateProductManagedBean")
 @RequestScoped
 public class RateProductManagedBean {
+
+    @EJB
+    FeedbackFacade feedbackFacade;
+    AuctionFacade auction;
+    Feedback feedback = new Feedback();
 
     private Double rating;
     private String comment;
@@ -30,7 +40,7 @@ public class RateProductManagedBean {
         return rating;
     }
 
-    public void setStars(Double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
@@ -42,5 +52,9 @@ public class RateProductManagedBean {
         this.comment = comment;
     }
     
+    public void addFeedback(Feedback feedback){
+       
+       feedbackFacade.addFeedback(feedback);
+    }
     
 }
