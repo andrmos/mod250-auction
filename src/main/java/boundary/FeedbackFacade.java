@@ -30,7 +30,7 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
         super(Feedback.class);
     }
     
-    public void addFeedback(Feedback feedback){
+    public void createFeedback(Feedback feedback){
         em.persist(feedback);
     }
 }
