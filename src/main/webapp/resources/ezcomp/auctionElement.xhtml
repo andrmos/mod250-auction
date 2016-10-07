@@ -27,13 +27,13 @@
                     <h1><strong>Rate Product</strong></h1>
                     <h:form>
                         <h:outputText value="Rating: "/>
-                        <p:rating value="#{RateProductManagedBean.rating}"/>
-                        <b:inputText placeholder="Type a comment here..." value="#{RateProductManagedBean.comment}"></b:inputText>
+                        <p:rating value="#{RateProductManagedBean.feedback.rating}"/>
+                        <b:inputText placeholder="Type a comment here..." value="#{RateProductManagedBean.feedback.comment}"></b:inputText>
                     </h:form>
                 </b:well>
                 <f:facet name="footer">
                     <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{FeedBackFacade.setFeedback}"/>
+                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{FeedBackFacade.addFeedback}"/>
                 </f:facet>
             </b:modal>
             <b:modal id="amodal2" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
