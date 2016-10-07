@@ -37,7 +37,6 @@ public class RateProductManagedBean {
     private Double rating;
     private String comment;
     private Auction auction;
-    private AuctionUser user;
     
     /**
      * Creates a new instance of RateProductManagedBean
@@ -61,12 +60,10 @@ public class RateProductManagedBean {
         this.comment = comment;
     }
     
-    public void addFeedback(long auctionID, long userID){
-        user = userFacade.find(userID);
+    public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
-        
         feedback.setAuction(auction);
-        feedback.setUser(user);
+        feedback.setUser(userFacade.getCurrentUser());
         
         feedbackFacade.createFeedback(feedback);
     }

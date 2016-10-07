@@ -24,6 +24,8 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
 
     @PersistenceContext(unitName = "no.mod250_mod250_auction_war_1.0-SNAPSHOTPU")
     private EntityManager em;
+    
+    private AuctionUser user;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -32,6 +34,16 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
 
     public AuctionUserFacade() {
         super(AuctionUser.class);
+    }
+    
+    /**
+     * Finds the current user
+     * @return user
+     */
+    public AuctionUser getCurrentUser(){
+        long id = this.getAuctionUserId();
+        user = this.find(id);
+        return user;
     }
     
     /**

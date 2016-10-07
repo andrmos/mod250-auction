@@ -7,6 +7,7 @@ package manageBeans;
 
 import boundary.AuctionUserFacade;
 import entities.Auction;
+import entities.AuctionUser;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -41,7 +42,7 @@ public class AuctionUserView implements Serializable {
     public int getNumber(){
         return 12;
     }
-    
+       
     public ArrayList<Auction> getFinishedAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
         arr.addAll(this.userFacade.getFinishedAuctions());
