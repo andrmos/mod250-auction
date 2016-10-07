@@ -20,7 +20,7 @@
                                 <ui:repeat value="#{sellerCatalougeMB.activeAuctions}" var="auction">
                                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" timeLeft="#{auction.duration}"
                                                        profile="#{auction.user.username}" title="#{auction.product.description}" showRating="false" deleteAuction="false" 
-                                                       userID="#{auction.user.id}" auctionId="#{auction.id}"/>
+                                                       userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="#{facesContext.externalContext.isUserInRole('customer')}"/>
                                     <br/>     
                                 </ui:repeat>
                             </div>
@@ -31,7 +31,7 @@
                                 <ui:repeat value="#{sellerCatalougeMB.finishedAuctions}" var="auction">
                                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" timeLeft="#{auction.duration}"
                                                        profile="#{auction.user.username}" title="#{auction.product.description}" showRating="false" deleteAuction="false" 
-                                                       userID="#{auction.user.id}" auctionId="#{auction.id}"/>
+                                                       userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
                                     <br/> 
                                 </ui:repeat>
                             </div>

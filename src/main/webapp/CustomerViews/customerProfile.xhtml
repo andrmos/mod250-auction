@@ -19,7 +19,7 @@
                     <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
                         <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"
                                            profile="#{auction.getUser().getContactInfo().getName()}" title="#{auction.getProduct().getProductName()}" showRating="true" deleteAuction="false"
-                                           userID="auction.user.id" auctionId="#{auction.id}"/>
+                                           userID="auction.user.id" auctionId="#{auction.id}" showBidButton="false"/>
                         <br/>  
                     </ui:repeat>
                    
@@ -32,7 +32,7 @@
                                            timeLeft="19:29" profile="#{auction.getUser().getContactInfo().getName()}" 
                                            title="#{auction.getProduct().getProductName()}"
                                            showRating="false" deleteAuction="false" 
-                                           userID="auction.user.id" auctionId="#{auction.id}"/>
+                                           userID="auction.user.id" auctionId="#{auction.id}" showBidButton="false"/>
                         <br/>  
                     </ui:repeat>
                    
