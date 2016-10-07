@@ -29,7 +29,7 @@ public class Feedback implements Serializable {
     @Column(name="FEEDBACK_ID")
     private Long id;
     private String comment;
-    private int starAmount;
+    private Double rating;
     
     @OneToOne
     @JoinColumn(name="AUCTION_ID", referencedColumnName="AUCTION_ID")
@@ -67,14 +67,13 @@ public class Feedback implements Serializable {
         this.comment = comment;
     }
 
-    public int getStarAmount() {
-        return starAmount;
+    public Double getRating() {
+        return rating;
     }
 
-    public void setStarAmount(int starAmount) {
-        this.starAmount = starAmount;
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
-
 
     public Long getId() {
         return id;
