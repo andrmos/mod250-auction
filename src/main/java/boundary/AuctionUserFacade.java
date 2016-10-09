@@ -27,6 +27,7 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     
     private AuctionUser user = new AuctionUser();
 
+   
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -34,6 +35,31 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
 
     public AuctionUserFacade() {
         super(AuctionUser.class);
+    }
+    
+    /**
+     * Finds the current user
+     * @return user
+     */
+    public AuctionUser getCurrentUser(){
+        long id = this.getAuctionUserId();
+        user = this.find(id);
+        return user;
+    }
+    
+    /**
+     * Method to retrieve auction_user_id
+     * @return id
+     *         auction_user_id
+     *      
+     */
+    public int getAuctionUserId(){
+        String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+        System.out.println("BRUKERNAVN: " + username);
+        int id = em.createQuery(
+                "SELECT A.id FROM AuctionUser AS A WHERE A.username = '" + username + "'"
+        ).getFirstResult();
+        return id;
     }
     
     /**

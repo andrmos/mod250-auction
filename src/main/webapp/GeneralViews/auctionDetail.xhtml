@@ -6,7 +6,8 @@
       xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
       <h:head>
         <!--<h:outputStylesheet name ="css/customer.css"/> -->
         <title>Auction Detail</title>
@@ -21,30 +22,51 @@
                 <b:container>
                     <b:row>
                         <b:column medium-screen="6">
-                            <h1><h:outputText value="#{auctionDetail.getProductTitle()}" /></h1>
+                            <b:row style="height: 90px;">
+                                <h1><h:outputText value="#{auctionDetail.getProductTitle()}" /></h1>
+                            </b:row>
 
-                            <h:graphicImage value="#{auctionDetail.getProductImage()}" height="350px"/>
-
-                            <b:well>
-                                <h3>Description</h3>
-                                <h:outputLabel value="#{auctionDetail.getProductDesciption()}"/>
-                            </b:well>
+                            <b:row>
+                                <h:graphicImage value="#{auctionDetail.getProductImage()}" height="350px"/>
+                            </b:row>
+                            
+                            <b:row>
+                                <b:well>
+                                    <h3>Description</h3>
+                                    <h:outputLabel value="#{auctionDetail.getProductDesciption()}"/>
+                                </b:well>
+                            </b:row>
                         </b:column>
                         
                         <b:column medium-screen="6">
+                            <b:row style="height: 90px;">
+                                <div class="pull-right text-center">
+
+                                    <h:graphicImage value="/resources/images/profileImage.png" 
+                                                    width="50" 
+                                                    height="50"/>
+                                    <br/>
+                                    <h:outputText value="#{auctionDetail.getAuctionOwnerName()}"/>
+                                    <br />
+                                    <p:rating value="#{auctionDetail.getSellerRating()}" disabled="true" cancel="false" />
+                                </div>
+                            </b:row>
+                            <b:row>
+                                <div class="pull-right" style="height: 350px;">
+                                    <h4>Current Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
+                                </div>
+                            </b:row>
                             
-                            <div class="pull-right text-center">
-                                
-                                <h:graphicImage value="/resources/images/profileImage.png" 
-                                                width="50" 
-                                                height="50"/>
-                                <br/>
-                                <h:outputText value="#{auctionDetail.getAuctionOwnerName()}"/>
-                                <br />
-                                <p:rating value="#{auctionDetail.getSellerRating()}" disabled="true" cancel="false" />
-                            </div>
-                            
-                            <h4>Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
+                            <b:row>
+                                <div class="pull-right" style="margin: 10px">
+                                    <h:form>
+                                        <h:inputText id="bid" a:type="number" a:placeholder="Place bid in NOK" style="height:34px;" 
+                                                     value="#{auctionDetail.bid.amount}">
+                                        </h:inputText>
+                                        <h:commandButton type="submit" class="btn btn-default" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
+                                    </h:form>
+                                </div>
+                            </b:row>
                         </b:column>
                     </b:row>
                 </b:container>
