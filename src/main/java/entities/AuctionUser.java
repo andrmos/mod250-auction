@@ -27,10 +27,13 @@ import javax.persistence.Table;
 public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="AUCTION_USER_ID")
     private Long id;
+    
+    @Column(unique=true)
     private String username;
     private String password;
     private int sellers_rating;
