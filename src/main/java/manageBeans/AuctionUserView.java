@@ -30,18 +30,46 @@ import javax.servlet.http.HttpSession;
 public class AuctionUserView implements Serializable {
 
     
-     @EJB
+    @EJB
     private AuctionUserFacade userFacade;
+    
+    private AuctionUser user;
     
     /**
      * Creates a new instance of AuctionUserView
      */
     public AuctionUserView() {
     }
+
+    public AuctionUser getUser() {
+        return user;
+    }
+
+    public void setUser(AuctionUser user) {
+        this.user = user;
+    }
     
     public int getNumber(){
         return 12;
+    }  
+    
+    
+    
+     public String getUserFullname(){
+        AuctionUser testUser = userFacade.getAuctionUser();
+        if (testUser == null) System.out.println("AuctionUserView: testUser is null");
+        return testUser.getContactinfo().getName();
     }
+     
+    /**
+    public int getSellersRating(){
+        AuctionUser user = userFacade.getAuctionUser();
+        if(!user.getRole().equals("seller")){
+            throw new IllegalArgumentException("Only sellers have rating");
+        }
+        return (int) user.getSellers_rating();
+    }
+    * */
        
     public ArrayList<Auction> getFinishedAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
