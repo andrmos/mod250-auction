@@ -25,7 +25,7 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     @PersistenceContext(unitName = "no.mod250_mod250_auction_war_1.0-SNAPSHOTPU")
     private EntityManager em;
     
-    private AuctionUser user;
+    private AuctionUser user = new AuctionUser();
 
     @Override
     protected EntityManager getEntityManager() {
@@ -34,30 +34,6 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
 
     public AuctionUserFacade() {
         super(AuctionUser.class);
-    }
-    
-    /**
-     * Finds the current user
-     * @return user
-     */
-    public AuctionUser getCurrentUser(){
-        long id = this.getAuctionUserId();
-        user = this.find(id);
-        return user;
-    }
-    
-    /**
-     * Method to retrieve auction_user_id
-     * @return id
-     *         auction_user_id
-     *      
-     */
-    public int getAuctionUserId(){
-        String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        int id = em.createQuery(
-                "SELECT A.id FROM AuctionUser AS A WHERE A.username = '" + username + "'"
-        ).setMaxResults(1).getFirstResult();
-        return id;
     }
     
     /**
@@ -78,7 +54,31 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     public List getCurrentAuctions(){
        return getAuctions(false);
     }
-         
+    
+    
+    /**
+     * Retrieves the current session user
+     * @return user
+     * 
+     */
+    public AuctionUser getAuctionUser(){
+        
+       //finds the username of the logged in user
+        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        
+        //Creates a list of user id's
+        LinkedList<Integer> idList = new LinkedList<Integer>();
+        idList.addAll(em.createQuery("SELECT a.id FROM AuctionUser a").getResultList());
+        
+        //Checks and finds user object equal to the given username
+        for(int i = 0; i < idList.size(); i++){
+            user = em.find(AuctionUser.class, idList.get(i));
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null; //should not happen
+    }
     
     /**
      * Method returns a list of auctions. If '@isOver' is true and the user
@@ -93,14 +93,13 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
      *      LinkedList of auctions
      */
     public List getAuctions(boolean isOver){
-        int id = getAuctionUserId();
         LinkedList<Integer> list = new LinkedList<Integer>();
         LinkedList<Auction> auctionList = new LinkedList<Auction>();
         Auction auction;
         DateTime nowDate = new DateTime();
         DateTime dateTime = new DateTime();
        
-        AuctionUser user = em.find(AuctionUser.class, Long.valueOf(id));
+        AuctionUser user = getAuctionUser();
         
         if(user != null){
            if(user.getRole().equals("customer")){
