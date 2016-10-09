@@ -32,7 +32,6 @@ public class AuctionUserView implements Serializable {
     
     @EJB
     private AuctionUserFacade userFacade;
-    
     private AuctionUser user;
     
     /**
@@ -49,27 +48,31 @@ public class AuctionUserView implements Serializable {
         this.user = user;
     }
     
-    public int getNumber(){
-        return 12;
-    }  
-    
-    
-    
-     public String getUserFullname(){
-        AuctionUser testUser = userFacade.getAuctionUser();
-        if (testUser == null) System.out.println("AuctionUserView: testUser is null");
-        return testUser.getContactinfo().getName();
+    /**
+     * Method gets the users full name if they have one, else their username
+     * @return user's full name
+     */
+    public String getUserFullname(){
+        user = userFacade.getAuctionUser();
+        if(user == null){
+            return user.getUsername();
+        }
+        return user.getContactinfo().getName();
     }
      
+    
     /**
+     * Method to get the sellers rating
+     * @return 
+     */
     public int getSellersRating(){
-        AuctionUser user = userFacade.getAuctionUser();
+        user = userFacade.getAuctionUser(); //finds the logged in user
         if(!user.getRole().equals("seller")){
             throw new IllegalArgumentException("Only sellers have rating");
         }
-        return (int) user.getSellers_rating();
+        return user.getSellers_rating();
     }
-    * */
+    
        
     public ArrayList<Auction> getFinishedAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
