@@ -9,6 +9,7 @@ import boundary.AuctionFacade;
 import boundary.AuctionUserFacade;
 import boundary.BidFacade;
 import entities.Auction;
+import entities.AuctionUser;
 import entities.Bid;
 import entities.ContactInfo;
 import javax.inject.Named;
@@ -36,9 +37,7 @@ public class AuctionDetail extends UIInput implements Serializable {
     private AuctionUserFacade auctionUserFacade;
     @EJB
     private BidFacade bidFacade;
-    
-    private double bidAmount;
-    
+   
     private Bid bid;
     private Auction auction;
     private int auctionId;
@@ -129,7 +128,10 @@ public class AuctionDetail extends UIInput implements Serializable {
         }
         bid.setBidDate(new Date());
         bid.setAuction(this.auction);
-        bid.setAuctionUser(auctionUserFacade.getCurrentUser());
+        AuctionUser user = auctionUserFacade.getAuctionUser();
+        if(user != null){
+            bid.setAuctionUser(user);
+        }
         bidFacade.create(bid);
         this.auction.setBid(bid);
         this.auctionFacade.edit(auction);

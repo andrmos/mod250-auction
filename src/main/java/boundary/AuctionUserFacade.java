@@ -85,20 +85,24 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
     /**
      * Retrieves the current session user
      * @return user
+     *          null if the user is not logged in
      * 
      */
     public AuctionUser getAuctionUser(){
         
        //finds the username of the logged in user
-        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        
-        //Creates a list of user id's
-        LinkedList<Integer> idList = new LinkedList<Integer>();
-        idList.addAll(em.createQuery("SELECT a.id FROM AuctionUser a").getResultList());
+        String username = "";
+        try{
+            username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        }catch(NullPointerException e){
+            return null;
+        }
+
+        LinkedList<AuctionUser> users = new LinkedList<AuctionUser>();
+        users.addAll(this.findAll());
         
         //Checks and finds user object equal to the given username
-        for(int i = 0; i < idList.size(); i++){
-            user = em.find(AuctionUser.class, idList.get(i));
+        for(AuctionUser user : users){
             if(user.getUsername().equals(username)){
                 return user;
             }
