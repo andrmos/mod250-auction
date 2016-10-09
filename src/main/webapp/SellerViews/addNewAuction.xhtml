@@ -23,14 +23,21 @@
                     <h:form>
 
                         <b:inputText label="Title" value="#{addAuctionMB.title}"></b:inputText>
-                        
+
                         <b:inputText label="Description" value="#{addAuctionMB.description}"></b:inputText>
-                        
+
                         <b:inputText label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only"></b:inputText>
-                        
+
                         <b:inputText label="Duration in minutes" value="#{addAuctionMB.duration}" converterMessage="Please enter digits only"></b:inputText>
 
+                        <b:selectOneMenu value="#{addAuctionMB.selectedCategory}">
+                            <f:selectItems value="#{addAuctionMB.selectedCategories}"/>
+                        </b:selectOneMenu>
+
+                        <b:selectBooleanCheckbox value="#{addAuctionMB.published}" caption="Published?"/>
+
                         <b:commandButton value="Submit" action="#{addAuctionMB.addAuction()}"></b:commandButton>
+
 
                     </h:form>
                 </b:container>
