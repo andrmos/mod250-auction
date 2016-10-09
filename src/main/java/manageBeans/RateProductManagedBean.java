@@ -42,6 +42,7 @@ public class RateProductManagedBean {
      * Creates a new instance of RateProductManagedBean
      */
     public RateProductManagedBean() {
+        feedback = new Feedback();
     }
     
     public Double getRating() {
@@ -65,6 +66,14 @@ public class RateProductManagedBean {
         feedback.setAuction(auction);
         feedback.setUser(userFacade.getAuctionUser());
         feedbackFacade.createFeedback(feedback);
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
     
 }
