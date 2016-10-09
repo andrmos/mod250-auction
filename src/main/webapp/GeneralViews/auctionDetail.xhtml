@@ -60,10 +60,10 @@
                             <b:row>
                                 <div class="pull-right" style="margin: 10px">
                                     <h:form>
-                                        <h:inputText id="bid" a:type="number" a:placeholder="Place bid in NOK" style="height:34px;" 
+                                        <h:inputText disabled="#{!auctionDetail.isLoggedIn()}" id="bid" a:type="number" a:placeholder="Place bid in NOK" style="height:34px;" 
                                                      value="#{auctionDetail.bid.amount}">
                                         </h:inputText>
-                                        <h:commandButton type="submit" class="btn btn-default" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
+                                        <h:commandButton disabled="#{!auctionDetail.isLoggedIn()}" type="submit" class="btn btn-default" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
                                     </h:form>
                                 </div>
                             </b:row>

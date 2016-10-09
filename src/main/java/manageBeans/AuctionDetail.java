@@ -144,4 +144,8 @@ public class AuctionDetail extends UIInput implements Serializable {
         }
     }
     
+    public boolean isLoggedIn(){
+        return this.auctionUserFacade.getAuctionUser() != null; 
+    }
+    
 }
