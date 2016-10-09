@@ -12,9 +12,7 @@
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
             <h1>Overview over bids</h1>
             <ui:define name="contentDiv">
-                         
-                <h:outputText value="#{auctionUserView.getNumber()}"/>
-                <div class="auction-list" style="height: 400px; overflow-y: auto">
+                    <div class="auction-list" style="height: 400px; overflow-y: auto">
                     <h1>Auctions won</h1>
                     <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
                         <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"

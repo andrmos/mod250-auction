@@ -63,8 +63,7 @@ public class RateProductManagedBean {
     public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
         feedback.setAuction(auction);
-        feedback.setUser(userFacade.getCurrentUser());
-        
+        feedback.setUser(userFacade.getAuctionUser());
         feedbackFacade.createFeedback(feedback);
     }
     
