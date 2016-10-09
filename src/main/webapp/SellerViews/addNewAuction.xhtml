@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet name ="css/customer.css"/> 
+        <title>Seller Profile</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
+
+            <ui:define name="contentDiv">
+
+                <h1>Add new auction</h1>
+
+
+                <b:container>
+                    <h:form>
+
+                        <b:inputText label="Title" value="#{addAuctionMB.title}"></b:inputText>
+                        
+                        <b:inputText label="Description" value="#{addAuctionMB.description}"></b:inputText>
+                        
+                        <b:inputText label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only"></b:inputText>
+                        
+                        <b:inputText label="Duration in minutes" value="#{addAuctionMB.duration}" converterMessage="Please enter digits only"></b:inputText>
+
+                        <b:commandButton value="Submit" action="#{addAuctionMB.addAuction()}"></b:commandButton>
+
+                    </h:form>
+                </b:container>
+
+            </ui:define>
+        </ui:composition>                       
+    </h:body>
+</html>

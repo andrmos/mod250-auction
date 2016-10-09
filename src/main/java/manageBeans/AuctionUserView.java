@@ -56,9 +56,10 @@ public class AuctionUserView implements Serializable {
     
     
      public String getUserFullname(){
-        AuctionUser testUser = userFacade.getAuctionUser();
-        if (testUser == null) System.out.println("AuctionUserView: testUser is null");
-        return testUser.getContactinfo().getName();
+        //AuctionUser testUser = userFacade.getAuctionUser();
+        //if (testUser == null) System.out.println("AuctionUserView: testUser is null");
+        //return testUser.getContactinfo().getName();
+        return "Dummy Text";
     }
      
     /**
