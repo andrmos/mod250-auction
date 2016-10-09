@@ -6,7 +6,7 @@
       xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
-      <h:head>
+    <h:head>
         <h:outputStylesheet name ="css/customer.css"/> 
         <title>Seller Profile</title>
     </h:head>
@@ -21,36 +21,42 @@
                                 <h1>Ongoing</h1>
                                 <ui:repeat value="#{AuctionUserView.getWinnerAuctions()}" var="auction">
                                     <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" 
-                                           showRating="false" deleteAuction="true" userID="Auction.auctionseller.id"
-                                           auctionId="#{auction.id}" showBidButton="false"/>
-                                <br/>  
+                                                       profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" 
+                                                       showRating="false" deleteAuction="true" userID="Auction.auctionseller.id"
+                                                       auctionId="#{auction.id}" showBidButton="false"/>
+                                    <br/>  
                                 </ui:repeat>
                             </div> 
                             <div class="auction-list" style="height: 400px; overflow-y: auto">
                                 <h1>History</h1>
                                 <ui:repeat value="#{AuctionUserView.getCurrentBids()}" var="auction">
                                     <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                           profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" 
-                                           showRating="false" deleteAuction="false" userID="Auction.auctionseller.id"
-                                           auctionId="#{auction.id}" showBidButton="false"/>
-                            <br/>     
+                                                       profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" 
+                                                       showRating="false" deleteAuction="false" userID="Auction.auctionseller.id"
+                                                       auctionId="#{auction.id}" showBidButton="false"/>
+                                    <br/>     
                                 </ui:repeat>
-                   
+
                             </div>
                         </b:column>
                         <b:column medium-screen="6">
-                        <div class="pull-right text-center">
-                            <h:graphicImage value="/resources/images/profileImage.png" 
-                                            width="80" height="80"/>
+                            <div class="pull-right text-center">
+                                <h:graphicImage value="/resources/images/profileImage.png" 
+                                                width="80" height="80"/>
                                 <br/>
                                 <h:outputText value="#{auctionUserView.getUserFullname()}"/>
                                 <p:rating value="#{auctionUserView.getSellersRating()}" stars="5" cancel="false" disabled="true"/>
                                 <br/>
-                        </div>
+
+                                <b:button value="Add new auction" outcome="/SellerViews/addNewAuction.xhtml?auctionId=testId"></b:button>
+
+                            </div>
+
+
+
                         </b:column>
                     </b:row>
-            </b:container>
+                </b:container>
             </ui:define>
         </ui:composition>                       
     </h:body>
