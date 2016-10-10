@@ -5,7 +5,11 @@
  */
 package support;
 
+import boundary.AuctionFacade;
+import boundary.AuctionUserFacade;
 import entities.Auction;
+import entities.AuctionUser;
+import entities.Bid;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -38,5 +42,16 @@ public class AuctionSupport {
    public static List<Auction> sortAuctionsBasedOnTime(List<Auction> auctions) {
        Collections.sort(auctions);
        return auctions;
+   }
+   
+   public static double getCurrentPrice(Auction auction){
+        AuctionFacade auctionFacade = new AuctionFacade();
+        
+        Bid bid = auction.getBid();
+        if(bid == null){
+          return auction.getInitPrice();
+        }else{
+            return bid.getAmount();
+        }
    }
 }
