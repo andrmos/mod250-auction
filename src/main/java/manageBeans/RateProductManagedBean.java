@@ -14,6 +14,8 @@ import entities.Feedback;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 
 /**
@@ -33,6 +35,8 @@ public class RateProductManagedBean {
     @EJB
     AuctionFacade auctionFacade;
     
+    @DecimalMin("0.0")
+    @DecimalMax("5.0")
     private Double rating;
     private String comment;
     private Auction auction;
