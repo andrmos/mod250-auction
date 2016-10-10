@@ -127,4 +127,8 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         Double numberOfDays=Math.floor(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))/86400);
         return numberOfDays.intValue();
     }
+    
+    public List<Auction> getSortedAuctions(List<Auction> auctions){
+        return AuctionSupport.sortAuctionsBasedOnTime(auctions);
+    }
 }

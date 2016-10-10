@@ -110,10 +110,10 @@ public class AuctionListManagedBean implements Serializable {
     
     public List<Auction> getAuctions() {
         if(currentListOfAuctions==null){
-            return auction.findAll();
+            return auction.getSortedAuctions(auction.findAll());
         }
         else{
-            return currentListOfAuctions;
+            return auction.getSortedAuctions(currentListOfAuctions);
         }        
     }
     
