@@ -21,7 +21,7 @@
                 
                 <ui:repeat value="#{auctionListManagedBean.auctions}" var="auction">
                 
-                    <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" timeLeft="#{auction.duration}"
+                    <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auctionListManagedBean.getPrice(auction.id)}" timeLeft="#{auction.duration}"
                                        profile="#{auction.user.username}" title="#{auction.product.productName}" showRating="false" deleteAuction="false" 
                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="#{facesContext.externalContext.isUserInRole('customer')}"/>
                     <br/>                    

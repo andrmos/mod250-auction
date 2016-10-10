@@ -12,14 +12,14 @@
     <cc:interface>
         <cc:attribute name="price" required="true"/>
         <cc:attribute name="title" required="true"/>
-        <cc:attribute name="timeLeft" required="true"/>
+       
         <cc:attribute name="pictureFilePath" required="true"/>
         <cc:attribute name="profile" required="true"/>  
         <cc:attribute name="showRating" required="true"/> 
         <cc:attribute name="deleteAuction" required="true"/>
         <cc:attribute name="userID" required="true"/>
         <cc:attribute name="auctionId" required="true" />
-         <cc:attribute name="showBidButton" required="true" />         
+        <cc:attribute name="showBidButton" required="true" />
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
@@ -36,7 +36,7 @@
                 </b:well>
                 <f:facet name="footer">
                     <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{rateProductManagedBean.addFeedback(auctionId)}"/>
+                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{rateProductManagedBean.addFeedback(cc.attrs.auctionId)}"/>
                 </f:facet>
             </b:modal>
             <b:modal id="amodal2" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
@@ -62,9 +62,10 @@
                                 </h:outputText>
                             </b:column>
                             <b:column span="6">                                
-                                <h:form rendered="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)>0}"> 
+                                <h:form rendered="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)>0}"> 
                                     <b:label text="Time left "/>                                    
-                                    <pe:timer timeout="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
+                                    <b:label text="Days: #{auctionListManagedBean.getDaysLeft(cc.attrs.auctionId)}"/>
+                                    <pe:timer timeout="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
                                 </h:form>
                             </b:column>
                         </b:row>
@@ -78,9 +79,8 @@
                                 <h:outputText value="#{cc.attrs.profile}"></h:outputText>            
                             </b:column>
                             <b:column span="6">
-                                <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />
-                                <b:button value="Bid" rendered="#{cc.attrs.showBidButton}" onclick="$('.testModal').modal()"/>
-                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and rateProductManagedBean.renderFeedback(cc.attrs.auctionId)}"/>
+                                <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />                                
+                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and renderFeedbackMB.renderFeedback(cc.attrs.auctionId)}"/>
                                 <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction}"/>
                             </b:column>
                         </b:row>

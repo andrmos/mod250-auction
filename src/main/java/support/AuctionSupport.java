@@ -5,7 +5,14 @@
  */
 package support;
 
+import boundary.AuctionFacade;
+import boundary.AuctionUserFacade;
 import entities.Auction;
+import entities.AuctionUser;
+import entities.Bid;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
@@ -27,8 +34,22 @@ public class AuctionSupport {
       return Seconds.secondsBetween(finsihedDate, now).getSeconds();      
       }
       else if(auction.getStartTime()==null){
-          return 100;
+          return 0;
       }
-      return 100;
+      return 0;
+   }
+   
+   public static List<Auction> sortAuctionsBasedOnTime(List<Auction> auctions) {
+       Collections.sort(auctions);
+       return auctions;
+   }
+   
+   public static double getCurrentPrice(Auction auction){
+        Bid bid = auction.getBid();
+        if(bid == null){
+          return auction.getInitPrice();
+        }else{
+            return bid.getAmount();
+        }
    }
 }

@@ -25,6 +25,7 @@ import javax.faces.view.facelets.FaceletContext;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertTrue;
+import support.AuctionSupport;
 
 /**
  *
@@ -110,15 +111,23 @@ public class AuctionListManagedBean implements Serializable {
     
     public List<Auction> getAuctions() {
         if(currentListOfAuctions==null){
-            return auction.findAll();
+            return auction.getSortedAuctions(auction.findAll());
         }
         else{
-            return currentListOfAuctions;
+            return auction.getSortedAuctions(currentListOfAuctions);
         }        
     }
     
-   public int getTimeLeft(String id){
+   public int getSecondsLeft(String id){
        return auction.getTimeLeftInSeconds(id);
+   }
+   
+   public int getDaysLeft(String id){
+       return auction.getNumberOfDaysUntilDeadline(id);
+   }
+   
+   public double getPrice(String auctionId){
+       return AuctionSupport.getCurrentPrice(auction.find(Long.valueOf(auctionId)));
    }
     
     public void createAuction() {

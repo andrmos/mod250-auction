@@ -123,8 +123,11 @@ public class AuctionDetail extends UIInput implements Serializable {
     }        
     
     public void saveBid(){
-        if(this.bid.getAmount() <= this.auction.getBid().getAmount()){
-            return;
+        Bid currentBid = this.auction.getBid();
+        if(currentBid != null){
+            if(this.bid.getAmount() <= currentBid.getAmount()){
+                return;
+            }
         }
         bid.setBidDate(new Date());
         bid.setAuction(this.auction);
@@ -136,6 +139,11 @@ public class AuctionDetail extends UIInput implements Serializable {
         this.auction.setBid(bid);
         this.auctionFacade.edit(auction);
         
+        if(currentBid != null){
+            this.bidFacade.remove(currentBid);
+        }
+        
+        //reload page
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try{
             ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI() + "?auctionId=" + this.auction.getId());
