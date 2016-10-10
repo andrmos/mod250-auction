@@ -30,6 +30,9 @@ public class AuctionUserView implements Serializable {
     
     @EJB
     private AuctionUserFacade userFacade;
+    @EJB
+    private FeedbackFacade feedbackFacade;
+    
     private AuctionUser user;
     
     /**
@@ -70,18 +73,33 @@ public class AuctionUserView implements Serializable {
         return (int) Math.round(user.getSellers_rating()); 
     }
        
+    /**
+     * Finds all finished auctions for a user
+     * @return arr
+     *          arrayList
+     */
     public ArrayList<Auction> getFinishedAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
         arr.addAll(this.userFacade.getFinishedAuctions());
         return arr;
     }
     
+    /**
+     * Finds all ongoing (current) auctions for a user
+     * @return arr
+     *          arrayList
+     */
     public ArrayList<Auction> getCurrentAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
         arr.addAll(this.userFacade.getCurrentAuctions());
         return arr;
     }
     
+    /**
+     * Logout method
+     * @return index.xhtml
+     *          redirect page after logout
+     */
     public String logout() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         session.invalidate();
@@ -90,11 +108,28 @@ public class AuctionUserView implements Serializable {
     
     /**
      * Sets new sellers rating
-     * @param rating 
+     * @param user
+     *          user to set new rating
+     * @param newRating 
+     *          the rating to add to 
      */
     public void setNewSellersRating(AuctionUser user, double newRating){
-        double totalRating = (user.getSellers_rating()+newRating)/2;
-        user.setSellers_rating((int) totalRating);
+        LinkedList<Feedback> feedbacks = feedbackFacade.getAllFeedbacksByUser(user);
+        double counter = 0;
+        double total = 0;
+        //checks if the user have several ratings from beforehand
+        if(feedbacks.size() > 0){
+            for(int i = 0; i < feedbacks.size(); i++){
+                total += feedbacks.get(i).getRating();
+                counter++;
+            }
+            counter++;
+            total = (total+newRating)/counter;
+            user.setSellers_rating((int) total);
+        }else{ //if this is the first rating
+            user.setSellers_rating((int) newRating);
+        }       
+        userFacade.edit(user);
     }
     
 }

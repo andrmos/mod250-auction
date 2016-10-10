@@ -14,9 +14,6 @@ import entities.Feedback;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-
 
 /**
  *
@@ -65,6 +62,11 @@ public class RateProductManagedBean {
         this.comment = comment;
     }
     
+    /**
+     * Adds the new feedback for an auction
+     * @param auctionID 
+     *          auction to add feedback to
+     */
     public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
         //Adds feedback if there doesnt exists a feedback
@@ -97,9 +99,11 @@ public class RateProductManagedBean {
     public boolean renderFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
         if(feedbackFacade.checkForExistingFeedback(auction)){
-            return false; //there exists a feedback for this auction
+            //Feedback for auction exists, do not render rating
+            return false; 
         }
-        return true; //There doesn't exist any feedback
+        //No feedback exists, render rating
+        return true;
     }
     
 }

@@ -12,25 +12,25 @@
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
             <h1>Overview over bids</h1>
             <ui:define name="contentDiv">
-                    <div class="auction-list" style="height: 400px; overflow-y: auto">
-                    <h1>Auctions won</h1>
+                <h1>Auctions won</h1>
+                <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                     <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
-                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" timeLeft="19:29"
-                                           profile="#{auction.getUser().getContactInfo().getName()}" title="#{auction.getProduct().getProductName()}" showRating="false" deleteAuction="false"
-                                           userID="auction.user.id" auctionId="#{auction.id}" showBidButton="false"/>
+                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.bid.amount}" timeLeft="19:29"
+                                           profile="#{auction.user.contactinfo.name}" title="#{auction.product.productName}" showRating="false" deleteAuction="false"
+                                           userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
                         <br/>  
                     </ui:repeat>
                    
                 </div> 
                 
-                <div class="auction-list" style="height: 400px; overflow-y: auto">
-                    <h1>Ongoing auctions with bids</h1>
-                    <ui:repeat value="#{AuctionUserView.getCurrentAuctions()}" var="auction">
+                <h1>Ongoing auctions with bids</h1>
+                <div class="auction-list" style="max-height: 400px; overflow-y: auto">
+                    <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">
                         <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" 
-                                           timeLeft="19:29" profile="#{auction.getUser().getContactInfo().getName()}" 
+                                           timeLeft="19:29" profile="#{auction.user.contactinfo.name}" 
                                            title="#{auction.getProduct().getProductName()}"
                                            showRating="false" deleteAuction="false" 
-                                           userID="auction.user.id" auctionId="#{auction.id}" showBidButton="false"/>
+                                           userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
                         <br/>  
                     </ui:repeat>
                    
