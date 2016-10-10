@@ -148,4 +148,8 @@ public class AuctionDetail extends UIInput implements Serializable {
         return this.auctionUserFacade.getAuctionUser() != null; 
     }
     
+    public int getTimeLeft(){
+       return auctionFacade.getTimeLeftInSeconds(""+this.auction.getId());
+   }
+    
 }

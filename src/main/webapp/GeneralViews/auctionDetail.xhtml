@@ -7,12 +7,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:pe="http://primefaces.org/ui/extensions">
       <h:head>
         <!--<h:outputStylesheet name ="css/customer.css"/> -->
         <title>Auction Detail</title>
         <f:metadata>
-            <f:viewParam name="auctionId" value="#{auctionDetail.auctionId}" />
+            <f:viewParam name="auctionId" value="#{auctionDetail.auctionId}" required="true"/>
         </f:metadata>
     </h:head>
     <h:body>
@@ -53,7 +54,10 @@
                             </b:row>
                             <b:row>
                                 <div class="pull-right" style="height: 350px;">
-                                    <h4>Current Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
+                                    <h:form>
+                                        <h4>Current Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
+                                        <h5>Time left: <pe:timer timeout="#{auctionDetail.getTimeLeft()}"  format="HH:mm:ss"/></h5>
+                                    </h:form>
                                 </div>
                             </b:row>
                             
