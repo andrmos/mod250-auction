@@ -31,9 +31,8 @@ public class RateProductManagedBean {
     AuctionUserFacade userFacade;
     @EJB
     AuctionFacade auctionFacade;
-    @EJB
-    AuctionUserView auctionUserView;
     
+    AuctionUserView auctionUserView;
     private Double rating;
     private String comment;
     private Auction auction;
@@ -100,10 +99,10 @@ public class RateProductManagedBean {
         auction = auctionFacade.find(auctionID);
         if(feedbackFacade.checkForExistingFeedback(auction)){
             //Feedback for auction exists, do not render rating
-            return false; 
+            return true; 
         }
         //No feedback exists, render rating
-        return true;
+        return false;
     }
     
 }
