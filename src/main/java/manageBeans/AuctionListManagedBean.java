@@ -119,13 +119,17 @@ public class AuctionListManagedBean implements Serializable {
     }
     
    public int getSecondsLeft(String id){
-       System.out.println("secondsLef: "+id +" " +auction.getTimeLeftInSeconds(id));
+       if(auction.find(Long.parseLong(id)).isPublished()){       
        return auction.getTimeLeftInSeconds(id);
+       }
+       return 0;
    }
    
-   public int getDaysLeft(String id){
-       System.out.println("daysLeft: " + id+" " + auction.getNumberOfDaysUntilDeadline(id));
+   public int getDaysLeft(String id){       
+       if(auction.find(Long.parseLong(id)).isPublished()){       
        return auction.getNumberOfDaysUntilDeadline(id);
+       }
+       return 0;
    }
    
    public double getPrice(String auctionId){

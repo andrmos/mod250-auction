@@ -86,7 +86,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
    public List<Auction> getActiveAuctions(){
        List<Auction> tempList= new ArrayList<>();
        for(int i=0; i< findAll().size();i++){
-           if(findAll().get(i).isPublished()){
+           if(findAll().get(i).isPublished() && !AuctionSupport.isAuctionFinished(findAll().get(i))){
                tempList.add(findAll().get(i));
            }
        }
