@@ -23,6 +23,12 @@ public class AuctionSupport {
       DateTime finsihedDate=new DateTime(auction.getStartTime()).
                plusSeconds(auction.getDuration().intValue());
       DateTime now=new DateTime();
+      if(finsihedDate.isAfter(now)){
       return Seconds.secondsBetween(finsihedDate, now).getSeconds();      
+      }
+      else if(auction.getStartTime()==null){
+          return 100;
+      }
+      return 100;
    }
 }

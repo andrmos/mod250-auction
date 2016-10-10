@@ -36,7 +36,7 @@ public class AuctionUser implements Serializable {
     @Column(unique=true)
     private String username;
     private String password;
-    private int sellers_rating;
+    private double sellers_rating;
     private String role;
 
     public String getRole() {
@@ -76,11 +76,11 @@ public class AuctionUser implements Serializable {
         this.password = password;
     }
 
-    public int getSellers_rating() {
+    public double getSellers_rating() {
         return sellers_rating;
     }
 
-    public void setSellers_rating(int sellers_rating) {
+    public void setSellers_rating(double sellers_rating) {
         this.sellers_rating = sellers_rating;
     }
 

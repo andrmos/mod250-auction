@@ -62,10 +62,10 @@
                                 </h:outputText>
                             </b:column>
                             <b:column span="6">                                
-                                <h:form> 
-                                    <b:label text="Time left "/>
+                                <h:form rendered="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)>0}"> 
+                                    <b:label text="Time left "/>                                    
                                     <pe:timer timeout="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
-                                </h:form>> 
+                                </h:form>
                             </b:column>
                         </b:row>
                         <b:row id="profileAndButtonRow">                            
