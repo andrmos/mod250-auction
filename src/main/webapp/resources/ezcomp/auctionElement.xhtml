@@ -36,7 +36,7 @@
                 </b:well>
                 <f:facet name="footer">
                     <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{rateProductManagedBean.addFeedback(auctionId)}"/>
+                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{rateProductManagedBean.addFeedback(cc.attrs.auctionId)}"/>
                 </f:facet>
             </b:modal>
             <b:modal id="amodal2" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
@@ -80,7 +80,7 @@
                             </b:column>
                             <b:column span="6">
                                 <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />                                
-                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and rateProductManagedBean.renderFeedback(cc.attrs.auctionId)}"/>
+                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and renderFeedbackMB.renderFeedback(cc.attrs.auctionId)}"/>
                                 <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction}"/>
                             </b:column>
                         </b:row>
