@@ -117,8 +117,12 @@ public class AuctionListManagedBean implements Serializable {
         }        
     }
     
-   public int getTimeLeft(String id){
+   public int getSecondsLeft(String id){
        return auction.getTimeLeftInSeconds(id);
+   }
+   
+   public int getDaysLeft(String id){
+       return auction.getNumberOfDaysUntilDeadline(id);
    }
     
     public void createAuction() {

@@ -62,9 +62,10 @@
                                 </h:outputText>
                             </b:column>
                             <b:column span="6">                                
-                                <h:form rendered="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)>0}"> 
+                                <h:form rendered="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)>0}"> 
                                     <b:label text="Time left "/>                                    
-                                    <pe:timer timeout="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
+                                    <b:label text="Days: #{auctionListManagedBean.getDaysLeft(cc.attrs.auctionId)}"/>
+                                    <pe:timer timeout="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
                                 </h:form>
                             </b:column>
                         </b:row>
@@ -78,8 +79,7 @@
                                 <h:outputText value="#{cc.attrs.profile}"></h:outputText>            
                             </b:column>
                             <b:column span="6">
-                                <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />
-                                <b:button value="Bid" rendered="#{cc.attrs.showBidButton}" onclick="$('.testModal').modal()"/>
+                                <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />                                
                                 <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and rateProductManagedBean.renderFeedback(cc.attrs.auctionId)}"/>
                                 <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction}"/>
                             </b:column>
