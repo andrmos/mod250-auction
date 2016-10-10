@@ -14,9 +14,9 @@
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
             <h1>Overview over Auctions</h1>
             <ui:define name="contentDiv">
-                <b:container>
+                <b:container fluid="true">
                     <b:row>
-                        <b:column medium-screen="6">
+                        <b:column medium-screen="9">
                             <h1>Ongoing</h1>
                             <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                             <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">                       
@@ -41,7 +41,7 @@
 
                         </div> 
                         </b:column>
-                        <b:column medium-screen="6">
+                        <b:column medium-screen="2">
                             <div class="pull-right text-center">
                                 <h:graphicImage value="/resources/images/profileImage.png" 
                                                 width="80" height="80"/>
