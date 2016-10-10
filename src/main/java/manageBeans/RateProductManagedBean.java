@@ -34,6 +34,8 @@ public class RateProductManagedBean {
     AuctionUserFacade userFacade;
     @EJB
     AuctionFacade auctionFacade;
+    @EJB
+    AuctionUserView auctionUserView;
     
     private Double rating;
     private String comment;
@@ -68,10 +70,11 @@ public class RateProductManagedBean {
         //Adds feedback if there doesnt exists a feedback
         if(!feedbackFacade.checkForExistingFeedback(auction)){
             user = userFacade.getAuctionUser();
+            //connects feedback to an auction and user
             feedback.setAuction(auction);
             feedback.setUser(user);
-            feedbackFacade.createFeedback(feedback);
-            user.setSellers_rating(feedback.getRating());
+            feedbackFacade.createFeedback(feedback); //creates new feedback
+            auctionUserView.setNewSellersRating(user, feedback.getRating()); //sets new sellers rating
         }
     }
 
