@@ -27,20 +27,23 @@ public class AuctionSupport {
    }
     
    public static int secondsToAuctionIsFinished(Auction auction){
-      DateTime finsihedDate=new DateTime(auction.getStartTime()).
-               plusSeconds(auction.getDuration().intValue());
-      DateTime now=new DateTime();
-      if(finsihedDate.isAfter(now)){
-      return Seconds.secondsBetween(finsihedDate, now).getSeconds();      
-      }
-      else if(auction.getStartTime()==null){
+      if(auction.getStartTime()==null){
           return 0;
       }
+      else if(auction.getStartTime()!=null){
+          DateTime finsihedDate = new DateTime(auction.getStartTime()).
+                  plusSeconds(auction.getDuration().intValue());
+          DateTime now = new DateTime();
+          if (finsihedDate.isAfter(now)) {
+              return Seconds.secondsBetween(now,finsihedDate).getSeconds();
+          }
+      }            
       return 0;
    }
    
    public static List<Auction> sortAuctionsBasedOnTime(List<Auction> auctions) {
-       Collections.sort(auctions);
+       Collections.sort(auctions);       
+       Collections.reverse(auctions);
        return auctions;
    }
    
