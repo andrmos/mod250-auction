@@ -7,6 +7,7 @@ package boundary;
 
 import entities.Auction;
 import entities.AuctionUser;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -123,7 +124,7 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
      */
     public List getAuctions(boolean isOver){
         LinkedList<Integer> list = new LinkedList<Integer>();
-        LinkedList<Auction> auctionList = new LinkedList<Auction>();
+        HashSet<Auction> auctionList = new HashSet<Auction>();
         Auction auction;
         DateTime nowDate = new DateTime();
         DateTime dateTime = new DateTime();
@@ -136,7 +137,11 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
                     "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id =" + user.getId()
                 ).getResultList());
             
-            } 
+            }else if(user.getRole().equals("seller")){
+                list.addAll(em.createQuery( //query to retrieve all auctions
+                 "SELECT a.id FROM Auction as a WHERE a.user.id =" + user.getId()
+                ).getResultList());
+            }
         }else{
             list.addAll(em.createQuery( //query to retrieve all auctions
                  "SELECT a.id FROM Auction as a WHERE a.user.id =" + user.getId()
@@ -150,7 +155,7 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
            dateTime.plusSeconds(auction.getDuration().intValue());
            
            if(isOver){ //if auction is done
-                if(dateTime.compareTo(nowDate) < 0){
+                if(dateTime.compareTo(nowDate) <= 0){
                     auctionList.add(auction);
                 }
            }else{ //if auction is still ongoing
@@ -159,6 +164,9 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
                 }
            }
         }
-        return auctionList; 
+        
+        LinkedList<Auction> listOfAuctions = new LinkedList<Auction>();
+        listOfAuctions.addAll(auctionList); 
+        return listOfAuctions;
     }
  }
