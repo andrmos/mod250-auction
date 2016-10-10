@@ -24,21 +24,6 @@
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <b:modal id="jeje" title="Set bid" styleClass="testModal" rendered="#{cc.attrs.showBidButton}">
-                <b:well>
-                    <h1><strong>Bid on product</strong></h1>
-                    <h:form>
-                        <h:outputText value="Current price: #{cc.attrs.price} NOK"/>
-                        <b:inputText placeholder="New price"  required-message="please enter a price grater than #{cc.attrs.price}" 
-                                     value="#{auctionDetail.bid.setAmount(amount)}">                           
-                        </b:inputText>
-                        <b:commandButton value="Submit" rendered="#{auctionDetail.bidAmountHigherThanCurrentBid}"></b:commandButton>
-                    </h:form>
-                </b:well>
-                <f:facet name="footer">
-                    <b:button value="Close" dismiss="modal" onclick="$('.testModal').modal('hide');return false;"/>                    
-                </f:facet>
-            </b:modal>
         <div style="border: thin black solid">
             <b:modal id="amodal" title="Rate Product" styleClass="ratingModal" rendered="#{cc.attrs.showRating}">
                 <b:well>
@@ -95,7 +80,7 @@
                             <b:column span="6">
                                 <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />
                                 <b:button value="Bid" rendered="#{cc.attrs.showBidButton}" onclick="$('.testModal').modal()"/>
-                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating}"/> <!-- ; rateProductManagedBean.renderFeedback(cc.attrs.auctionId)-->
+                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and rateProductManagedBean.renderFeedback(cc.attrs.auctionId)}"/>
                                 <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction}"/>
                             </b:column>
                         </b:row>
