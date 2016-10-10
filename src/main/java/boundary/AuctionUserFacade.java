@@ -55,7 +55,6 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
      */
     public int getAuctionUserId(){
         String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        System.out.println("BRUKERNAVN: " + username);
         int id = em.createQuery(
                 "SELECT A.id FROM AuctionUser AS A WHERE A.username = '" + username + "'"
         ).getFirstResult();
@@ -134,13 +133,13 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         if(user != null){
            if(user.getRole().equals("customer")){
                 list.addAll(em.createQuery( //query to retrieve all auctions with bids
-                    "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id = 78" //user.getId()
+                    "SELECT b.auction.id FROM Bid as b WHERE b.auctionUser.id =" + user.getId()
                 ).getResultList());
             
             } 
         }else{
             list.addAll(em.createQuery( //query to retrieve all auctions
-                 "SELECT a.id FROM Auction as a WHERE a.user.id = 2" //+ user.getId()
+                 "SELECT a.id FROM Auction as a WHERE a.user.id =" + user.getId()
             ).getResultList());
         }
         
