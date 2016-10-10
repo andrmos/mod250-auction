@@ -24,6 +24,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.facelets.FaceletContext;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.AssertTrue;
 
 /**
  *
@@ -43,6 +44,9 @@ public class AuctionListManagedBean implements Serializable {
     private List<Auction> currentListOfAuctions;
     private String selectedCategory;
     private String searchKeyword;
+    
+    @AssertTrue()
+    private Double bid;
     
 
 
@@ -112,6 +116,10 @@ public class AuctionListManagedBean implements Serializable {
             return currentListOfAuctions;
         }        
     }
+    
+   public int getTimeLeft(String id){
+       return auction.getTimeLeftInSeconds(id);
+   }
     
     public void createAuction() {
        /* System.out.println("heymama");

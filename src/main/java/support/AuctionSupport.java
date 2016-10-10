@@ -7,6 +7,7 @@ package support;
 
 import entities.Auction;
 import org.joda.time.DateTime;
+import org.joda.time.Seconds;
 
 /**
  *
@@ -16,5 +17,12 @@ public class AuctionSupport {
     public static boolean isAuctionFinished(Auction auction){           
        return auction.isPublished() && (new DateTime(auction.getStartTime()).
                plusSeconds(auction.getDuration().intValue()).compareTo(new DateTime())<0);
+   }
+    
+   public static int secondsToAuctionIsFinished(Auction auction){
+      DateTime finsihedDate=new DateTime(auction.getStartTime()).
+               plusSeconds(auction.getDuration().intValue());
+      DateTime now=new DateTime();
+      return Seconds.secondsBetween(finsihedDate, now).getSeconds();      
    }
 }

@@ -117,4 +117,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
        return tempList;      
    }   
    
+   public int getTimeLeftInSeconds(String id){
+       return AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)));       
+   }
 }

@@ -5,7 +5,8 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
     <!-- INTERFACE -->
     <cc:interface>
@@ -28,9 +29,10 @@
                     <h1><strong>Bid on product</strong></h1>
                     <h:form>
                         <h:outputText value="Current price: #{cc.attrs.price} NOK"/>
-                        <b:inputText placeholder="New price"  required-message="please enter a price grater than #{cc.attrs.price}">                           
+                        <b:inputText placeholder="New price"  required-message="please enter a price grater than #{cc.attrs.price}" 
+                                     value="#{auctionDetail.bid.setAmount(amount)}">                           
                         </b:inputText>
-                        <b:commandButton value="Submit"></b:commandButton>
+                        <b:commandButton value="Submit" rendered="#{auctionDetail.bidAmountHigherThanCurrentBid}"></b:commandButton>
                     </h:form>
                 </b:well>
                 <f:facet name="footer">
@@ -75,7 +77,10 @@
                                 </h:outputText>
                             </b:column>
                             <b:column span="6">                                
-                                <h:outputText id="timeLeft" value="time left #{cc.attrs.timeLeft}"/>                                                                    
+                                <h:form> 
+                                    <b:label text="Time left "/>
+                                    <pe:timer timeout="#{auctionListManagedBean.getTimeLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
+                                </h:form>> 
                             </b:column>
                         </b:row>
                         <b:row id="profileAndButtonRow">                            
@@ -85,17 +90,7 @@
                                                     height="50"/>
                                      <f:param name="uID" value="#{cc.attrs.userID}"></f:param>
                                 </h:link>
-                                <h:outputText value="#{cc.attrs.profile}"></h:outputText> 
-                                <!--<h:form>                                    
-                                    <h:commandLink action="/GeneralViews/sellerCatalogue.xhtml" > 
-                                        <h:graphicImage value="/resources/images/profileImage.png" width="50" 
-                                                    height="50"/>
-                                        <f:param name="lol" value="kk"></f:param>
-                                    </h:commandLink>
-                                    <h:outputText value="#{cc.attrs.profile}"></h:outputText>                                  
-                                    
-                                </h:form>-->
-
+                                <h:outputText value="#{cc.attrs.profile}"></h:outputText>            
                             </b:column>
                             <b:column span="6">
                                 <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />

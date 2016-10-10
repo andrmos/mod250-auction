@@ -120,7 +120,7 @@ public class AuctionDetail extends UIInput implements Serializable {
     
     public int getSellerRating(){
         return (int)this.auction.getUser().getSellers_rating();
-    }
+    }        
     
     public void saveBid(){
         if(this.bid.getAmount() <= this.auction.getBid().getAmount()){
