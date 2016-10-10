@@ -6,12 +6,15 @@
 package manageBeans;
 
 import boundary.AuctionUserFacade;
+import boundary.FeedbackFacade;
 import entities.Auction;
 import entities.AuctionUser;
+import entities.Feedback;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -28,6 +31,8 @@ public class AuctionUserView implements Serializable {
     
     @EJB
     private AuctionUserFacade userFacade;
+    @EJB
+    private FeedbackFacade feedbackFacade;
     private AuctionUser user;
     
     /**
@@ -61,7 +66,7 @@ public class AuctionUserView implements Serializable {
      * Method to get the sellers rating
      * @return 
      */
-    public int getSellersRating(){
+    public double getSellersRating(){
         user = userFacade.getAuctionUser(); //finds the logged in user
         if(!user.getRole().equals("seller")){
             throw new IllegalArgumentException("Only sellers have rating");
@@ -86,6 +91,17 @@ public class AuctionUserView implements Serializable {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         session.invalidate();
         return "index.xhtml?faces-redirect=true";
+    }
+    
+    
+    /**
+     * Sets new sellers rating
+     * @param rating 
+     */
+    public void setNewSellersRating(double newRating){
+        double oldRating = getUser().getSellers_rating();
+        double totalRating = (oldRating+newRating)/2;
+        getUser().setSellers_rating((int) totalRating);
     }
     
 }
