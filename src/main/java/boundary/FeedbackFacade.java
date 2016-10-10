@@ -6,6 +6,7 @@
 package boundary;
 
 import entities.Auction;
+import entities.AuctionUser;
 import entities.Feedback;
 import java.util.LinkedList;
 import javax.ejb.Stateless;
@@ -34,6 +35,23 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
     public void createFeedback(Feedback feedback){
         em.persist(feedback);
     }
+    
+    /**
+     * Finds all the feedbacks connected to a seller
+     * @param user
+     * @return 
+     */
+    public LinkedList getAllFeedbacksByUser(AuctionUser user){
+        LinkedList<Feedback> feedbackList = new LinkedList<Feedback>();
+        LinkedList<Feedback> fullList = getAllFeedbacks();
+        for(int i = 0; i < fullList.size(); i++){
+            if(fullList.get(i).getAuction().getUser().equals(user)){
+                feedbackList.add(fullList.get(i));
+            }
+        }
+        return feedbackList;
+    }
+    
     
     /**
      * Gets all existing feedbacks
