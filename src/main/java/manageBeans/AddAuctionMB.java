@@ -6,36 +6,69 @@
 package manageBeans;
 
 import boundary.AuctionFacade;
+import boundary.ProductFacade;
+import entities.Auction;
+import entities.Product;
+import enums.Category;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Interval;
 
 /**
  *
  * @author andre
  */
 @Named(value = "addAuctionMB")
-@RequestScoped
+@ViewScoped
 public class AddAuctionMB implements Serializable {
     
     @EJB
     AuctionFacade auctionFacade;
     
+    @EJB
+    ProductFacade productFacade;
+    
     private String title;
     private String description;
     private int price;
-    private int duration;
+    private long duration;
     private String selectedCategory;
     private boolean published;
+    
+    private Date startDate;
+    private Date endDate;
 
     /**
      * Creates a new instance of AddAuctionMB
      */
     public AddAuctionMB() {
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        System.out.println("setstart date " + startDate);
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getTitle() {
@@ -62,11 +95,11 @@ public class AddAuctionMB implements Serializable {
         this.price = price;
     }
 
-    public int getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
@@ -90,16 +123,25 @@ public class AddAuctionMB implements Serializable {
         List selectedCategories=new ArrayList();
         selectedCategories.add(new SelectItem("0", "Clothing"));
         selectedCategories.add(new SelectItem("1", "Electronics"));
-        selectedCategories.add(new SelectItem("2", "White Wear"));
+        selectedCategories.add(new SelectItem("2", "White Ware"));
         selectedCategories.add(new SelectItem("3", "Jewlerry"));        
         selectedCategories.add(new SelectItem("4", "Guns"));        
         return selectedCategories;
     }
     
     public void addAuction() {
+        // Create Product: id, category, description, picturepath, productname
+        Product product = new Product();
+        //product.setCategory(Category.fromString(selectedCategory));
+        product.setDescription(description);
+        product.setPicturePath("tesplaceholder...");
+        product.setProductName(title);
+        //productFacade.create(product);
         
-        System.out.println("test");
+        // Create Auction: id, duration, price, published, starttime, prod_id, user_id
+        Auction auction = new Auction();
         
+        System.out.println("start date: " + startDate);
     }
     
     
