@@ -20,7 +20,7 @@
                             <h1>Ongoing</h1>
                             <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                             <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">                       
-                                <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" timeLeft="19:29"
+                                <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" 
                                                    profile="#{auction.user.contactinfo.name}" title="#{auction.product.productName}" showRating="false" deleteAuction="false"
                                                    userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
                                 <br/>  
@@ -32,7 +32,7 @@
                         <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                             <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">
                                 <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" 
-                                                   timeLeft="19:29" profile="#{auction.user.contactinfo.name}" 
+                                                   profile="#{auction.user.contactinfo.name}" 
                                                    title="#{auction.getProduct().getProductName()}"
                                                    showRating="false" deleteAuction="false" 
                                                    userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>

@@ -8,7 +8,6 @@ package manageBeans;
 import boundary.AuctionFacade;
 import entities.Auction;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;

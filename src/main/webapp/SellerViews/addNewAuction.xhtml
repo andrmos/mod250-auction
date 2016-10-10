@@ -6,7 +6,7 @@
       xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui/extensions">
     <h:head>
         <h:outputStylesheet name ="css/customer.css"/> 
         <title>Seller Profile</title>
@@ -28,7 +28,14 @@
 
                         <b:inputText label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only"></b:inputText>
 
-                        <b:inputText label="Duration in minutes" value="#{addAuctionMB.duration}" converterMessage="Please enter digits only"></b:inputText>
+                        <b:label text="Start date"></b:label>
+                        
+                        
+                        <b:dateTimePicker side-by-side="true" format="DD/MM/YY - HH:mm" value="#{addAuctionMB.startDate}"></b:dateTimePicker>
+                        
+                        
+                        <b:label text="End date"></b:label>
+                        <b:dateTimePicker side-by-side="true" format="DD/MM/YY - HH:mm" value="#{addAuctionMB.endDate}"></b:dateTimePicker>
 
                         <b:selectOneMenu value="#{addAuctionMB.selectedCategory}">
                             <f:selectItems value="#{addAuctionMB.selectedCategories}"/>
