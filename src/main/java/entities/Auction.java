@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import org.joda.time.DateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="AUCTION")
-public class Auction implements Serializable {
+public class Auction implements Serializable, Comparable<Auction> {
 
     private static final long serialVersionUID = 1L;
     
@@ -142,5 +143,26 @@ public class Auction implements Serializable {
     public String toString() {
         return "entities.Auction[ id=" + id + " ]";
     }
-    
+
+    @Override
+    public int compareTo(Auction o) {
+        DateTime thisDateTime;    
+        try{
+        thisDateTime = new DateTime(startTime);
+        thisDateTime=thisDateTime.plusSeconds(duration.intValue());}        
+        catch(NullPointerException exception){
+        thisDateTime = new DateTime();
+        thisDateTime=thisDateTime.plusSeconds(duration.intValue());
+        }
+        DateTime otherDateTime;
+        try{
+            otherDateTime = new DateTime(o.startTime);
+            otherDateTime.plus(o.getDuration().intValue());            
+        }
+        catch(NullPointerException e){
+            otherDateTime = new DateTime();
+            otherDateTime.plus(o.getDuration().intValue());            
+        }
+        return thisDateTime.compareTo(otherDateTime);                        
+    }    
 }

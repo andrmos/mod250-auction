@@ -6,6 +6,9 @@
 package support;
 
 import entities.Auction;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
@@ -27,8 +30,13 @@ public class AuctionSupport {
       return Seconds.secondsBetween(finsihedDate, now).getSeconds();      
       }
       else if(auction.getStartTime()==null){
-          return 100;
+          return 0;
       }
-      return 100;
+      return 0;
+   }
+   
+   public static List<Auction> sortAuctionsBasedOnTime(List<Auction> auctions) {
+       Collections.sort(auctions);
+       return auctions;
    }
 }

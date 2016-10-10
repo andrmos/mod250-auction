@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Andreas
  */
 @Named(value = "sellerCatalougeMB")
-@SessionScoped
+@ViewScoped
 public class SellerCatalougeMB implements Serializable {
 
     /**
@@ -37,7 +38,10 @@ public class SellerCatalougeMB implements Serializable {
         .getRequest();
         userID=request.getParameter("uID");
     }    
+    
+    
     public List<Auction> getActiveAuctions() {
+        System.out.println(userID);
         return auctionFacade.getActiveAuctionsBasedOnUserID(userID);
     }
     public List<Auction> getFinishedAuctions() {
