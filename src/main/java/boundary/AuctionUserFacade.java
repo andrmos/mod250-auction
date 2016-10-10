@@ -153,7 +153,6 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
            auction = em.find(Auction.class, list.get(i));
            dateTime = new DateTime(auction.getStartTime());
            dateTime = dateTime.plusSeconds(auction.getDuration().intValue());
-           System.out.println("NOTID: " + nowDate + " FerdigTID: "+ dateTime);
            
            if(isOver){ //if auction is done
                 if(dateTime.compareTo(nowDate) <= 0){

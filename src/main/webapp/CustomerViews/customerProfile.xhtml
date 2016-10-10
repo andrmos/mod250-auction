@@ -17,7 +17,7 @@
                 <b:container fluid="true">
                     <b:row>
                         <b:column medium-screen="9">
-                        <h1>Auctions won</h1>
+                        <h1 style="height: 40px">Auctions won</h1>
                         <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                             <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
                                 <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.bid.amount}" timeLeft="19:29"
@@ -42,8 +42,8 @@
                         </div> 
                         </b:column>
                         
-                        <b:column medium-screen="3">
-                            <div class="pull-right text-center">
+                        <b:column medium-screen="2">
+                            <div class="pull-right text-center" style="margin-top: 40px">
 
                                     <h:graphicImage value="/resources/images/profileImage.png" 
                                                     width="50" 
