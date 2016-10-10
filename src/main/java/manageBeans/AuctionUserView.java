@@ -12,12 +12,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 
@@ -87,9 +83,9 @@ public class AuctionUserView implements Serializable {
     }
     
     public String logout() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);session.invalidate();
-        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/mod250_auction/index.xhtml";
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        session.invalidate();
+        return "index.xhtml?faces-redirect=true";
     }
     
 }
