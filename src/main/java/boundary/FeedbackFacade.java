@@ -74,7 +74,7 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
     public boolean checkForExistingFeedback(Auction auction){
         LinkedList<Feedback> feedbacks = getAllFeedbacks();
         for(int i = 0; i < feedbacks.size(); i++){
-            if(auction.getId().equals(feedbacks.get(i).getAuction().getId())){
+            if(feedbacks.get(i).getAuction().getId().equals(auction.getId())){
                 return true; //This auction have a feedback
             }  
         }
