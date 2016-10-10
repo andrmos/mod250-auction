@@ -29,9 +29,9 @@ import javax.servlet.http.HttpSession;
 public class AuctionUserView implements Serializable {
     
     @EJB
-    private AuctionUserFacade userFacade;
+    AuctionUserFacade userFacade;
     @EJB
-    private FeedbackFacade feedbackFacade;
+    FeedbackFacade feedbackFacade;
     
     private AuctionUser user;
     
