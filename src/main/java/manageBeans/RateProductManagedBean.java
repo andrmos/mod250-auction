@@ -35,11 +35,10 @@ public class RateProductManagedBean {
     @EJB
     AuctionFacade auctionFacade;
     
-    @DecimalMin("0.0")
-    @DecimalMax("5.0")
     private Double rating;
     private String comment;
     private Auction auction;
+    private AuctionUser user;
     
     /**
      * Creates a new instance of RateProductManagedBean
@@ -68,9 +67,11 @@ public class RateProductManagedBean {
         auction = auctionFacade.find(auctionID);
         //Adds feedback if there doesnt exists a feedback
         if(!feedbackFacade.checkForExistingFeedback(auction)){
+            user = userFacade.getAuctionUser();
             feedback.setAuction(auction);
-            feedback.setUser(userFacade.getAuctionUser());
+            feedback.setUser(user);
             feedbackFacade.createFeedback(feedback);
+            user.setSellers_rating(feedback.getRating());
         }
     }
 
