@@ -27,12 +27,9 @@ import javax.servlet.http.HttpSession;
 @Named(value = "auctionUserView")
 @SessionScoped
 public class AuctionUserView implements Serializable {
-
     
     @EJB
     private AuctionUserFacade userFacade;
-    @EJB
-    private FeedbackFacade feedbackFacade;
     private AuctionUser user;
     
     /**
@@ -60,20 +57,18 @@ public class AuctionUserView implements Serializable {
         }
         return user.getContactinfo().getName();
     }
-     
     
     /**
      * Method to get the sellers rating
      * @return 
      */
-    public double getSellersRating(){
+    public int getSellersRating(){
         user = userFacade.getAuctionUser(); //finds the logged in user
         if(!user.getRole().equals("seller")){
             throw new IllegalArgumentException("Only sellers have rating");
         }
-        return user.getSellers_rating();
+        return (int) Math.round(user.getSellers_rating()); 
     }
-    
        
     public ArrayList<Auction> getFinishedAuctions(){
         ArrayList<Auction> arr = new ArrayList<Auction>();
@@ -93,15 +88,13 @@ public class AuctionUserView implements Serializable {
         return "index.xhtml?faces-redirect=true";
     }
     
-    
     /**
      * Sets new sellers rating
      * @param rating 
      */
-    public void setNewSellersRating(double newRating){
-        double oldRating = getUser().getSellers_rating();
-        double totalRating = (oldRating+newRating)/2;
-        getUser().setSellers_rating((int) totalRating);
+    public void setNewSellersRating(AuctionUser user, double newRating){
+        double totalRating = (user.getSellers_rating()+newRating)/2;
+        user.setSellers_rating((int) totalRating);
     }
     
 }
