@@ -117,7 +117,14 @@ public class AuctionFacade extends AbstractFacade<Auction> {
        return tempList;      
    }   
    
-   public int getTimeLeftInSeconds(String id){
-       return AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)));       
-   }
+   public int getTimeLeftInSeconds(String id){       
+       int numberOfDays=getNumberOfDaysUntilDeadline(id);
+       int seocndsLeft=(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))-(numberOfDays*86400));      
+       return seocndsLeft;       
+   }      
+
+    public int getNumberOfDaysUntilDeadline(String id) throws NumberFormatException {
+        Double numberOfDays=Math.floor(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))/86400);
+        return numberOfDays.intValue();
+    }
 }
