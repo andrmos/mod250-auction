@@ -33,7 +33,6 @@ public class RateProductManagedBean {
     @EJB
     AuctionFacade auctionFacade;
     
-    
     private Double rating;
     private String comment;
     private Auction auction;
@@ -63,9 +62,12 @@ public class RateProductManagedBean {
     
     public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
-        feedback.setAuction(auction);
-        feedback.setUser(userFacade.getAuctionUser());
-        feedbackFacade.createFeedback(feedback);
+        //Adds feedback if there doesnt exists a feedback
+        if(!feedbackFacade.checkForExistingFeedback(auction)){
+            feedback.setAuction(auction);
+            feedback.setUser(userFacade.getAuctionUser());
+            feedbackFacade.createFeedback(feedback);
+        }
     }
 
     public Feedback getFeedback() {
@@ -74,6 +76,22 @@ public class RateProductManagedBean {
 
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
+    }
+    
+    /**
+     * Method checks if rate button is rendered to a customer, only
+     * if they have not rated it from beforehand.
+     * @param auctionID
+     *          auction to check
+     * @return boolean 
+     *          true if no existing feedback, else false
+     */
+    public boolean renderFeedback(long auctionID){
+        auction = auctionFacade.find(auctionID);
+        if(feedbackFacade.checkForExistingFeedback(auction)){
+            return false; //there exists a feedback for this auction
+        }
+        return true; //There doesn't exist any feedback
     }
     
 }
