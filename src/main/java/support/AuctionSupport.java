@@ -45,8 +45,6 @@ public class AuctionSupport {
    }
    
    public static double getCurrentPrice(Auction auction){
-        AuctionFacade auctionFacade = new AuctionFacade();
-        
         Bid bid = auction.getBid();
         if(bid == null){
           return auction.getInitPrice();

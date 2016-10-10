@@ -17,27 +17,29 @@
                 <b:container>
                     <b:row>
                         <b:column medium-screen="6">
-                            <div class="auction-list" style="height: 400px; overflow-y: auto">
-                                <h1>Ongoing</h1>
-                                <ui:repeat value="#{AuctionUserView.getWinnerAuctions()}" var="auction">
-                                    <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                                       profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" 
-                                                       showRating="false" deleteAuction="true" userID="Auction.auctionseller.id"
-                                                       auctionId="#{auction.id}" showBidButton="false"/>
-                                    <br/>  
-                                </ui:repeat>
-                            </div> 
-                            <div class="auction-list" style="height: 400px; overflow-y: auto">
-                                <h1>History</h1>
-                                <ui:repeat value="#{AuctionUserView.getCurrentBids()}" var="auction">
-                                    <ez:auctionElement pictureFilePath="auction.getProduct().getPicturePath()" price="auction.getBid().getAmount()" timeLeft="19:29"
-                                                       profile="auction.getUser().getContactInfo().getName()" title="auction.getProduct().getProductName()" 
-                                                       showRating="false" deleteAuction="false" userID="Auction.auctionseller.id"
-                                                       auctionId="#{auction.id}" showBidButton="false"/>
-                                    <br/>     
-                                </ui:repeat>
+                            <h1>Ongoing</h1>
+                            <div class="auction-list" style="max-height: 400px; overflow-y: auto">
+                            <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">                       
+                                <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" timeLeft="19:29"
+                                                   profile="#{auction.user.contactinfo.name}" title="#{auction.product.productName}" showRating="false" deleteAuction="false"
+                                                   userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
+                                <br/>  
+                            </ui:repeat>
 
-                            </div>
+                        </div> 
+
+                        <h1>History</h1>
+                        <div class="auction-list" style="max-height: 400px; overflow-y: auto">
+                            <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">
+                                <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" 
+                                                   timeLeft="19:29" profile="#{auction.user.contactinfo.name}" 
+                                                   title="#{auction.getProduct().getProductName()}"
+                                                   showRating="false" deleteAuction="false" 
+                                                   userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
+                                <br/>  
+                            </ui:repeat>
+
+                        </div> 
                         </b:column>
                         <b:column medium-screen="6">
                             <div class="pull-right text-center">

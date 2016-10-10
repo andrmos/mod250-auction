@@ -127,7 +127,7 @@ public class AuctionListManagedBean implements Serializable {
    }
    
    public double getPrice(String auctionId){
-       return AuctionSupport.getCurrentPrice( auction.find(Long.valueOf(auctionId)));
+       return AuctionSupport.getCurrentPrice(auction.find(Long.valueOf(auctionId)));
    }
     
     public void createAuction() {
