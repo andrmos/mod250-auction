@@ -12,13 +12,14 @@ import entities.Auction;
 import entities.AuctionUser;
 import entities.Feedback;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
  *
- * @author DidrikKvanvik
+ * @author DidrikKvanvik 
  */
 
 @Named(value = "rateProductManagedBean")
@@ -51,8 +52,14 @@ public class RateProductManagedBean implements Serializable{
         return rating;
     }
 
+    @PostConstruct
+    public void init(){
+        feedback = new Feedback();
+    }
+    
     public void setRating(Double rating) {
         this.rating = rating;
+        System.out.println("Rating: " + rating);
     }
 
     public String getComment() {
@@ -70,7 +77,7 @@ public class RateProductManagedBean implements Serializable{
      */
     public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
-        
+        System.out.println("COMMENT " + getComment());
         //Adds feedback if there doesnt exists a feedback
         if(!feedbackFacade.checkForExistingFeedback(auction)){
             user = userFacade.getAuctionUser();

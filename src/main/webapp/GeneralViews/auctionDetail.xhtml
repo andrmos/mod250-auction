@@ -23,12 +23,12 @@
                 <b:container>
                     <b:row>
                         <b:column medium-screen="6">
-                            <b:row style="height: 90px;">
+                            <b:row style="height: 90px; margin-bottom:20px">
                                 <h1><h:outputText value="#{auctionDetail.getProductTitle()}" /></h1>
                             </b:row>
 
                             <b:row>
-                                <h:graphicImage value="#{auctionDetail.getProductImage()}" height="350px"/>
+                                <h:graphicImage value="#{auctionDetail.getProductImage()}" height="300px" style="margin: 40px"/>
                             </b:row>
                             
                             <b:row>
@@ -37,6 +37,16 @@
                                     <h:outputLabel value="#{auctionDetail.getProductDesciption()}"/>
                                 </b:well>
                             </b:row>
+                            
+                            <h:form rendered="#{rateProductManagedBean.renderFeedback(auctionDetail.auctionId)}">
+                                <h2><strong>Rate Product</strong></h2> 
+                                <br/>
+                                <b:inputText id="rating" value="#{rateProductManagedBean.rating}" label="Rating 1-5:"> </b:inputText>
+                                <br/>
+                                <b:inputText id="comment" value="#{rateProductManagedBean.comment}" label="Comment:"> </b:inputText>
+                                <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionID)}"></h:commandButton>
+                                <br/>
+                            </h:form>  
                         </b:column>
                         
                         <b:column medium-screen="6">
@@ -56,7 +66,13 @@
                                 <div class="pull-right" style="height: 350px;">
                                     <h:form>
                                         <h4>Current Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
-                                        <h5>Time left: <pe:timer timeout="#{auctionDetail.getTimeLeft()}"  format="HH:mm:ss"/></h5>
+
+                                        <h:panelGroup layout="block" rendered="#{auctionDetail.isActive()}">
+                                            <b:label text="Time left "/>
+                                            <b:label text="Days: #{auctionDetail.getDaysLeft()}"/>
+                                            <pe:timer timeout="#{auctionDetail.getSecondsLeft()}"  format="HH:mm:ss"/>
+                                        </h:panelGroup>
+
                                     </h:form>
                                 </div>
                             </b:row>

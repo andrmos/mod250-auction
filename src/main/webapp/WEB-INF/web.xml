@@ -73,12 +73,17 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <security-role>
-        <description>user security role</description>
-        <role-name>customer</role-name>
-    </security-role>
-    <security-role>
-        <description>user security role</description>
-        <role-name>seller</role-name>
-    </security-role>
+
+     <security-role>
+         <description>user security role</description>
+         <role-name>customer</role-name>
+     </security-role>
+     <security-role>
+         <description>user security role</description>
+         <role-name>seller</role-name>
+     </security-role>  
+     <error-page>
+        <error-code>404</error-code>
+        <location>/404.xhtml</location>
+     </error-page>
 </web-app>

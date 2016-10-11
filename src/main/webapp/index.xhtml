@@ -9,7 +9,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
-        <title>Facelets Template</title>
+        <title>Home</title>
         
         
     </h:head>
@@ -21,13 +21,14 @@
                 
                 <ui:repeat value="#{auctionListManagedBean.auctions}" var="auction">
                 
-                    <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auctionListManagedBean.getPrice(auction.id)}" timeLeft="#{auction.duration}"
-                                       profile="#{auction.user.username}" title="#{auction.product.productName}" showRating="false" deleteAuction="false" 
+                    <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auctionListManagedBean.getPrice(auction.id)}" 
+                                       profile="#{auction.user.username}" title="#{auction.product.productName}"
                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="#{facesContext.externalContext.isUserInRole('customer')}"/>
                     <br/>                    
-                </ui:repeat>              
+                </ui:repeat>
             </ui:define>
-        </ui:composition>           
+        </ui:composition> 
+       
     </h:body>
 
 </html>

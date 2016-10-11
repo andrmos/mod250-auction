@@ -15,8 +15,10 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 
 
@@ -25,7 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author oleeskild
  */
 @Named(value = "auctionUserView")
-@SessionScoped
+@ViewScoped
 public class AuctionUserView implements Serializable {
     
     @EJB
@@ -35,10 +37,21 @@ public class AuctionUserView implements Serializable {
     
     private AuctionUser user;
     
+    private ArrayList<Auction> finishedAuctions;
+    boolean finishedAuctionIsSet;
+    private ArrayList<Auction> currentAuctions;
+    boolean currentAuctionIsSet;
+    
     /**
      * Creates a new instance of AuctionUserView
      */
     public AuctionUserView() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        this.finishedAuctionIsSet = false;
+        this.currentAuctionIsSet = false;
     }
 
     public AuctionUser getUser() {
@@ -72,16 +85,35 @@ public class AuctionUserView implements Serializable {
         }
         return (int) Math.round(user.getSellers_rating()); 
     }
-       
+     
+    public boolean hasFinishedAuctions(){
+        if(!this.finishedAuctionIsSet){
+            this.finishedAuctions = new ArrayList<Auction>();
+            finishedAuctions.addAll(this.userFacade.getFinishedAuctions());
+            this.finishedAuctionIsSet = true;
+        }
+        return finishedAuctions.size() > 0;
+    } 
+    
+    public boolean hasCurrentAuctions(){
+        if(!this.currentAuctionIsSet){
+            this.currentAuctions = new ArrayList<Auction>();
+            this.currentAuctions.addAll(this.userFacade.getCurrentAuctions());
+            this.currentAuctionIsSet = true;
+        }
+        return this.currentAuctions.size() > 0;
+    }
+    
     /**
      * Finds all finished auctions for a user
      * @return arr
      *          arrayList
      */
     public ArrayList<Auction> getFinishedAuctions(){
-        ArrayList<Auction> arr = new ArrayList<Auction>();
-        arr.addAll(this.userFacade.getFinishedAuctions());
-        return arr;
+        if(!this.finishedAuctionIsSet){
+            this.hasFinishedAuctions();
+        }
+        return this.finishedAuctions;
     }
     
     /**
@@ -90,9 +122,10 @@ public class AuctionUserView implements Serializable {
      *          arrayList
      */
     public ArrayList<Auction> getCurrentAuctions(){
-        ArrayList<Auction> arr = new ArrayList<Auction>();
-        arr.addAll(this.userFacade.getCurrentAuctions());
-        return arr;
+        if(!this.currentAuctionIsSet){
+            this.hasCurrentAuctions();
+        }
+        return this.currentAuctions;
     }
     
     /**

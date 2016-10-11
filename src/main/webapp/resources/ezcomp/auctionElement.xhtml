@@ -11,12 +11,9 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="price" required="true"/>
-        <cc:attribute name="title" required="true"/>
-        <cc:attribute name="timeLeft" required="true"/>
+        <cc:attribute name="title" required="true"/>   
         <cc:attribute name="pictureFilePath" required="true"/>
         <cc:attribute name="profile" required="true"/>  
-        <cc:attribute name="showRating" required="true"/> 
-        <cc:attribute name="deleteAuction" required="true"/>
         <cc:attribute name="userID" required="true"/>
         <cc:attribute name="auctionId" required="true" />
         <cc:attribute name="showBidButton" required="true" />
@@ -25,32 +22,11 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <div style="border: thin black solid">
-            <b:modal id="amodal" title="Rate Product" styleClass="ratingModal" rendered="#{cc.attrs.showRating}">
-                <b:well>
-                    <h1><strong>Rate Product</strong></h1>
-                    <h:form>
-                        <h:outputText value="Rating: "/>
-                        <p:rating value="#{rateProductManagedBean.feedback.rating}"/>
-                        <b:inputText placeholder="Type a comment here..." value="#{rateProductManagedBean.feedback.comment}"></b:inputText>
-                    </h:form>
-                </b:well>
-                <f:facet name="footer">
-                    <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Submit" look="primary" dismiss="modal" onclick="#{rateProductManagedBean.addFeedback(cc.attrs.auctionId)}"/>
-                </f:facet>
-            </b:modal>
-            <b:modal id="amodal2" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
-                <h3>Are you sure you want to delete this auction?</h3>
-                <f:facet name="footer">
-                    <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Delete" look="primary" dismiss="modal" onclick="#{removeAuctionBean.removeAuction(cc.attrs.auctionId)}"/>
-                </f:facet>
-            </b:modal>
             <b:container fluid="true" >
                 <b:row>
                     <b:column span="4">
                         <h:graphicImage id="productImage" 
-                                        width="150" height="150" value="#{cc.attrs.pictureFilePath}"/>
+                                        width="150" height="150" style="margin:10px" value="#{cc.attrs.pictureFilePath}"/>
                     </b:column>
                     <b:column span="8">
                         <b:row id="titleRow">
@@ -63,8 +39,8 @@
                             </b:column>
                             <b:column span="6">                                
                                 <h:form rendered="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)>0}"> 
-                                    <b:label text="Time left "/>                                    
-                                    <b:label text="Days: #{auctionListManagedBean.getDaysLeft(cc.attrs.auctionId)}"/>
+                                    <h:outputText value="Time left: "/>                                    
+                                    <h:outputText value="#{auctionListManagedBean.getDaysLeft(cc.attrs.auctionId)} days" class="ui-timer ui-widget ui-widget-header ui-corner-all"/>
                                     <pe:timer timeout="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
                                 </h:form>
                             </b:column>
@@ -80,8 +56,6 @@
                             </b:column>
                             <b:column span="6">
                                 <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />                                
-                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and rateProductManagedBean.renderFeedback(cc.attrs.auctionId)}"/>
-                                <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction and removeAuctionBean.renderDeleteButton(cc.attrs.auctionID)}"/>
                             </b:column>
                         </b:row>
                     </b:column>
