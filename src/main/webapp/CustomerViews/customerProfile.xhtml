@@ -17,28 +17,37 @@
                 <b:container fluid="true">
                     <b:row>
                         <b:column medium-screen="9">
-                        <h1 style="height: 40px">Auctions won</h1>
-                        <div class="auction-list" style="max-height: 400px; overflow-y: auto">
-                            <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
-                                <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.bid.amount}"
-                                                   profile="#{auction.user.contactinfo.name}" title="#{auction.product.productName}"
-                                                   userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
-                                <br/>  
-                            </ui:repeat>
+                            <ui:fragment rendered="#{auctionUserView.hasFinishedAuctions()}">
+                                <h1 style="height: 40px">Auctions won</h1>
+                                <div class="auction-list" style="max-height: 400px; overflow-y: auto">
+                                    <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">                       
+                                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.bid.amount}"
+                                                           profile="#{auction.user.contactinfo.name}" title="#{auction.product.productName}"
+                                                           userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
+                                        <br/>  
+                                    </ui:repeat>
+                                </div> 
+                            </ui:fragment>
 
-                        </div> 
-
-                        <h1>Ongoing auctions where you have highest bet</h1>
-                        <div class="auction-list" style="max-height: 400px; overflow-y: auto">
-                            <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">
-                                <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" 
-                                                    profile="#{auction.user.contactinfo.name}" 
-                                                   title="#{auction.getProduct().getProductName()}"
-                                                   userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
-                                <br/>  
-                            </ui:repeat>
-
-                        </div> 
+                            <ui:fragment rendered="#{auctionUserView.hasCurrentAuctions()}">
+                                <h1>Ongoing auctions where you have highest bet</h1>
+                                <div class="auction-list" style="max-height: 400px; overflow-y: auto">
+                                    <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">
+                                        <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" 
+                                                            profile="#{auction.user.contactinfo.name}" 
+                                                           title="#{auction.getProduct().getProductName()}"
+                                                           userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
+                                        <br/>  
+                                    </ui:repeat>
+                                </div> 
+                            </ui:fragment>
+                            
+                            <h:panelGroup layout="block" rendered="#{!auctionUserView.hasCurrentAuctions() and !auctionUserView.hasFinishedAuctions()}">
+                                <h2>Auctions</h2>
+                                <b:well>
+                                    <h3>You have no ongoing nor won auctions...</h3>
+                                </b:well>
+                            </h:panelGroup>
                         </b:column>
                         
                         <b:column medium-screen="2">
