@@ -21,8 +21,7 @@ import javax.ejb.EJB;
 public class RemoveAuctionBean implements Serializable {
 
     @EJB
-    AuctionFacade auctionFacade;
-    
+    AuctionFacade auctionFacade; 
     private Auction auction;
     
     /**
@@ -31,9 +30,28 @@ public class RemoveAuctionBean implements Serializable {
     public RemoveAuctionBean() {
     }
     
-    public void removeAuction(Long auctionID){
+    /**
+     * Removes an auction
+     * @param auctionID 
+     */
+    public void removeAuction(long auctionID){
         auction = auctionFacade.find(auctionID);
-        auctionFacade.remove(auction);
+        auctionFacade.removeAuction(auction);     
     }
     
+    /**
+     * Will only render delete button to a finished and published auction
+     * @param auctionID
+     *          auction to check
+     * @return boolean
+     *          true if finished, else false
+     */
+    public boolean renderDeleteButton(long auctionID){
+        auction = auctionFacade.find(auctionID);
+        //if an auction is published and finished
+        if(auction.isPublished() && auctionFacade.isAuctionFinished(auction)){
+            return true;
+        }
+        return false;
+    }   
 }
