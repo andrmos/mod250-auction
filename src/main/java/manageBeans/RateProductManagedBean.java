@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import support.AuctionSupport;
 
 /**
  *
@@ -77,7 +78,6 @@ public class RateProductManagedBean implements Serializable{
      */
     public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
-        System.out.println("COMMENT " + getComment());
         //Adds feedback if there doesnt exists a feedback
         if(!feedbackFacade.checkForExistingFeedback(auction)){
             user = userFacade.getAuctionUser();
@@ -106,13 +106,27 @@ public class RateProductManagedBean implements Serializable{
      *          true if no existing feedback, else false
      */
     public boolean renderFeedback(long auctionID){
+        user = userFacade.getAuctionUser();
         auction = auctionFacade.find(auctionID);
-        if(feedbackFacade.checkForExistingFeedback(auction)){
-            //Feedback for auction exists, do not render rating
-            return true; 
+        
+        //If there is no user logged on
+        if(user == null){
+            return false;
         }
-        //No feedback exists, render rating
+        //is auction finished, published and does user have highest bid check
+        try{
+            if(AuctionSupport.isAuctionFinished(auction) && user.equals(auction.getBid().getAuctionUser())){
+                if(feedbackFacade.checkForExistingFeedback(auction)){
+                    //Feedback for auction exists, do not render rating
+                    return false; 
+                }else{
+                    return true;
+                }
+            }
+        }catch(NullPointerException ex){
+            return false;
+        }
+        //No feedback exists, render rating    
         return false;
-    }
-    
+    } 
 }

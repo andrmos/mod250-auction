@@ -13,7 +13,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.joda.time.DateTime;
 import support.AuctionSupport;
 
 /**
@@ -49,14 +48,11 @@ public class AuctionFacade extends AbstractFacade<Auction> {
      *          true is finished, else false
      */
     public boolean isAuctionFinished(Auction auction){
-        DateTime dateTime = new DateTime(auction.getStartTime());
-        DateTime nowTime = new DateTime();
-        dateTime = dateTime.plusSeconds(auction.getDuration().intValue());
-        
-        if(dateTime.compareTo(nowTime) < 0){
-            return false; //auction is still ongoing
-        }else {
-            return true; //auction is finished
+        List<Auction> list = getActiveAuctions();
+        if(list.contains(auction)){
+            return false;
+        }else{
+            return true;
         }
     }
     
