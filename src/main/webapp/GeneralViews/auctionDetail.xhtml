@@ -96,8 +96,9 @@
                                     <h:form>
                                         <h:inputText disabled="#{!auctionDetail.isLoggedIn()}" id="bid" a:type="number" a:placeholder="Place bid in NOK" style="height:34px;" 
                                                      value="#{auctionDetail.bid.amount}">
+                                            <f:ajax event="keyup" delay="200" render="bidButton" />
                                         </h:inputText>
-                                        <h:commandButton disabled="#{!auctionDetail.isLoggedIn()}" type="submit" class="btn btn-default" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
+                                        <h:commandButton id="bidButton" disabled="#{!auctionDetail.isLoggedIn() or auctionDetail.bid.amount <= auctionDetail.getOldBidAmount()}" type="submit" class="btn btn-default" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
                                     </h:form>
                                 </div>
                             </b:row>
