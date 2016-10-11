@@ -33,9 +33,7 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
     }
     
     public void createFeedback(Feedback feedback){
-        em.getTransaction().begin();
         em.persist(feedback);
-        em.getTransaction().commit();
     }
     
     /**
@@ -77,6 +75,7 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
      */
     public boolean checkForExistingFeedback(Auction auction){
         LinkedList<Feedback> feedbacks = getAllFeedbacks();
+        if(feedbacks.size() < 1){ return false; }
         for(int i = 0; i < feedbacks.size(); i++){
             //if a feedback is connected to @auction
             if(feedbacks.get(i).getAuction().equals(auction)){
@@ -84,5 +83,31 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
             }  
         }
         return false; //Auction has no feedback
+    }
+    
+    
+    /**
+     * Sets new sellers rating
+     * @param user
+     *          user to set new rating
+     * @param newRating 
+     *          the rating to add to 
+     */
+    public double setNewSellersRating(AuctionUser user, double newRating){
+        LinkedList<Feedback> feedbacks = this.getAllFeedbacksByUser(user);
+        double counter = 0;
+        double total = 0;
+        //checks if the user have several ratings from beforehand
+        if(feedbacks.size() > 0){
+            for(int i = 0; i < feedbacks.size(); i++){
+                total += feedbacks.get(i).getRating();
+                counter++;
+            }
+            counter++;
+            total = (total+newRating)/counter;
+            return total;
+        }else{ //if this is the first rating
+            return newRating;
+        }       
     }
 }

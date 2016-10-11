@@ -41,10 +41,10 @@
                             <h:form rendered="#{rateProductManagedBean.renderFeedback(auctionDetail.auctionId)}">
                                 <h2><strong>Rate Product</strong></h2> 
                                 <br/>
-                                <b:inputText id="rating" value="#{rateProductManagedBean.rating}" label="Rating 1-5:"> </b:inputText>
+                                <b:inputText id="rating" value="#{rateProductManagedBean.feedback.rating}" label="Rating 1-5:"> </b:inputText>
                                 <br/>
-                                <b:inputText id="comment" value="#{rateProductManagedBean.comment}" label="Comment:"> </b:inputText>
-                                <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionID)}"></h:commandButton>
+                                <b:inputText id="comment" value="#{rateProductManagedBean.feedback.comment}" label="Comment:"> </b:inputText>
+                                <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionDetail.auctionId)}"></h:commandButton>
                                 <br/>
                             </h:form>  
                         </b:column>

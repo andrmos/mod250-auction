@@ -25,8 +25,7 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
 
     @PersistenceContext(unitName = "no.mod250_mod250_auction_war_1.0-SNAPSHOTPU")
     private EntityManager em;
-    
-    private AuctionUser user = new AuctionUser();
+   
 
    
     @Override
@@ -145,4 +144,10 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         listOfAuctions.addAll(auctionList); 
         return listOfAuctions;
     }
+    
+    public void setNewRating(AuctionUser user, double rating){
+        user.setSellers_rating((int) rating);
+        this.edit(user);
+    }
+    
  }

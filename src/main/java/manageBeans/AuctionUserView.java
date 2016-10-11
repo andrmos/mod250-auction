@@ -139,30 +139,4 @@ public class AuctionUserView implements Serializable {
         return "index.xhtml?faces-redirect=true";
     }
     
-    /**
-     * Sets new sellers rating
-     * @param user
-     *          user to set new rating
-     * @param newRating 
-     *          the rating to add to 
-     */
-    public void setNewSellersRating(AuctionUser user, double newRating){
-        LinkedList<Feedback> feedbacks = feedbackFacade.getAllFeedbacksByUser(user);
-        double counter = 0;
-        double total = 0;
-        //checks if the user have several ratings from beforehand
-        if(feedbacks.size() > 0){
-            for(int i = 0; i < feedbacks.size(); i++){
-                total += feedbacks.get(i).getRating();
-                counter++;
-            }
-            counter++;
-            total = (total+newRating)/counter;
-            user.setSellers_rating((int) total);
-        }else{ //if this is the first rating
-            user.setSellers_rating((int) newRating);
-        }       
-        userFacade.edit(user);
-    }
-    
 }
