@@ -56,7 +56,13 @@
                                 <div class="pull-right" style="height: 350px;">
                                     <h:form>
                                         <h4>Current Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
-                                        <h5>Time left: <pe:timer timeout="#{auctionDetail.getTimeLeft()}"  format="HH:mm:ss"/></h5>
+
+                                        <h:panelGroup layout="block" rendered="#{auctionDetail.isActive()}">
+                                            <b:label text="Time left "/>
+                                            <b:label text="Days: #{auctionDetail.getDaysLeft()}"/>
+                                            <pe:timer timeout="#{auctionDetail.getSecondsLeft()}"  format="HH:mm:ss"/>
+                                        </h:panelGroup>
+
                                     </h:form>
                                 </div>
                             </b:row>

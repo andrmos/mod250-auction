@@ -44,7 +44,6 @@ public class AuctionDetail extends UIInput implements Serializable {
 
     @PostConstruct
     public void initialize(){
-        System.out.println("INITIALISERER");
         this.bid = new Bid();
     }
     
@@ -156,8 +155,25 @@ public class AuctionDetail extends UIInput implements Serializable {
         return this.auctionUserFacade.getAuctionUser() != null; 
     }
     
-    public int getTimeLeft(){
-       return auctionFacade.getTimeLeftInSeconds(""+this.auction.getId());
+    public int getSecondsLeft(){
+        if(this.auction.isPublished()){
+            return auctionFacade.getTimeLeftInSeconds("" + this.auction.getId());
+        }
+        return 0;
+    }
+
+
+   public int getDaysLeft(){
+       if(this.auction.isPublished()){
+           return auctionFacade.getNumberOfDaysUntilDeadline("" + this.auction.getId());
+       }
+       return 0;
+   }
+   
+   public boolean isActive(){
+       boolean isActive = this.auction.isPublished() && (this.auctionFacade.getTimeLeftInSeconds(""+this.auction.getId()) >0);
+       System.out.println("ACTIVE: " + isActive);
+       return isActive;
    }
     
 }
