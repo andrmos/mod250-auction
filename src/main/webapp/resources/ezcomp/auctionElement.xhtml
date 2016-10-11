@@ -80,8 +80,8 @@
                             </b:column>
                             <b:column span="6">
                                 <b:button value="View" outcome="/GeneralViews/auctionDetail.xhtml?auctionId=#{cc.attrs.auctionId}" />                                
-                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and renderFeedbackMB.renderFeedback(cc.attrs.auctionId)}"/>
-                                <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction}"/>
+                                <b:button value="Rate" look="success" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.showRating and rateProductManagedBean.renderFeedback(cc.attrs.auctionId)}"/>
+                                <b:button value="Delete" look="danger" onclick="$('.ratingModal').modal();return false;" rendered="#{cc.attrs.deleteAuction and removeAuctionBean.renderDeleteButton(cc.attrs.auctionID)}"/>
                             </b:column>
                         </b:row>
                     </b:column>
