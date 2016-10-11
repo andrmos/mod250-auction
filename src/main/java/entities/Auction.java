@@ -5,11 +5,13 @@
  */
 package entities;
 
+import entityListner.MenuChangeListener;
 import java.io.Serializable;
 import org.joda.time.DateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ import javax.persistence.TemporalType;
  *
  * @author oleeskild
  */
+@EntityListeners(MenuChangeListener.class)
 @Entity
 @Table(name="AUCTION")
 public class Auction implements Serializable, Comparable<Auction> {
