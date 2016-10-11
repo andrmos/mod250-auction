@@ -39,8 +39,8 @@
                             </b:column>
                             <b:column span="6">                                
                                 <h:form rendered="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)>0}"> 
-                                    <b:label text="Time left "/>                                    
-                                    <b:label text="Days: #{auctionListManagedBean.getDaysLeft(cc.attrs.auctionId)}"/>
+                                    <h:outputText value="Time left: "/>                                    
+                                    <h:outputText value="#{auctionListManagedBean.getDaysLeft(cc.attrs.auctionId)} days" class="ui-timer ui-widget ui-widget-header ui-corner-all"/>
                                     <pe:timer timeout="#{auctionListManagedBean.getSecondsLeft(cc.attrs.auctionId)}"  format="HH:mm:ss"/>
                                 </h:form>
                             </b:column>
