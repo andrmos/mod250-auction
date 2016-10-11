@@ -30,22 +30,4 @@ public enum Category {
         
         return UNDEFINED;
     }
-    
-    public static Category fromString(String s) {
-        
-        switch(s) {
-            case "Clothing":
-                return CLOTHING;
-            case "Electronics":
-                return ELECTRONICS;
-            case "White ware":
-                return WHITE_WARE;
-            case "Jewlerry":
-                return JEWLERRY;
-        }
-        
-        return UNDEFINED;
-    }
-    
-    
 }
