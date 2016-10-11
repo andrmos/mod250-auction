@@ -37,6 +37,16 @@
                                     <h:outputLabel value="#{auctionDetail.getProductDesciption()}"/>
                                 </b:well>
                             </b:row>
+                            
+                            <h:form>
+                                <h2><strong>Rate Product</strong></h2> 
+                                <br/>
+                                <b:inputText id="rating" value="#{rateProductManagedBean.rating}" span="1" label="Rating 1-5:" required="true" renderLabel="true"></b:inputText>
+                                <br/>
+                                <b:inputText id="comment" value="#{rateProductManagedBean.comment}" span="6" label="Comment:"> </b:inputText>
+                                <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionID)}"></h:commandButton>
+                                
+                            </h:form>  
                         </b:column>
                         
                         <b:column medium-screen="6">
