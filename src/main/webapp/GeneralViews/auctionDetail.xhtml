@@ -41,7 +41,10 @@
                             <h:form rendered="#{rateProductManagedBean.renderFeedback(auctionDetail.auctionId)}">
                                 <h2><strong>Rate Product</strong></h2> 
                                 <br/>
-                                <b:inputText id="rating" value="#{rateProductManagedBean.feedback.rating}" label="Rating 1-5:"> </b:inputText>
+                                <b:inputText id="rating" required="true" value="#{rateProductManagedBean.feedback.rating}" label="Rating 1-5:">
+                                    <f:validateLongRange minimum="1" maximum="5"/>
+                                </b:inputText> 
+                                <h:message for="rating" style="color:red"/>
                                 <br/>
                                 <b:inputText id="comment" value="#{rateProductManagedBean.feedback.comment}" label="Comment:"> </b:inputText>
                                 <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionDetail.auctionId)}"></h:commandButton>
