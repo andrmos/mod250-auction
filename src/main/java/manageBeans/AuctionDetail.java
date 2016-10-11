@@ -41,20 +41,11 @@ public class AuctionDetail extends UIInput implements Serializable {
     private Bid bid;
     private Auction auction;
     private int auctionId;
-    
-    private int oldBidAmount;
 
     @PostConstruct
     public void initialize(){
         this.bid = new Bid();
-    }
-    
-    public double getOldBidAmount(){
-        Bid oldBid = this.auction.getBid();
-        if(bid == null){
-            return 0;
-        }
-        return oldBid.getAmount();
+        this.bid.setAmount(0);
     }
     
     public AuctionFacade getAuctionFacade() {
@@ -181,7 +172,7 @@ public class AuctionDetail extends UIInput implements Serializable {
    }
    
    public boolean isActive(){
-       boolean isActive = this.auction.isPublished() && (this.auctionFacade.getTimeLeftInSeconds(""+this.auction.getId()) >0);
+       boolean isActive = (this.auctionFacade.getTimeLeftInSeconds(""+this.auction.getId()) >0);// && this.auction.isPublished() ;
        return isActive;
    }
     
