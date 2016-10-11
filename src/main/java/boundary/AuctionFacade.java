@@ -67,7 +67,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
                 tempList.add(auctionList.get(i));
             }
         }
-        return tempList;
+        return AuctionSupport.sortAuctionsBasedOnTime(tempList);
     }
     
     public List<Auction> getAuctionsByKeyword(String keyword){
@@ -87,7 +87,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
                 tempList.add(auctionList.get(i));
             }
         }
-        return tempList;
+        return AuctionSupport.sortAuctionsBasedOnTime(tempList);
     }
    
     public List<Auction> getActiveAuctionsByKeyword(String keyword){
@@ -121,7 +121,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
                tempList.add(getActiveAuctions().get(i));
            }
        }
-       return tempList;      
+       return AuctionSupport.sortAuctionsBasedOnTime(tempList);
    }
    public List<Auction> getFinishedAuctionsBasedOnUserID(String id){    
        /*TODO
@@ -135,7 +135,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
                tempList.add(findAll().get(i));
            }
        }
-       return tempList;      
+       return AuctionSupport.sortAuctionsBasedOnTime(tempList); 
    }   
    
    public int getTimeLeftInSeconds(String id){       

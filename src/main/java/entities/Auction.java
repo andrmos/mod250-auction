@@ -6,8 +6,8 @@
 package entities;
 
 import entityListner.MenuChangeListener;
+import java.awt.BorderLayout;
 import java.io.Serializable;
-import org.joda.time.DateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -149,23 +149,21 @@ public class Auction implements Serializable, Comparable<Auction> {
 
     @Override
     public int compareTo(Auction o) {
-        DateTime thisDateTime;    
+        Date othertime,thisTime;
         try{
-        thisDateTime = new DateTime(startTime);
-        thisDateTime=thisDateTime.plusSeconds(duration.intValue());}        
-        catch(NullPointerException exception){
-        thisDateTime = new DateTime();
-        thisDateTime=thisDateTime.plusSeconds(duration.intValue());
+        othertime =new Date(o.getStartTime().getTime());            
+        othertime.setTime(othertime.getTime()+(o.getDuration().intValue()*1000));
         }
-        DateTime otherDateTime;
+        catch(Exception e){
+            return 0;
+        }
         try{
-            otherDateTime = new DateTime(o.startTime);
-            otherDateTime.plus(o.getDuration().intValue());            
+        thisTime =new Date(getStartTime().getTime());            
+        thisTime.setTime(thisTime.getTime()+(getDuration().intValue()*1000));        
         }
-        catch(NullPointerException e){
-            otherDateTime = new DateTime();
-            otherDateTime.plus(o.getDuration().intValue());            
-        }
-        return thisDateTime.compareTo(otherDateTime);                        
+        catch(Exception e){
+            return 0;
+        }             
+        return thisTime.compareTo(othertime);
     }    
 }

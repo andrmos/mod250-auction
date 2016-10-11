@@ -108,6 +108,19 @@ public class AuctionListManagedBean implements Serializable {
         }        
     }
     
+       public void  searchActive(){       
+        if(selectedCategory.equals("10")||selectedCategory.equals("")){
+        currentListOfAuctions=auction.getActiveAuctionsByKeyword(searchKeyword);
+        }
+        else if((!selectedCategory.equals("10")||!selectedCategory.equals(""))
+                && searchKeyword==null||searchKeyword.equals("")){
+            currentListOfAuctions=auction.getActiveAuctionsByCategory(getEnumFromSelectedCatagory());
+        }
+        else {
+            currentListOfAuctions=auction.getActiveAuctionsByKeywordAndCategory
+        (searchKeyword, getEnumFromSelectedCatagory());
+        }        
+    }
     
     public List<Auction> getAuctions() {
         if(currentListOfAuctions==null){
@@ -116,6 +129,15 @@ public class AuctionListManagedBean implements Serializable {
         else{
             return auction.getSortedAuctions(currentListOfAuctions);
         }        
+    }
+    
+    public List<Auction> getActiveAuctions(){
+         if(currentListOfAuctions==null){
+            return auction.getSortedAuctions(auction.getActiveAuctions());
+        }
+        else{
+            return auction.getSortedAuctions(currentListOfAuctions);
+        }
     }
     
    public int getSecondsLeft(String id){

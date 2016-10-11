@@ -43,7 +43,7 @@ public class AuctionSupport {
    
    public static List<Auction> sortAuctionsBasedOnTime(List<Auction> auctions) {
        Collections.sort(auctions);       
-       Collections.reverse(auctions);
+       
        return auctions;
    }
    
