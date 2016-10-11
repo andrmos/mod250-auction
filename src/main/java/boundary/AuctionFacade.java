@@ -35,6 +35,31 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         super(Auction.class);
     }
     
+    public void removeAuction(Auction auciton){
+        em.getTransaction().begin();
+        em.remove(auciton);
+        em.getTransaction().commit();
+    }
+    
+    /**
+     * Method to check if an auction is finished.
+     * @param auction
+     *          auction to check
+     * @return boolean 
+     *          true is finished, else false
+     */
+    public boolean isAuctionFinished(Auction auction){
+        DateTime dateTime = new DateTime(auction.getStartTime());
+        DateTime nowTime = new DateTime();
+        dateTime = dateTime.plusSeconds(auction.getDuration().intValue());
+        
+        if(dateTime.compareTo(nowTime) < 0){
+            return false; //auction is still ongoing
+        }else {
+            return true; //auction is finished
+        }
+    }
+    
     public List<Auction> getAuctionByCategory(Category category){
         return filterAuctionListByCategory(findAll(), category);        
     }
