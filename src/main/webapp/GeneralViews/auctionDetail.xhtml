@@ -68,11 +68,11 @@
                             <b:row>
                                 <div class="pull-right" style="height: 350px;">
                                     <h:form>
-                                        <h4>Current Price: <h:outputText value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
+                                        <h4>Current Price: <h:outputText class="currentPrice" value="#{auctionDetail.getCurrentPrice()}"/> NOK</h4>
 
                                         <h:panelGroup layout="block" rendered="#{auctionDetail.isActive()}">
-                                            <b:label text="Time left "/>
-                                            <b:label text="Days: #{auctionDetail.getDaysLeft()}"/>
+                                            <h:outputText value="Time left: "/>                                    
+                                            <h:outputText value="#{auctionDetail.getDaysLeft()} days" class="ui-timer ui-widget ui-widget-header ui-corner-all"/>
                                             <pe:timer timeout="#{auctionDetail.getSecondsLeft()}"  format="HH:mm:ss"/>
                                         </h:panelGroup>
 
@@ -80,20 +80,36 @@
                                 </div>
                             </b:row>
                             
-                            <b:row>
+                            <b:row rendered="#{auctionDetail.isActive()}">
                                 <div class="pull-right" style="margin: 10px">
                                     <h:form>
-                                        <h:inputText disabled="#{!auctionDetail.isLoggedIn()}" id="bid" a:type="number" a:placeholder="Place bid in NOK" style="height:34px;" 
+                                        <h:inputText onkeyup="checkAmount()" disabled="#{!auctionDetail.isLoggedIn()}" class="bid" a:type="number" a:placeholder="Place bid in NOK" style="height:34px;" 
                                                      value="#{auctionDetail.bid.amount}">
                                         </h:inputText>
-                                        <h:commandButton disabled="#{!auctionDetail.isLoggedIn()}" type="submit" class="btn btn-default" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
+                                        <h:commandButton disabled="#{!auctionDetail.isLoggedIn()}" type="submit" class="btn btn-default bidButton" value="Place Bid" action="#{auctionDetail.saveBid()}"/>
                                     </h:form>
                                 </div>
                             </b:row>
                         </b:column>
                     </b:row>
                 </b:container>
-                
+                <script>
+                    document.getElementsByClassName('bidButton')[0].disabled = true;
+                    var checkAmount = function(){
+                        if(document.getElementsByClassName('bid')[0].value){
+                            var currentBid = document.getElementsByClassName('bid')[0].value;
+                            if(Number(document.getElementsByClassName('currentPrice')[0].innerHTML) >= currentBid){
+                                document.getElementsByClassName('bidButton')[0].disabled = true;
+                            }else if(currentBid == ""){
+                                document.getElementsByClassName('bidButton')[0].disabled = true;
+                            }else{
+                                document.getElementsByClassName('bidButton')[0].disabled = false;
+                            }
+                            document.getElementsByClassName('bidButton')[0].disabled = #{!auctionDetail.isLoggedIn()}
+                            
+                        }
+                    }
+                </script>
             </ui:define>
         </ui:composition>                       
     </h:body>
