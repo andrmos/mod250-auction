@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import support.AuctionSupport;
 
 /**
  *
@@ -106,13 +107,38 @@ public class RateProductManagedBean implements Serializable{
      *          true if no existing feedback, else false
      */
     public boolean renderFeedback(long auctionID){
+        System.out.println("Auctionid: " + auctionID);
+        user = userFacade.getAuctionUser();
         auction = auctionFacade.find(auctionID);
-        if(feedbackFacade.checkForExistingFeedback(auction)){
-            //Feedback for auction exists, do not render rating
-            return true; 
+        
+        System.out.println("AUCTION FINISHED: " + AuctionSupport.isAuctionFinished(auction));
+        System.out.println("LOGGED IN USER: " + user);
+        System.out.println("HIGHEST BIDDER: " + auction.getBid().getAuctionUser());
+        System.out.println("EXISTING FEEDBACK: " + feedbackFacade.checkForExistingFeedback(auction));
+        
+        
+        //If there is no user logged on
+        if(user == null){
+            System.out.println("RENDER NO USER");
+            return false;
         }
-        //No feedback exists, render rating
+        //is auction finished, published and does user have highest bid check
+        try{
+            if(AuctionSupport.isAuctionFinished(auction) && user.equals(auction.getBid().getAuctionUser())){
+                if(feedbackFacade.checkForExistingFeedback(auction)){
+                    //Feedback for auction exists, do not render rating
+                    System.out.println("RENDER NO");
+                    return false; 
+                }else{
+                    System.out.println("RENDER YES");
+                    return true;
+                }
+            }
+        }catch(NullPointerException ex){
+            System.out.println("RENDER NO ERROR");
+            return false;
+        }
+        //No feedback exists, render rating    
         return false;
-    }
-    
+    } 
 }
