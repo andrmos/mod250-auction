@@ -28,7 +28,7 @@
                             </b:row>
 
                             <b:row>
-                                <h:graphicImage value="#{auctionDetail.getProductImage()}" height="350px"/>
+                                <h:graphicImage value="#{auctionDetail.getProductImage()}" height="300px" style="margin: 40px"/>
                             </b:row>
                             
                             <b:row>
@@ -38,14 +38,14 @@
                                 </b:well>
                             </b:row>
                             
-                            <h:form>
+                            <h:form rendered="#{rateProductManagedBean.renderFeedback(auctionDetail.auctionId)}">
                                 <h2><strong>Rate Product</strong></h2> 
                                 <br/>
-                                <b:inputText id="rating" value="#{rateProductManagedBean.rating}" span="1" label="Rating 1-5:" required="true" renderLabel="true"></b:inputText>
+                                <b:inputText id="rating" value="#{rateProductManagedBean.rating}" label="Rating 1-5:"> </b:inputText>
                                 <br/>
-                                <b:inputText id="comment" value="#{rateProductManagedBean.comment}" span="6" label="Comment:"> </b:inputText>
+                                <b:inputText id="comment" value="#{rateProductManagedBean.comment}" label="Comment:"> </b:inputText>
                                 <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionID)}"></h:commandButton>
-                                
+                                <br/>
                             </h:form>  
                         </b:column>
                         
