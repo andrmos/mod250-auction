@@ -40,10 +40,10 @@
                 </f:facet>
             </b:modal>
             <b:modal id="amodal2" title="Delete Auction" styleClass="ratingModal" rendered="#{cc.attrs.deleteAuction}">
-                <p>Are you sure you want to delete this auction?</p>
+                <h3>Are you sure you want to delete this auction?</h3>
                 <f:facet name="footer">
                     <b:button value="Close" dismiss="modal" onclick="$('.ratingModal').modal('hide');return false;"/>
-                    <b:button value="Delete" look="primary" dismiss="modal" onclick="#{removeAuctionBean.removeAuction(auctionId)}"/>
+                    <b:button value="Delete" look="primary" dismiss="modal" onclick="#{removeAuctionBean.removeAuction(cc.attrs.auctionId)}"/>
                 </f:facet>
             </b:modal>
             <b:container fluid="true" >
