@@ -18,7 +18,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author DidrikKvanvik
+ * @author DidrikKvanvik 
  */
 
 @Named(value = "rateProductManagedBean")
