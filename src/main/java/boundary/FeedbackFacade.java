@@ -33,7 +33,9 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
     }
     
     public void createFeedback(Feedback feedback){
+        em.getTransaction().begin();
         em.persist(feedback);
+        em.getTransaction().commit();
     }
     
     /**
