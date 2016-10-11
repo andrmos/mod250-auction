@@ -78,7 +78,6 @@ public class RateProductManagedBean implements Serializable{
      */
     public void addFeedback(long auctionID){
         auction = auctionFacade.find(auctionID);
-        System.out.println("COMMENT " + getComment());
         //Adds feedback if there doesnt exists a feedback
         if(!feedbackFacade.checkForExistingFeedback(auction)){
             user = userFacade.getAuctionUser();
@@ -107,19 +106,11 @@ public class RateProductManagedBean implements Serializable{
      *          true if no existing feedback, else false
      */
     public boolean renderFeedback(long auctionID){
-        System.out.println("Auctionid: " + auctionID);
         user = userFacade.getAuctionUser();
         auction = auctionFacade.find(auctionID);
         
-        System.out.println("AUCTION FINISHED: " + AuctionSupport.isAuctionFinished(auction));
-        System.out.println("LOGGED IN USER: " + user);
-        System.out.println("HIGHEST BIDDER: " + auction.getBid().getAuctionUser());
-        System.out.println("EXISTING FEEDBACK: " + feedbackFacade.checkForExistingFeedback(auction));
-        
-        
         //If there is no user logged on
         if(user == null){
-            System.out.println("RENDER NO USER");
             return false;
         }
         //is auction finished, published and does user have highest bid check
@@ -127,15 +118,12 @@ public class RateProductManagedBean implements Serializable{
             if(AuctionSupport.isAuctionFinished(auction) && user.equals(auction.getBid().getAuctionUser())){
                 if(feedbackFacade.checkForExistingFeedback(auction)){
                     //Feedback for auction exists, do not render rating
-                    System.out.println("RENDER NO");
                     return false; 
                 }else{
-                    System.out.println("RENDER YES");
                     return true;
                 }
             }
         }catch(NullPointerException ex){
-            System.out.println("RENDER NO ERROR");
             return false;
         }
         //No feedback exists, render rating    
