@@ -41,7 +41,9 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
     /**
      * Finds all the feedbacks connected to a seller
      * @param user
-     * @return 
+     *          to check
+     * @return feedbackList
+     *          list of feedbacks for a user
      */
     public LinkedList getAllFeedbacksByUser(AuctionUser user){
         LinkedList<Feedback> feedbackList = new LinkedList<Feedback>();
@@ -76,10 +78,11 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
     public boolean checkForExistingFeedback(Auction auction){
         LinkedList<Feedback> feedbacks = getAllFeedbacks();
         for(int i = 0; i < feedbacks.size(); i++){
-            if(feedbacks.get(i).getAuction().getId().equals(auction.getId())){
+            //if a feedback is connected to @auction
+            if(feedbacks.get(i).getAuction().equals(auction)){
                 return true; //This auction have a feedback
             }  
         }
-        return false; //there is no feedback
+        return false; //Auction has no feedback
     }
 }
