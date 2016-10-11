@@ -52,11 +52,20 @@ public class AddAuctionMB implements Serializable {
     private int selectedCategory;
     private String picturePath;
     private Date endDate;
+    private Date endTime;
 
     /**
      * Creates a new instance of AddAuctionMB
      */
     public AddAuctionMB() {
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public String getPicturePath() {
@@ -146,7 +155,8 @@ public class AddAuctionMB implements Serializable {
     
     private Auction createAuction(Product product) {
         DateTime currentTime = new DateTime();
-        DateTime end = new DateTime(endDate);
+        DateTime temp = new DateTime(endDate);
+        DateTime end = new DateTime(temp.getYear(), temp.getMonthOfYear(), temp.getDayOfMonth(), endTime.getHours(), endTime.getMinutes());      
         
         // Calculate duration from start to end date
         Duration duration = new Duration(currentTime, end);
