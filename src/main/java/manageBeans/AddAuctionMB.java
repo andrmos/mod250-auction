@@ -6,6 +6,7 @@
 package manageBeans;
 
 import boundary.AuctionFacade;
+import boundary.AuctionUserFacade;
 import boundary.ProductFacade;
 import entities.Auction;
 import entities.Product;
@@ -18,8 +19,11 @@ import java.util.UUID;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpServletRequest;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
@@ -38,14 +42,15 @@ public class AddAuctionMB implements Serializable {
     @EJB
     ProductFacade productFacade;
     
+    @EJB
+    AuctionUserFacade userFacade;
+    
     private String title;
     private String description;
-    private int price;
+    private double price;
     private long duration;
-    private String selectedCategory;
-    private boolean published;
-    
-    private Date startDate;
+    private int selectedCategory;
+    private String picturePath;
     private Date endDate;
 
     /**
@@ -54,13 +59,12 @@ public class AddAuctionMB implements Serializable {
     public AddAuctionMB() {
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setStartDate(Date startDate) {
-        System.out.println("setstart date " + startDate);
-        this.startDate = startDate;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     public Date getEndDate() {
@@ -87,11 +91,11 @@ public class AddAuctionMB implements Serializable {
         this.description = description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -103,20 +107,12 @@ public class AddAuctionMB implements Serializable {
         this.duration = duration;
     }
 
-    public String getSelectedCategory() {
+    public int getSelectedCategory() {
         return selectedCategory;
     }
 
-    public void setSelectedCategory(String selectedCategory) {
+    public void setSelectedCategory(int selectedCategory) {
         this.selectedCategory = selectedCategory;
-    }
-
-    public boolean isPublished() {
-        return published;
-    }
-
-    public void setPublished(boolean published) {
-        this.published = published;
     }
     
      public List<SelectItem> getSelectedCategories(){
@@ -129,21 +125,42 @@ public class AddAuctionMB implements Serializable {
         return selectedCategories;
     }
     
-    public void addAuction() {
-        // Create Product: id, category, description, picturepath, productname
-        Product product = new Product();
-        //product.setCategory(Category.fromString(selectedCategory));
-        product.setDescription(description);
-        product.setPicturePath("tesplaceholder...");
-        product.setProductName(title);
-        //productFacade.create(product);
+    public String addAuction() {
+        Product product = createProduct();
+        Auction auction = createAuction(product);
+        productFacade.create(product);
+        auctionFacade.create(auction);
         
-        // Create Auction: id, duration, price, published, starttime, prod_id, user_id
-        Auction auction = new Auction();
-        
-        System.out.println("start date: " + startDate);
+        // Redirect to profile
+        return "/SellerViews/sellerProfile.xhtml";
     }
     
+    private Product createProduct() {
+        Product product = new Product();
+        product.setCategory(Category.fromInt(selectedCategory));
+        product.setDescription(description);
+        product.setPicturePath(picturePath);
+        product.setProductName(title);
+        return product;
+    }
     
+    private Auction createAuction(Product product) {
+        DateTime currentTime = new DateTime();
+        DateTime end = new DateTime(endDate);
+        
+        // Calculate duration from start to end date
+        Duration duration = new Duration(currentTime, end);
+        long durationSeconds = duration.getStandardSeconds();
+        
+        Auction auction = new Auction();
+        auction.setDuration(durationSeconds);
+        auction.setInitPrice(price);
+        // All auctions are published. TODO remove field from db
+        auction.setPublished(true); 
+        auction.setStartTime(currentTime.toDate());
+        auction.setProduct(product);
+        auction.setUser(userFacade.getAuctionUser());
+        return auction;
+    }
     
 }

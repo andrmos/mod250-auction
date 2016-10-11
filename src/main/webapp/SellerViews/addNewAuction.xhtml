@@ -22,29 +22,24 @@
                 <b:container>
                     <h:form>
 
-                        <b:inputText label="Title" value="#{addAuctionMB.title}"></b:inputText>
+                        <b:inputText required="true" label="Title" value="#{addAuctionMB.title}"></b:inputText>
 
-                        <b:inputText label="Description" value="#{addAuctionMB.description}"></b:inputText>
+                        <b:inputText required="true" label="Description" value="#{addAuctionMB.description}"></b:inputText>
 
-                        <b:inputText label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only"></b:inputText>
+                        <b:inputText required="true" label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only"></b:inputText>
 
-                        <b:label text="Start date"></b:label>
-                        
-                        
-                        <b:dateTimePicker side-by-side="true" format="DD/MM/YY - HH:mm" value="#{addAuctionMB.startDate}"></b:dateTimePicker>
-                        
-                        
                         <b:label text="End date"></b:label>
-                        <b:dateTimePicker side-by-side="true" format="DD/MM/YY - HH:mm" value="#{addAuctionMB.endDate}"></b:dateTimePicker>
+                        <b:dateTimePicker required="true" side-by-side="true" format="DD/MM/YY - HH:mm" value="#{addAuctionMB.endDate}"></b:dateTimePicker>
 
-                        <b:selectOneMenu value="#{addAuctionMB.selectedCategory}">
+                        <b:inputText required="true" label="Picture path (ex. ending with .jpg or .png)" value="#{addAuctionMB.picturePath}"></b:inputText>
+                        
+                        <b:label text="Category"></b:label>
+                        <b:selectOneMenu required="true" value="#{addAuctionMB.selectedCategory}">
                             <f:selectItems value="#{addAuctionMB.selectedCategories}"/>
                         </b:selectOneMenu>
 
-                        <b:selectBooleanCheckbox value="#{addAuctionMB.published}" caption="Published?"/>
-
                         <b:commandButton value="Submit" action="#{addAuctionMB.addAuction()}"></b:commandButton>
-
+ 
 
                     </h:form>
                 </b:container>

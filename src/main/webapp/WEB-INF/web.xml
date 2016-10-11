@@ -51,7 +51,7 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-     <security-constraint>
+    <security-constraint>
         <display-name>Customer Pages</display-name>
         <web-resource-collection>
             <web-resource-name>Protected customer area</web-resource-name>
@@ -73,12 +73,12 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-     <security-role>
-         <description>user security role</description>
-         <role-name>customer</role-name>
-     </security-role>
-     <security-role>
-         <description>user security role</description>
-         <role-name>seller</role-name>
-     </security-role>          
+    <security-role>
+        <description>user security role</description>
+        <role-name>customer</role-name>
+    </security-role>
+    <security-role>
+        <description>user security role</description>
+        <role-name>seller</role-name>
+    </security-role>
 </web-app>
