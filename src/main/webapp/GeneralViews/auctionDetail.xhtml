@@ -116,6 +116,7 @@
                             }else{
                                 document.getElementsByClassName('bidButton')[0].disabled = false;
                             }
+                            document.getElementsByClassName('bidButton')[0].disabled = #{!auctionDetail.isLoggedIn()}
                             
                         }
                     }
