@@ -24,6 +24,7 @@ We have included two generic user logins:
 ### Installation and setup
 Building is done using Maven.
 The project requires that the user installs Glasshfish Server v. 4.1.1.
+When the project is run, it can be accessed at: 'localhost:8080:mod250_auction'
 
 ### Authors
 The project is created by Didrik Kvanvik, Andreas Ravndal, Ole Eskild Steensen and André Mossige.
