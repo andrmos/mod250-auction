@@ -17,7 +17,7 @@
                 <b:container fluid="true">
                     <b:row>
                         <b:column medium-screen="9">
-                            <ui:fragment>
+                            <ui:fragment rendered="#{auctionUserView.hasCurrentAuctions()}">
                                 <h1>Ongoing</h1>
                                 <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                                 <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">                       
@@ -30,7 +30,7 @@
                                 </div> 
                             </ui:fragment>
 
-                            <ui:fragment rendered="#{auctionUserView.hasCurrentAuctions()}">
+                            <ui:fragment rendered="#{auctionUserView.hasFinishedAuctions()}">
                                 <h1>History</h1>
                                 <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                                     <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">
