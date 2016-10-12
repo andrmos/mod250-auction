@@ -9,41 +9,54 @@
       xmlns:p="http://primefaces.org/ui/extensions">
     <h:head>
         <h:outputStylesheet name ="css/customer.css"/> 
-        <title>Seller Profile</title>
+        <title>Add new auction</title>
     </h:head>
     <h:body>
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">     
 
             <ui:define name="contentDiv">
 
-                <h1>Add new auction</h1>
+
 
 
                 <b:container>
-                    <h:form>
 
-                        <b:inputText required="true" label="Title" value="#{addAuctionMB.title}"></b:inputText>
+                    <b:column span="7">
 
-                        <b:inputText required="true" label="Description" value="#{addAuctionMB.description}"></b:inputText>
+                        <h1>Add new auction</h1>
 
-                        <b:inputText required="true" label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only"></b:inputText>
+                        <h:form>
 
-                        <b:label text="End date"></b:label>
-                        <b:dateTimePicker format="DD/MM/YY" required="true" value="#{addAuctionMB.endDate}"></b:dateTimePicker>
-                        
-                        <b:label text="End time"></b:label>
-                        <p:timePicker required="true" value="#{addAuctionMB.endTime}"></p:timePicker>
+                            <b:inputText required="true" label="Title" value="#{addAuctionMB.title}"></b:inputText>
+                            <b:inputText required="true" label="Description" value="#{addAuctionMB.description}"></b:inputText>
 
-                        <b:inputText required="true" label="Picture path (ex. ending with .jpg or .png)" value="#{addAuctionMB.picturePath}"></b:inputText>
-                        
-                        <b:label text="Category"></b:label>
-                        <b:selectOneMenu required="true" value="#{addAuctionMB.selectedCategory}">
-                            <f:selectItems value="#{addAuctionMB.selectedCategories}"/>
-                        </b:selectOneMenu>
+                            <b:row>
+                                <b:inputText required="true" label="Price" value="#{addAuctionMB.price}" converterMessage="Please enter digits only" span="4"></b:inputText>
+                                <b:column span="4">
 
-                        <b:commandButton value="Submit" action="#{addAuctionMB.addAuction()}"></b:commandButton>
- 
-                    </h:form>
+                                    <h:outputText value="End date *"></h:outputText>
+                                    <b:dateTimePicker format="DD/MM/YY" required="true" value="#{addAuctionMB.endDate}"></b:dateTimePicker>    
+                                </b:column>
+
+                                <b:column span="4">
+                                    <h:outputText value="End time *"></h:outputText>
+                                    <p:timePicker required="true" value="#{addAuctionMB.endTime}"></p:timePicker>
+                                </b:column>
+
+                            </b:row>
+
+                            <b:inputText required="true" label="Picture path (ex. ending with .jpg or .png)" value="#{addAuctionMB.picturePath}"></b:inputText>
+
+                            <h:outputText value="Category *"></h:outputText>
+                            <b:selectOneMenu required="true" value="#{addAuctionMB.selectedCategory}">
+                                <f:selectItems value="#{addAuctionMB.selectedCategories}"/>
+                            </b:selectOneMenu>
+
+                            <b:commandButton value="Submit" action="#{addAuctionMB.addAuction()}"></b:commandButton>
+
+                        </h:form>
+
+                    </b:column>
                 </b:container>
 
             </ui:define>
