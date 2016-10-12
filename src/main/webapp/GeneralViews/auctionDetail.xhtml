@@ -98,14 +98,14 @@
                     var checkAmount = function(){
                         if(document.getElementsByClassName('bid')[0].value){
                             var currentBid = document.getElementsByClassName('bid')[0].value;
-                            if(Number(document.getElementsByClassName('currentPrice')[0].innerHTML) >= currentBid){
+                            var currentPrice = Number(document.getElementsByClassName('currentPrice')[0].innerHTML);
+                            if(currentPrice >= currentBid){
                                 document.getElementsByClassName('bidButton')[0].disabled = true;
                             }else if(currentBid == ""){
                                 document.getElementsByClassName('bidButton')[0].disabled = true;
                             }else{
                                 document.getElementsByClassName('bidButton')[0].disabled = false;
                             }
-                            document.getElementsByClassName('bidButton')[0].disabled = #{!auctionDetail.isLoggedIn()}
                             
                         }
                     }
