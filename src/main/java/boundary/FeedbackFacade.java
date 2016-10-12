@@ -90,6 +90,24 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
         return false; //Auction has no feedback
     }
     
+    /**
+     * Gets the feedback for an auction. Returns the feedback
+     * if it has any, else returns null
+     * @param auction
+     *          auction to check
+     * @return feedback/null
+     *          feedback if it has, else null
+     */
+    public Feedback getFeedbackFromAuction(Auction auction){
+       LinkedList<Feedback> feedbacks = getAllFeedbacks();
+        for(int i = 0; i < feedbacks.size(); i++){
+            //if a feedback is connected to @auction
+            if(feedbacks.get(i).getAuction().equals(auction)){
+                return feedbacks.get(i);
+            }  
+        }
+        return null;
+    }
     
     /**
      * Sets new sellers rating

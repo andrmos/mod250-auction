@@ -8,6 +8,7 @@ package manageBeans;
 import boundary.AuctionFacade;
 import boundary.AuctionUserFacade;
 import boundary.BidFacade;
+import boundary.FeedbackFacade;
 import entities.Auction;
 import entities.AuctionUser;
 import entities.Bid;
@@ -37,6 +38,8 @@ public class AuctionDetail extends UIInput implements Serializable {
     private AuctionUserFacade auctionUserFacade;
     @EJB
     private BidFacade bidFacade;
+    @EJB
+    private FeedbackFacade feedbackFacade;
    
     private Bid bid;
     private Auction auction;
@@ -215,6 +218,32 @@ public class AuctionDetail extends UIInput implements Serializable {
     public boolean isActive(){
        boolean isActive = (this.auctionFacade.getTimeLeftInSeconds(""+this.auction.getId()) >0);// && this.auction.isPublished() ;
        return isActive;
+    }
+    
+    /**
+     * Gets the rating from a feedback for an auction
+     * @param auctionID
+     *         auction
+     * @return rating
+     *         an auctions rating
+     *          
+     */
+    public int getRatingFromAuction(long auctionID){
+        auction = auctionFacade.find(auctionID);
+        double rating = feedbackFacade.getFeedbackFromAuction(auction).getRating();
+        return (int) rating;
+    }
+    
+    /**
+     * Gets the comment from a feedback for an auction
+     * @param auctionID
+     *          auction
+     * @return String
+     *          the comment
+     */
+    public String getCommentFromAuction(long auctionID){
+        auction = auctionFacade.find(auctionID);
+        return feedbackFacade.getFeedbackFromAuction(auction).getComment();
     }
     
 }

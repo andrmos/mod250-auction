@@ -49,7 +49,18 @@
                                 <b:inputText id="comment" value="#{rateProductManagedBean.feedback.comment}" label="Comment:"> </b:inputText>
                                 <h:commandButton value="Submit" action="#{rateProductManagedBean.addFeedback(auctionDetail.auctionId)}"></h:commandButton>
                                 <br/>
-                            </h:form>  
+                            </h:form> 
+                            <h:form rendered="#{rateProductManagedBean.renderFeedbackToAuction(auctionDetail.auctionId)}">
+                                <h2><strong>Auction rating</strong></h2>
+                                <br/>
+                                <h4>rating: </h4>
+                                <p:rating value="#{auctionDetail.getRatingFromAuction(auctionDetail.auctionId)}" disabled="true" cancel="false" />
+                                <br/>
+                                <h4>Comment: </h4>
+                                <br/>
+                                <h:outputText value="#{auctionDetail.getCommentFromAuction(auctionDetail.auctionId)}"></h:outputText>
+                            </h:form>
+                            
                         </b:column>
                         
                         <b:column medium-screen="6">

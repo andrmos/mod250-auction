@@ -82,6 +82,22 @@ public class RateProductManagedBean implements Serializable{
             feedbackFacade.createFeedback(feedback); //creates new feedback 
         }
     }
+    
+    /**
+     * Method checks which auction will render feedback.
+     * Will only render if an auction has a feedback
+     * @param auctionID
+     *          auction to render feedback
+     * @return boolean
+     *          true if render, else false
+     */
+    public boolean renderFeedbackToAuction(long auctionID){
+        auction = auctionFacade.find(auctionID);
+        if(feedbackFacade.checkForExistingFeedback(auction)){
+            return true;
+        }
+        return false;
+    }
 
     public Feedback getFeedback() {
         return feedback;
