@@ -47,6 +47,8 @@ public class AuctionUserView implements Serializable {
     public void init(){
         this.finishedAuctionIsSet = false;
         this.currentAuctionIsSet = false;
+        this.finishedAuctions = new ArrayList<Auction>();
+        this.currentAuctions = new ArrayList<Auction>();
     }
 
     public AuctionUser getUser() {

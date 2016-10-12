@@ -70,7 +70,6 @@ public class AuctionDetail extends UIInput implements Serializable {
 
     public void setAuctionId(int auctionId) {
         this.auctionId = auctionId;
-        
         this.auction = auctionFacade.find(Long.valueOf(auctionId));
     }
 

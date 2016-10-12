@@ -19,7 +19,7 @@
                 src="#{facesContext.externalContext.requestContextPath}/resources/js/JSNotifier.js"></script>               
                 
                 <ui:include src="/Templates/searchBar.xhtml"></ui:include>                           
-                <ui:repeat  value="#{auctionListManagedBean.activeAuctions}" var="auction">
+                <ui:repeat  value="#{auctionListManagedBean.getActiveAuctions()}" var="auction">
                 
                     <ez:auctionElement id="repeatThisShit" pictureFilePath="#{auction.product.picturePath}" price="#{auctionListManagedBean.getPrice(auction.id)}" 
                                        profile="#{empty auction.user.contactinfo.name ? auction.user.username : auction.user.contactinfo.name}" title="#{auction.product.productName}" 
