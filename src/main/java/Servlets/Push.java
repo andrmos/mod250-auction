@@ -35,7 +35,8 @@ public class Push {
         synchronized (SESSIONS) {
             for (Session session : SESSIONS) {
                 if (session.isOpen()) {
-                    session.getAsyncRemote().sendText(text);
+                    // TODO implement dynamic update of bids
+                    //session.getAsyncRemote().sendText(text);
                 }
             }
         }
