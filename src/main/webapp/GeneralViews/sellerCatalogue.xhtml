@@ -19,7 +19,7 @@
                             <div id="onGoingAuctionsDiv" style="overflow: auto; height: 400px; border: black thin solid">
                                 <ui:repeat value="#{sellerCatalougeMB.activeAuctions}" var="auction">
                                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}"
-                                                       profile="#{auction.user.username}" title="#{auction.product.description}" 
+                                                       profile="#{auction.user.username}" title="#{auction.product.productName}" 
                                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="#{facesContext.externalContext.isUserInRole('customer')}"/>
                                     <br/>     
                                 </ui:repeat>
@@ -30,7 +30,7 @@
                             <div id="finnishedAuctionsDiv" style="overflow: auto; height: 400px; border: black thin solid">
                                 <ui:repeat value="#{sellerCatalougeMB.finishedAuctions}" var="auction">
                                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" 
-                                                       profile="#{auction.user.username}" title="#{auction.product.description}" 
+                                                       profile="#{auction.user.username}" title="#{auction.product.productName}" 
                                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
                                     <br/> 
                                 </ui:repeat>
