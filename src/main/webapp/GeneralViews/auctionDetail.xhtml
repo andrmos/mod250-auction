@@ -67,10 +67,11 @@
                             <b:row style="height: 90px;">
                                 <div class="pull-right text-center">
 
-                                    <h:graphicImage value="/resources/images/profileImage.png" 
-                                                    width="50" 
-                                                    height="50"/>
-                                    <br/>
+                                    <h:link outcome="/GeneralViews/sellerCatalogue.xhtml">
+                                        <h:graphicImage value="/resources/images/profileImage.png" width="50" 
+                                                       height="50"/>
+                                        <f:param name="uID" value="#{auction.user.id}"></f:param>
+                                    </h:link>
                                     <h:outputText value="#{auctionDetail.getAuctionOwnerName()}"/>
                                     <br />
                                     <p:rating value="#{auctionDetail.getSellerRating()}" disabled="true" cancel="false" />
