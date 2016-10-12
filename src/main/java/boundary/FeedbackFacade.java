@@ -98,7 +98,7 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
      * @param newRating 
      *          the rating to add to 
      */
-    public double setNewSellersRating(AuctionUser user, double newRating){
+    public double calculateNewSellersRating(AuctionUser user, double newRating){
         LinkedList<Feedback> feedbacks = this.getAllFeedbacksByUser(user);
         double counter = 0;
         double total = 0;
