@@ -33,19 +33,18 @@ public class SellerCatalougeMB implements Serializable {
     @EJB
     AuctionUserFacade auctionUserFacade;        
     private List<Auction> activeAuctions;
-    private String userID;
+    private String userID;    
+   
     
 
-    public int getUserRating() {        
-        return auctionUserFacade.getSellerRating(auctionUserFacade.find(Long.valueOf(userID)));
-    }
+    
     
     public SellerCatalougeMB() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
         .getRequest();
-        userID=request.getParameter("uID");
+        userID=request.getParameter("uID");       
     }    
-    
+        
     
     public List<Auction> getActiveAuctions() {
         System.out.println(userID);
@@ -53,8 +52,12 @@ public class SellerCatalougeMB implements Serializable {
     }
     public List<Auction> getFinishedAuctions() {
         return auctionFacade.getFinishedAuctionsBasedOnUserID(userID);
-    }
+    }   
     
-   
-           
+    public String getProfileName(){
+     return auctionUserFacade.getProfileName(auctionUserFacade.find(Long.valueOf(userID)));
+    }
+    public int getUserRating() {        
+        return auctionUserFacade.getSellerRating(auctionUserFacade.find(Long.valueOf(userID)));
+    }
 }

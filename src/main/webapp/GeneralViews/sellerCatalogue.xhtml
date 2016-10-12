@@ -42,6 +42,7 @@
                             <div style="float: right ">
                             <h:graphicImage id="productImage" 
                                             width="200" height="200" value="/resources/images/profileImage.png"/>
+                            <h:outputText value="#{sellerCatalougeMB.getProfileName()}"></h:outputText>
                             <p:rating readonly="true" value="#{sellerCatalougeMB.getUserRating()}"/>
                             </div>
                         </b:row>
