@@ -145,6 +145,13 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         return listOfAuctions;
     }
     
+    /**
+     * Sets a new rating to a user given the new total rating
+     * @param user
+     *          user to edit the rating
+     * @param rating 
+     *          new rating to set
+     */
     public void setNewRating(AuctionUser user, double rating){
         user.setSellers_rating((int) rating);
         this.edit(user);
