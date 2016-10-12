@@ -47,11 +47,7 @@ public class RemoveAuctionBean implements Serializable {
      *          true if finished, else false
      */
     public boolean renderDeleteButton(long auctionID){
-        auction = auctionFacade.find(auctionID);
-        //if an auction is published and finished
-        if(auction.isPublished() && auctionFacade.isAuctionFinished(auction)){
-            return true;
-        }
+        //TODO: IMPLEMENT RENDERING OF DELETE BUTTON
         return false;
     }   
 }
