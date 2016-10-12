@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-       xmlns:b="http://bootsfaces.net/ui"
-       xmlns:p="http://primefaces.org/ui"
-        xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ez ="http://java.sun.com/jsf/composite/ezcomp">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body onload="#{sellerCatalougeMB.setUserID()}">
+    <h:body>
         <ui:composition template="/Templates/defaultViewTemplate.xhtml">            
             <ui:define name="contentDiv">
                 <b:container>
@@ -19,7 +19,7 @@
                             <div id="onGoingAuctionsDiv" style="overflow: auto; height: 400px; border: black thin solid">
                                 <ui:repeat value="#{sellerCatalougeMB.activeAuctions}" var="auction">
                                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}"
-                                                       profile="#{auction.user.username}" title="#{auction.product.description}" showRating="false" deleteAuction="false" 
+                                                       profile="#{auction.user.username}" title="#{auction.product.productName}"
                                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="#{facesContext.externalContext.isUserInRole('customer')}"/>
                                     <br/>     
                                 </ui:repeat>
@@ -30,7 +30,7 @@
                             <div id="finnishedAuctionsDiv" style="overflow: auto; height: 400px; border: black thin solid">
                                 <ui:repeat value="#{sellerCatalougeMB.finishedAuctions}" var="auction">
                                     <ez:auctionElement pictureFilePath="#{auction.product.picturePath}" price="#{auction.initPrice}" 
-                                                       profile="#{auction.user.username}" title="#{auction.product.description}" showRating="false" deleteAuction="false" 
+                                                       profile="#{auction.user.username}" title="#{auction.product.description}"
                                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false"/>
                                     <br/> 
                                 </ui:repeat>
@@ -40,9 +40,9 @@
                     <b:column span="4">
                         <b:row>
                             <div style="float: right ">
-                            <h:graphicImage id="productImage" 
-                                            width="200" height="200" value="/resources/images/profileImage.png"/>
-                            <p:rating readonly="true" value="3"/>
+                                <h:graphicImage id="productImage" 
+                                                width="200" height="200" value="/resources/images/profileImage.png"/>
+                                <p:rating readonly="true" value="3"/>
                             </div>
                         </b:row>
                     </b:column>
