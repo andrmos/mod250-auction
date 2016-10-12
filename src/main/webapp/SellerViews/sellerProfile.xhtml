@@ -22,7 +22,7 @@
                                 <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                                 <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">                       
                                     <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" 
-                                                       profile="#{auction.user.contactinfo.name}" title="#{auction.product.productName}"
+                                                       profile="#{empty auction.user.contactinfo.name ? auction.user.username : auction.user.contactinfo.name}" title="#{auction.product.productName}"
                                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
                                     <br/>  
                                 </ui:repeat>
@@ -35,7 +35,7 @@
                                 <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                                     <ui:repeat value="#{auctionUserView.getFinishedAuctions()}" var="auction">
                                         <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{sellerProfile.getPrice(auction.id)}" 
-                                                           profile="#{auction.user.contactinfo.name}" 
+                                                           profile="#{empty auction.user.contactinfo.name ? auction.user.username : auction.user.contactinfo.name}" 
                                                            title="#{auction.getProduct().getProductName()}"
                                                            userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
                                         <br/>  
