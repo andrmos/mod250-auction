@@ -34,7 +34,7 @@
                                 <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                                     <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">
                                         <ez:auctionElement pictureFilePath="#{auction.getProduct().getPicturePath()}" price="#{auction.getBid().getAmount()}" 
-                                                            profile="#{auction.user.contactinfo.name}" 
+                                                            profile="#{empty auction.user.contactinfo.name ? auction.user.username : auction.user.contactinfo.name}" 
                                                            title="#{auction.getProduct().getProductName()}"
                                                            userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="false" />
                                         <br/>  
