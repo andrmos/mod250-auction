@@ -34,10 +34,13 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         super(Auction.class);
     }
     
+    /**
+     * Removes and auction from the database
+     * @param auciton 
+     *          auction to be removed
+     */
     public void removeAuction(Auction auciton){
-        em.getTransaction().begin();
         em.remove(auciton);
-        em.getTransaction().commit();
     }
     
     /**
