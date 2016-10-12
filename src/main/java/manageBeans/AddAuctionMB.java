@@ -15,18 +15,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
-import javax.servlet.http.HttpServletRequest;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
-import org.joda.time.Interval;
 
 /**
  *
@@ -124,16 +118,26 @@ public class AddAuctionMB implements Serializable {
         this.selectedCategory = selectedCategory;
     }
     
-     public List<SelectItem> getSelectedCategories(){
-        List selectedCategories=new ArrayList();
-        selectedCategories.add(new SelectItem("0", "Clothing"));
-        selectedCategories.add(new SelectItem("1", "Electronics"));
-        selectedCategories.add(new SelectItem("2", "White Ware"));
-        selectedCategories.add(new SelectItem("3", "Jewlerry"));        
-        selectedCategories.add(new SelectItem("4", "Guns"));        
-        return selectedCategories;
+    /**
+     * Gets list of selected categories
+     * 
+     * @return selectedCategories 
+     *          list of categories
+     */
+    public List<SelectItem> getSelectedCategories(){
+       List selectedCategories=new ArrayList();
+       selectedCategories.add(new SelectItem("0", "Clothing"));
+       selectedCategories.add(new SelectItem("1", "Electronics"));
+       selectedCategories.add(new SelectItem("2", "White Ware"));
+       selectedCategories.add(new SelectItem("3", "Jewlerry"));        
+       selectedCategories.add(new SelectItem("4", "Guns"));        
+       return selectedCategories;
     }
     
+    /**
+     * Adds an auction to the system
+     * @return redirected xhtml page
+     */
     public String addAuction() {
         Product product = createProduct();
         Auction auction = createAuction(product);
@@ -144,6 +148,11 @@ public class AddAuctionMB implements Serializable {
         return "/SellerViews/sellerProfile.xhtml";
     }
     
+    /**
+     * Creates a new product
+     * @return product
+     *          the created product
+     */ 
     private Product createProduct() {
         Product product = new Product();
         product.setCategory(Category.fromInt(selectedCategory));
@@ -153,6 +162,13 @@ public class AddAuctionMB implements Serializable {
         return product;
     }
     
+    /**
+     * Creates an auction with a product
+     * @param product
+     *          product to add to an auction
+     * @return auction
+     *          the new created auction
+     */
     private Auction createAuction(Product product) {
         DateTime currentTime = new DateTime();
         DateTime temp = new DateTime(endDate);
