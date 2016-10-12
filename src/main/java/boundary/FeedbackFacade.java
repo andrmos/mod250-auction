@@ -32,6 +32,11 @@ public class FeedbackFacade extends AbstractFacade<Feedback> {
         super(Feedback.class);
     }
     
+    /**
+     * Adds a new feedback to the database
+     * @param feedback 
+     *          feedback to be added
+     */
     public void createFeedback(Feedback feedback){
         em.persist(feedback);
     }
