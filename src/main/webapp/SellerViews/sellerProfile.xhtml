@@ -17,7 +17,7 @@
                 <b:container fluid="true">
                     <b:row>
                         <b:column medium-screen="9">
-                            <ui:fragment rendered="#{auctionUserView.hasFinishedAuctions()}">
+                            <ui:fragment>
                                 <h1>Ongoing</h1>
                                 <div class="auction-list" style="max-height: 400px; overflow-y: auto">
                                 <ui:repeat value="#{auctionUserView.getCurrentAuctions()}" var="auction">                       
