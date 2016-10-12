@@ -100,6 +100,11 @@ public class AuctionDetail extends UIInput implements Serializable {
         return this.auction.getProduct().getDescription();
     }
     
+    /**
+     * Gets the auctions current price
+     * 
+     * @return bid amount
+     */
     public double getCurrentPrice(){
         Bid bid = this.auction.getBid();
         if(bid == null){
@@ -109,6 +114,13 @@ public class AuctionDetail extends UIInput implements Serializable {
         }
     }
     
+    /**
+     * Gets the auction owners name if the user has registered contact 
+     * information, else returns username as name
+     * 
+     * @return string
+     *          username/fullname
+     */
     public String getAuctionOwnerName(){
         ContactInfo contactInfo = this.auction.getUser().getContactinfo();
         if(contactInfo == null){
@@ -118,10 +130,18 @@ public class AuctionDetail extends UIInput implements Serializable {
         }               
     }
     
+    /**
+     * Gets the sellers rating. Converting the rating from double to int
+     * 
+     * @return sellers_rating
+     */
     public int getSellerRating(){
         return (int)this.auction.getUser().getSellers_rating();
-    }        
+    }  
     
+    /**
+     * Saves bid changes
+     */
     public void saveBid(){
         Bid currentBid = this.auction.getBid();
         if(currentBid != null){
@@ -152,10 +172,21 @@ public class AuctionDetail extends UIInput implements Serializable {
         }
     }
     
+    /**
+     * Checks if a user is logged in
+     * @return boolean
+     *          true if logged in, else false
+     */
     public boolean isLoggedIn(){
         return this.auctionUserFacade.getAuctionUser() != null; 
     }
     
+    /**
+     * Gets the remaining time left of an auction
+     * 
+     * @return int
+     *          timeleft
+     */
     public int getSecondsLeft(){
         if(this.auction.isPublished()){
             return auctionFacade.getTimeLeftInSeconds("" + this.auction.getId());
@@ -163,17 +194,28 @@ public class AuctionDetail extends UIInput implements Serializable {
         return 0;
     }
 
-
-   public int getDaysLeft(){
-       if(this.auction.isPublished()){
-           return auctionFacade.getNumberOfDaysUntilDeadline("" + this.auction.getId());
-       }
-       return 0;
-   }
-   
-   public boolean isActive(){
+    /**
+     * Gets the number of days left of an auction
+     * 
+     * @return int
+     *          number of days
+     */
+    public int getDaysLeft(){
+        if(this.auction.isPublished()){
+            return auctionFacade.getNumberOfDaysUntilDeadline("" + this.auction.getId());
+        }
+        return 0;
+    }
+    
+    /**
+     * Checks if an auction is active. 
+     * It's active if the timeleft is larger than zero
+     * @return boolean
+     *          true if active, else false
+     */
+    public boolean isActive(){
        boolean isActive = (this.auctionFacade.getTimeLeftInSeconds(""+this.auction.getId()) >0);// && this.auction.isPublished() ;
        return isActive;
-   }
+    }
     
 }
