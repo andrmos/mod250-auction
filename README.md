@@ -1,4 +1,5 @@
 # Java EE Auction web application
+Auction house web application created in Java EE. Developed as part of course MOD250, 'Advanced Software Technologies'.
 ### Main functionality:
 - Authenticated login
 - Creating auctions
