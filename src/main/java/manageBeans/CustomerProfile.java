@@ -34,7 +34,7 @@ public class CustomerProfile implements Serializable{
         AuctionUser user = this.auctionUserFacade.getAuctionUser();
         ContactInfo contactInfo = user.getContactinfo();
         if(contactInfo == null){
-            return "Unknown";
+            return user.getUsername();
         }
         return contactInfo.getName();
                
