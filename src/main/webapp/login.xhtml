@@ -12,10 +12,11 @@
           <div style="width: 12%;margin: 90px auto 0;">      
                 <h:form id="login" prependId="false" onsubmit="document.getElementById('login').action='j_security_check';">
                     <h:panelGrid columns="1" cellpadding="5">
-                        <b:inputText placeholder="Username" name="j_username">
+                        <b:inputText id="username" placeholder="Username" name="j_username">
                             <f:facet name="prepend">
                                 <b:icon name="user" />
                             </f:facet>
+                            <b:focus target="username"></b:focus>
                         </b:inputText>
                         <b:inputText placeholder="Password" type="password" name="j_password">
                             <f:facet name="prepend">
