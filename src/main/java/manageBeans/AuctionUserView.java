@@ -9,18 +9,14 @@ import boundary.AuctionUserFacade;
 import boundary.FeedbackFacade;
 import entities.Auction;
 import entities.AuctionUser;
-import entities.Feedback;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
-
 
 /**
  *
@@ -36,7 +32,6 @@ public class AuctionUserView implements Serializable {
     FeedbackFacade feedbackFacade;
     
     private AuctionUser user;
-    
     private ArrayList<Auction> finishedAuctions;
     boolean finishedAuctionIsSet;
     private ArrayList<Auction> currentAuctions;
@@ -76,7 +71,7 @@ public class AuctionUserView implements Serializable {
     
     /**
      * Method to get the sellers rating
-     * @return 
+     * @return sellers_rating
      */
     public int getSellersRating(){
         user = userFacade.getAuctionUser(); //finds the logged in user
@@ -118,7 +113,7 @@ public class AuctionUserView implements Serializable {
     
     /**
      * Finds all ongoing (current) auctions for a user
-     * @return arr
+     * @return arraylist
      *          arrayList
      */
     public ArrayList<Auction> getCurrentAuctions(){
@@ -127,16 +122,4 @@ public class AuctionUserView implements Serializable {
         }
         return this.currentAuctions;
     }
-    
-    /**
-     * Logout method
-     * @return index.xhtml
-     *          redirect page after logout
-     */
-    public String logout() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        session.invalidate();
-        return "index.xhtml?faces-redirect=true";
-    }
-    
 }

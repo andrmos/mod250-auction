@@ -28,8 +28,7 @@ public class SellerCatalougeMB implements Serializable {
      */
     @EJB
     AuctionFacade auctionFacade;
-    
-    private List<Auction> activeAuctions;
+  
     private String userID;
     
     public SellerCatalougeMB() {
@@ -38,15 +37,20 @@ public class SellerCatalougeMB implements Serializable {
         userID=request.getParameter("uID");
     }    
     
-    
+    /**
+     * Gets all active auctions based on user id
+     * @return auction list
+     */
     public List<Auction> getActiveAuctions() {
         System.out.println(userID);
         return auctionFacade.getActiveAuctionsBasedOnUserID(userID);
     }
+    
+    /**
+     * gets all finished auctions based on user id
+     * @return auction list
+     */
     public List<Auction> getFinishedAuctions() {
         return auctionFacade.getFinishedAuctionsBasedOnUserID(userID);
-    }
-    
-   
-           
+    }           
 }

@@ -34,6 +34,12 @@ public class SellerProfile implements Serializable{
     public SellerProfile() {
     }
     
+    /**
+     * Gets the auction users full name if they have contact information
+     * records, else returns their username as their fullname
+     * @return string
+     *          username/fullname
+     */
     public String getFullName(){
         AuctionUser user = this.auctionUserFacade.getAuctionUser();
         ContactInfo contactInfo = user.getContactinfo();
@@ -44,6 +50,12 @@ public class SellerProfile implements Serializable{
                
     }
     
+    /**
+     * Gets the current price of an auction based on the auction id
+     * @param auctionId
+     *          auction
+     * @return current highest bid
+     */
     public double getPrice(String auctionId){
         return AuctionSupport.getCurrentPrice(auctionFacade.find(Long.valueOf(auctionId)));
     }

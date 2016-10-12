@@ -27,11 +27,9 @@ public class LogoutServlet extends HttpServlet {
         session.invalidate();
         RequestDispatcher rd = req.getRequestDispatcher("/index.xhtml"); //the URL to redirect after logout
         try{
-        rd.forward(req,res);
+            rd.forward(req,res);
         }catch(IllegalStateException ex){
             System.out.println("Forwarding exception: " + ex);
-        }finally{
-            System.out.println("FINALLY");
         }
     }
   
