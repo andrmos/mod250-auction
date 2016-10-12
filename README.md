@@ -27,7 +27,7 @@ The project requires:
 - Installation of Glasshfish Server v. 4.1.1.
 - Setup of jdbc authentication realm in Glasshfish. If you're familiar with Glassfish, this should be straight forward. More information can be found here: https://dzone.com/articles/jdbc-realm-and-form-based
 
-When the project is run, it can be accessed at: 'localhost:8080:mod250_auction'
+When the project is run, it can be accessed at: 'localhost:8080/mod250_auction'
 
 ### Authors
 The project is created by Didrik Kvanvik, Andreas Ravndal, Ole Eskild Steensen and André Mossige.
