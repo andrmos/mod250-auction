@@ -22,7 +22,7 @@
                 <ui:repeat  value="#{auctionListManagedBean.activeAuctions}" var="auction">
                 
                     <ez:auctionElement id="repeatThisShit" pictureFilePath="#{auction.product.picturePath}" price="#{auctionListManagedBean.getPrice(auction.id)}" 
-                                       profile="#{auction.user.username}" title="#{auction.product.productName}" 
+                                       profile="#{empty auction.user.contactinfo.name ? auction.user.username : auction.user.contactinfo.name}" title="#{auction.product.productName}" 
                                        userID="#{auction.user.id}" auctionId="#{auction.id}" showBidButton="#{facesContext.externalContext.isUserInRole('customer')}"/>
                     <br/>                    
                 </ui:repeat>                  
