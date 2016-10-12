@@ -77,10 +77,9 @@ public class RateProductManagedBean implements Serializable{
             //connects feedback to an auction and user
             feedback.setAuction(auction);
             feedback.setUser(user);
-            double totalRating = feedbackFacade.calculateNewSellersRating(user, feedback.getRating()); //sets new sellers rating
-            userFacade.setNewRating(user, totalRating);
-            feedbackFacade.createFeedback(feedback); //creates new feedback
-            
+            double totalRating = feedbackFacade.calculateNewSellersRating(auction.getUser(), feedback.getRating()); //sets new sellers rating
+            userFacade.setNewRating(auction.getUser(), totalRating);
+            feedbackFacade.createFeedback(feedback); //creates new feedback 
         }
     }
 
