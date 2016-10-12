@@ -6,7 +6,6 @@
 package entities;
 
 import entityListner.MenuChangeListener;
-import java.awt.BorderLayout;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -151,15 +150,15 @@ public class Auction implements Serializable, Comparable<Auction> {
     public int compareTo(Auction o) {
         Date othertime,thisTime;
         try{
-        othertime =new Date(o.getStartTime().getTime());            
-        othertime.setTime(othertime.getTime()+(o.getDuration().intValue()*1000));
+            othertime =new Date(o.getStartTime().getTime());            
+            othertime.setTime(othertime.getTime()+(o.getDuration().intValue()*1000));
         }
         catch(Exception e){
             return 0;
         }
         try{
-        thisTime =new Date(getStartTime().getTime());            
-        thisTime.setTime(thisTime.getTime()+(getDuration().intValue()*1000));        
+            thisTime =new Date(getStartTime().getTime());            
+            thisTime.setTime(thisTime.getTime()+(getDuration().intValue()*1000));        
         }
         catch(Exception e){
             return 0;
