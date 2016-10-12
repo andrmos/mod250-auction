@@ -130,23 +130,26 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         
         //Adding winning auctions to the winningList
         for(int i = 0; i < list.size(); i++){
-           auction = em.find(Auction.class, list.get(i));
-           dateTime = new DateTime(auction.getStartTime());
-           dateTime = dateTime.plusSeconds(auction.getDuration().intValue());
-           
-           if(isOver){ //if auction is done
-                if(dateTime.compareTo(nowDate) <= 0){
-                    auctionList.add(auction);
-                }
-           }else{ //if auction is still ongoing
-               if(dateTime.compareTo(nowDate) > 0){
-                    auctionList.add(auction);
-                }
-           }
+            auction = em.find(Auction.class, list.get(i));
+            if(auction.isPublished()){
+
+                 dateTime = new DateTime(auction.getStartTime());
+                 dateTime = dateTime.plusSeconds(auction.getDuration().intValue());
+
+                 if(isOver){ //if auction is done
+                      if(dateTime.compareTo(nowDate) <= 0){
+                          auctionList.add(auction);
+                      }
+                 }else{ //if auction is still ongoing
+                     if(dateTime.compareTo(nowDate) > 0){
+                          auctionList.add(auction);
+                      }
+                 }
+            }
         }
         
         LinkedList<Auction> listOfAuctions = new LinkedList<Auction>();
-        listOfAuctions.addAll(auctionList); 
+        listOfAuctions.addAll(auctionList);
         return listOfAuctions;
     }
     
