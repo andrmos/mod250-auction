@@ -10,20 +10,13 @@ import boundary.AuctionUserFacade;
 import boundary.ProductFacade;
 import enums.Category;
 import entities.Auction;
-import entities.AuctionUser;
-import entities.Product;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
-import javax.faces.view.facelets.FaceletContext;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertTrue;
 import support.AuctionSupport;
 
@@ -49,8 +42,6 @@ public class AuctionListManagedBean implements Serializable {
     @AssertTrue()
     private Double bid;
     
-
-
     public String getSearchKeyword() {
         return searchKeyword;
     }
@@ -70,6 +61,12 @@ public class AuctionListManagedBean implements Serializable {
         this.selectedCategory=selectedCategory;
     }
     
+    /**
+     * Gets list of selected categories
+     * 
+     * @return selectedCategories
+     *          list of categories
+     */
     public List<SelectItem> getSelectedCategories(){
         List selectedCategories=new ArrayList();
         selectedCategories.add(new SelectItem("10", "All Items"));
@@ -88,13 +85,14 @@ public class AuctionListManagedBean implements Serializable {
         
     }
     
-    
-    
     private Category getEnumFromSelectedCatagory(){        
         return Category.fromInt(Integer.parseInt(selectedCategory));
     }
     
-    public void  search(){       
+    /**
+     * Search function
+     */
+    public void search(){       
         if(selectedCategory.equals("10")||selectedCategory.equals("")){
         currentListOfAuctions=auction.getAuctionsByKeyword(searchKeyword);
         }
@@ -108,7 +106,7 @@ public class AuctionListManagedBean implements Serializable {
         }        
     }
     
-       public void  searchActive(){       
+    public void searchActive(){       
         if(selectedCategory.equals("10")||selectedCategory.equals("")){
         currentListOfAuctions=auction.getActiveAuctionsByKeyword(searchKeyword);
         }
