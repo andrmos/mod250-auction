@@ -163,7 +163,6 @@ public class Auction implements Serializable, Comparable<Auction> {
         catch(Exception e){
             return 0;
         }   
-        System.out.println("Auction(this) id: " + this.id + " time = " + thisTime + " Auction(other) id: " + o.getId() + " time = " + othertime);
         return thisTime.compareTo(othertime);
     }    
 }
