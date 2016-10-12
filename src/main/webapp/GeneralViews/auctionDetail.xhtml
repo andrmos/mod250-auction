@@ -70,8 +70,9 @@
                                     <h:link outcome="/GeneralViews/sellerCatalogue.xhtml">
                                         <h:graphicImage value="/resources/images/profileImage.png" width="50" 
                                                        height="50"/>
-                                        <f:param name="uID" value="#{auction.user.id}"></f:param>
+                                        <f:param name="uID" value="#{auctionDetail.auction.user.id}"></f:param>
                                     </h:link>
+                                    <br/>
                                     <h:outputText value="#{auctionDetail.getAuctionOwnerName()}"/>
                                     <br />
                                     <p:rating value="#{auctionDetail.getSellerRating()}" disabled="true" cancel="false" />
