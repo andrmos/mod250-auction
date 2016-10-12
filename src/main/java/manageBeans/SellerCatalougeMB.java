@@ -6,6 +6,7 @@
 package manageBeans;
 
 import boundary.AuctionFacade;
+import boundary.AuctionUserFacade;
 import entities.Auction;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
+import entities.AuctionUser;
 
 /**
  *
@@ -28,8 +30,15 @@ public class SellerCatalougeMB implements Serializable {
      */
     @EJB
     AuctionFacade auctionFacade;
-  
+    @EJB
+    AuctionUserFacade auctionUserFacade;        
+    private List<Auction> activeAuctions;
     private String userID;
+    
+
+    public int getUserRating() {        
+        return auctionUserFacade.getSellerRating(auctionUserFacade.find(Long.valueOf(userID)));
+    }
     
     public SellerCatalougeMB() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
@@ -37,20 +46,15 @@ public class SellerCatalougeMB implements Serializable {
         userID=request.getParameter("uID");
     }    
     
-    /**
-     * Gets all active auctions based on user id
-     * @return auction list
-     */
+    
     public List<Auction> getActiveAuctions() {
         System.out.println(userID);
         return auctionFacade.getActiveAuctionsBasedOnUserID(userID);
     }
-    
-    /**
-     * gets all finished auctions based on user id
-     * @return auction list
-     */
     public List<Auction> getFinishedAuctions() {
         return auctionFacade.getFinishedAuctionsBasedOnUserID(userID);
-    }           
+    }
+    
+   
+           
 }
