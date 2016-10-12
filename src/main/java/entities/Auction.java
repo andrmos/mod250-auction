@@ -151,18 +151,19 @@ public class Auction implements Serializable, Comparable<Auction> {
         Date othertime,thisTime;
         try{
             othertime =new Date(o.getStartTime().getTime());            
-            othertime.setTime(othertime.getTime()+(o.getDuration().intValue()*1000));
+            othertime.setTime(othertime.getTime()+(o.getDuration()*1000));
         }
         catch(Exception e){
             return 0;
         }
         try{
             thisTime =new Date(getStartTime().getTime());            
-            thisTime.setTime(thisTime.getTime()+(getDuration().intValue()*1000));        
+            thisTime.setTime(thisTime.getTime()+(getDuration()*1000));        
         }
         catch(Exception e){
             return 0;
-        }             
+        }   
+        System.out.println("Auction(this) id: " + this.id + " time = " + thisTime + " Auction(other) id: " + o.getId() + " time = " + othertime);
         return thisTime.compareTo(othertime);
     }    
 }
