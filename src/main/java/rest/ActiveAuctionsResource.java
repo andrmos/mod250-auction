@@ -17,6 +17,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import support.JsonConverter;
 
 /**
  * REST Web Service
@@ -44,16 +45,12 @@ public class ActiveAuctionsResource {
      * Accessed from: http://localhost:8080/mod250_auction/webresources/auctions/active
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String getActiveAuctions() {
-        StringBuilder sb = new StringBuilder();
         List<Auction> auctionList = auctionFacade.getActiveAuctions();
         
-        for (int i = 0; i < auctionList.size(); i++) {
-            sb.append(auctionList.get(i).getProduct().getProductName() + "\n");
-        }
-        
-        return sb.toString();
+        System.out.println("Got rest hit at /webresources/auctions/active");
+        return JsonConverter.toJson(auctionList.get(3)).toString();
     }
 
     /**
