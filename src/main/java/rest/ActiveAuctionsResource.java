@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author andre
  */
-@Path("auctions/active")
+@Path("auctions")
 public class ActiveAuctionsResource {
 
     @Context
@@ -43,6 +43,7 @@ public class ActiveAuctionsResource {
      * Accessed from: .../mod250_auction/webresources/auctions/active
      */
     @GET
+    @Path("/active")
     @Produces(MediaType.APPLICATION_JSON)
     public String getActiveAuctions() {
         System.out.println("Got rest hit at /webresources/auctions/active");
