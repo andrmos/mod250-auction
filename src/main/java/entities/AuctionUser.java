@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,6 +38,7 @@ public class AuctionUser implements Serializable {
     
     @Column(unique=true)
     private String username;
+    @XmlTransient
     private String password;
     private double sellers_rating;
     private String role;

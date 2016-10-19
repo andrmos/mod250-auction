@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -54,6 +55,7 @@ public class Bid implements Serializable {
         this.auctionUser = auctionUser;
     }
 
+    @XmlTransient
     public Auction getAuction() {
         return auction;
     }
