@@ -48,15 +48,15 @@
             <role-name>customer</role-name>
         </auth-constraint>
         <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <security-constraint>
+        <security-constraint>
         <display-name>Customer Pages</display-name>
         <web-resource-collection>
             <web-resource-name>Protected customer area</web-resource-name>
             <description></description>
-            <url-pattern>/SellerViews/*</url-pattern>
+            <url-pattern>/CustomerViews/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -67,10 +67,22 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>seller</role-name>
+            <role-name>customer</role-name>
         </auth-constraint>
         <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Not logged in user</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected customer area</web-resource-name>
+            <description></description>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>      
+        </web-resource-collection>     
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
 
