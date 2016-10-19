@@ -5,6 +5,8 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -23,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="AUCTION_USER")
+@JsonIgnoreProperties({"password"})
 public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
