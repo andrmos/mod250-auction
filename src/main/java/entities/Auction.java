@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -69,7 +70,7 @@ public class Auction implements Serializable, Comparable<Auction> {
         }
         return true;
     }
-    
+    @XmlTransient
     public Bid getBid() {
         return bid;
     }
