@@ -11,3 +11,4 @@ buildNumber.properties
 .idea/
 *.iml
 /nbactions.xml
+/SoapClient/nbproject/private/
