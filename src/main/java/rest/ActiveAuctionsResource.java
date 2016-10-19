@@ -45,8 +45,8 @@ public class ActiveAuctionsResource {
     @GET
     @Path("/active")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getActiveAuctions() {
-        System.out.println("Got rest hit at /webresources/auctions/active");
+    public String getActiveAuctionsJson() {
+        System.out.println("Got json rest hit at /webresources/auctions/active");
 
         List<Auction> auctionList = auctionFacade.getActiveAuctions();
 
@@ -60,6 +60,14 @@ public class ActiveAuctionsResource {
         }
 
         return json;
+    }
+
+    @GET
+    @Path("/active")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Auction> getActiveAuctionsXml() {
+        System.out.println("Got xml rest hit at /webresources/auctions/active");
+        return auctionFacade.getActiveAuctions();
     }
 
     /**
