@@ -6,10 +6,12 @@ import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.ejb.MessageDrivenContext;
+import javax.faces.context.FacesContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
+import javax.servlet.http.HttpServletRequest;
 
 @MessageDriven(activationConfig = {
     @ActivationConfigProperty(propertyName = "destinationLookup",
@@ -31,10 +33,54 @@ public class NotifyBuyer implements MessageListener {
 
         try {
             if (inMessage instanceof TextMessage) {
-                System.out.println("MOTTATT: " + inMessage.getBody(String.class));
-                /*logger.log(Level.INFO,
-                        "MESSAGE BEAN: Message received: {0}",
-                        inMessage.getBody(String.class));*/
+                
+                /*  
+                ---- START EMAIL to customer X ----
+               Dear X,
+               Congratulations!  You have won in bidding for product Y.
+               You can access the product using the following link:
+               URL=<LINK>
+               ---- END EMAIL to customer X ----
+                */
+                
+                String productName = "";
+                String username = "";
+                String auctionId = "1";
+                String link = "";
+                String msg = inMessage.getBody(String.class);
+                String[] info = msg.split(":");
+                if(info.length == 3){
+                    productName = info[0];
+                    username = info[1];
+                    auctionId = info[2];
+                }
+                
+                try{
+                    link = "https://localhost:8181/mod250_auction/GeneralViews/auctionDetail.xhtml?auctionId=" + auctionId;
+                }catch(Exception e){
+                    
+                }
+                    
+                StringBuilder sb = new StringBuilder();
+                sb.append("---- START EMAIL to customer ");
+                sb.append(username);
+                sb.append(" ----\n");
+                
+                sb.append("Dear ");
+                sb.append(username);
+                sb.append(",\n");
+                
+                sb.append("Congratulations!  You have won in bidding for product ");
+                sb.append(productName + ".\n");
+                
+                sb.append("You can access the product using the following link:\n");
+                sb.append("URL=");
+                sb.append(link + "\n");
+                
+                sb.append("---- END EMAIL to customer ");
+                sb.append(username);
+                sb.append(" ----");
+                System.out.println(sb.toString());
             } else {
                 logger.log(Level.WARNING,
                         "Message of wrong type: {0}",

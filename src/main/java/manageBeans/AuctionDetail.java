@@ -18,11 +18,14 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
+import jms.SendMessage;
 
 /**
  *
@@ -164,6 +167,13 @@ public class AuctionDetail extends UIInput implements Serializable {
         if(currentBid != null){
             this.bidFacade.remove(currentBid);
         }
+        
+        SendMessage sm = new SendMessage();
+        
+        String productName = this.auction.getProduct().getProductName();
+        String username = this.bid.getAuctionUser().getUsername();
+        String auctionId = this.auction.getId().toString();
+        sm.sendMessage(productName + ":" + username + ":" + auctionId);
         
         //reload page
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
