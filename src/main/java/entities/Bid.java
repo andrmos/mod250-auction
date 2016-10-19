@@ -5,6 +5,7 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name="BID")
+@JsonIgnoreProperties({"auction"})
 public class Bid implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +41,7 @@ public class Bid implements Serializable {
     @ManyToOne
     @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
     protected AuctionUser auctionUser;
-    
+
     @OneToOne
     @JoinColumn(name="AUCTION_ID", referencedColumnName="AUCTION_ID")
     protected Auction auction;
