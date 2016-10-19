@@ -6,6 +6,8 @@
 package rest;
 
 import boundary.AuctionFacade;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Auction;
 import java.util.List;
 import javax.ejb.EJB;
@@ -30,9 +32,6 @@ public class ActiveAuctionsResource {
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of HelloWorld
-     */
     public ActiveAuctionsResource() {
     }
     
@@ -40,17 +39,27 @@ public class ActiveAuctionsResource {
     private AuctionFacade auctionFacade;
 
     /**
-     * Returns current active auctions
+     * Returns current active auctions in JSON format
      * 
-     * Accessed from: http://localhost:8080/mod250_auction/webresources/auctions/active
+     * Accessed from: .../mod250_auction/webresources/auctions/active
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getActiveAuctions() {
-        List<Auction> auctionList = auctionFacade.getActiveAuctions();
-        
         System.out.println("Got rest hit at /webresources/auctions/active");
-        return JsonConverter.toJson(auctionList.get(3)).toString();
+
+        List<Auction> auctionList = auctionFacade.getActiveAuctions();
+
+        String json;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(auctionList);
+        } catch (JsonProcessingException e) {
+            System.out.println("Catched error: JsonProcessingException1!\n" + e.toString());
+            json = "Error";
+        }
+
+        return json;
     }
 
     /**
