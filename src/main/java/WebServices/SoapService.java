@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import entities.Bid;
+import java.util.Objects;
 
 
 
@@ -37,6 +38,23 @@ public class SoapService {
     
     @WebMethod(operationName="setBid")
     public String setBid(Bid bid){        
-        return "sucess";        
+        try{
+            List<Auction> templist=auctionFacade.getActiveAuctions();
+            for(int i=0; i<templist.size();i++){
+                if(Objects.equals(bid.getAuction().getId(), templist.get(i).getId())){
+                    if(bid.getAmount()>templist.get(i).getBid().getAmount()&&
+                            bid.getAmount()>templist.get(i).getInitPrice()){
+                        templist.get(i).setBid(bid);
+                        return "success";
+                    }   
+                    else
+                        return "failure loop";
+                }                
+            }            
+            return "failure unknown";
+        }
+        catch(Exception e){
+         return "failure exception: "+e.getMessage();
+        }        
     }
 }
