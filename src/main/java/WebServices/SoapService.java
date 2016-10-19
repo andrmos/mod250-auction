@@ -11,6 +11,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import entities.Bid;
+
+
 
 
 /**
@@ -31,5 +34,9 @@ public class SoapService {
        return auctionFacade.getActiveAuctions();
         
     }
-
+    
+    @WebMethod(operationName="setBid")
+    public String setBid(Bid bid){        
+        return "sucess";        
+    }
 }

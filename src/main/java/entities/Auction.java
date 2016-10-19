@@ -70,7 +70,7 @@ public class Auction implements Serializable, Comparable<Auction> {
         }
         return true;
     }
-    @XmlTransient
+ 
     public Bid getBid() {
         return bid;
     }
