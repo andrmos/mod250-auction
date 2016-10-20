@@ -45,10 +45,12 @@ public class SoapService {
                     if(bid.getAmount()>templist.get(i).getBid().getAmount()&&
                             bid.getAmount()>templist.get(i).getInitPrice()){
                         templist.get(i).setBid(bid);
-                        return "success";
+                        return "Customer " + bid.getAuctionUser().getUsername() + "'s bid "
+                                + "has been successfully placed for product " + bid.getAuction().getProduct();
                     }   
                     else
-                        return "failure loop";
+                        return "The bid for product " + bid.getAuction().getProduct() + " has not been placed"
+                                + "for Customer " + bid.getAuctionUser();
                 }                
             }            
             return "failure unknown";
