@@ -5,6 +5,8 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="AUCTION_USER")
+@JsonIgnoreProperties({"password"})
 public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +38,7 @@ public class AuctionUser implements Serializable {
     
     @Column(unique=true)
     private String username;
+    @XmlTransient
     private String password;
     private double sellers_rating;
     private String role;

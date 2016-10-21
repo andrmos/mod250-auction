@@ -19,7 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @EntityListeners(MenuChangeListener.class)
 @Entity
 @Table(name="AUCTION")
+@XmlRootElement
 public class Auction implements Serializable, Comparable<Auction> {
 
     private static final long serialVersionUID = 1L;
