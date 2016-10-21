@@ -31,8 +31,7 @@ public class ActiveAuctionsResource {
     @Context
     private UriInfo context;
 
-    public ActiveAuctionsResource() {
-    }
+    public ActiveAuctionsResource() {}
     
     @EJB
     private AuctionFacade auctionFacade;
@@ -46,8 +45,6 @@ public class ActiveAuctionsResource {
     @Path("/active")
     @Produces(MediaType.APPLICATION_JSON)
     public String getActiveAuctionsJson() {
-        System.out.println("Got json rest hit at /webresources/auctions/active");
-
         List<Auction> auctionList = auctionFacade.getActiveAuctions();
 
         String json;
@@ -55,8 +52,7 @@ public class ActiveAuctionsResource {
         try {
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(auctionList);
         } catch (JsonProcessingException e) {
-            System.out.println("Catched error: JsonProcessingException1!\n" + e.toString());
-            json = "Error";
+            json = "Error parsing JSON...";
         }
 
         return json;
@@ -66,7 +62,6 @@ public class ActiveAuctionsResource {
     @Path("/active")
     @Produces(MediaType.APPLICATION_XML)
     public List<Auction> getActiveAuctionsXml() {
-        System.out.println("Got xml rest hit at /webresources/auctions/active");
         return auctionFacade.getActiveAuctions();
     }
 
