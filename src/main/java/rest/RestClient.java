@@ -1,44 +1,50 @@
 package rest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.io.*;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by andre on 21.10.16.
  */
 public class RestClient {
 
-    // 'application/json' and 'application/xml' supported
-    private static final String acceptFormat = "application/json";
-
     public static void main(String[] args) {
+        String httpsUrl = "https://localhost:8181/mod250_auction/webresources/auctions/active";
         try {
-            URL url = new URL("http://localhost:8080/mod250_auction/webresources/auctions/active");
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", acceptFormat);
+            // Create a context that doesn't check certificates.
+            SSLContext ssl_ctx = SSLContext.getInstance("TLS");
+            TrustManager[] trust_mgr = get_trust_mgr();
+            ssl_ctx.init(null,                // key manager
+                    trust_mgr,           // trust manager
+                    new SecureRandom()); // random number generator
+            HttpsURLConnection.setDefaultSSLSocketFactory(ssl_ctx.getSocketFactory());
 
-            if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
+            URL url = new URL(httpsUrl);
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (conn.getInputStream())));
+            // Guard against "bad hostname" errors during handshake.
+            con.setHostnameVerifier(new HostnameVerifier() {
+                public boolean verify(String host, SSLSession sess) {
+                    if (host.equals("localhost")) return true;
+                    else return false;
+                }
+            });
 
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
-
-            conn.disconnect();
+            printContent(con);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -46,6 +52,48 @@ public class RestClient {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static TrustManager[] get_trust_mgr() {
+        TrustManager[] certs = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return null;
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs, String t) {
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs, String t) {
+                    }
+                }
+        };
+        return certs;
+    }
+
+    private static void printContent(HttpsURLConnection con) {
+        if (con != null) {
+
+            try {
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+
+                String input;
+                while ((input = br.readLine()) != null) {
+                    System.out.println(input);
+                }
+                br.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
