@@ -64,14 +64,4 @@ public class ActiveAuctionsResource {
     public List<Auction> getActiveAuctionsXml() {
         return auctionFacade.getActiveAuctions();
     }
-
-    /**
-     * PUT method for updating or creating an instance of HelloWorld
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.TEXT_PLAIN)
-    public void putText(String content) {
-        // TODO
-    }
 }
