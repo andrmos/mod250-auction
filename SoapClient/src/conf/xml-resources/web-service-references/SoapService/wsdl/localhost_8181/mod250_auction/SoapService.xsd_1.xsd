@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://WebServices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://WebServices/">
+
+<xs:element name="activeAucitons" type="tns:activeAucitons"/>
+
+<xs:element name="activeAucitonsResponse" type="tns:activeAucitonsResponse"/>
+
+<xs:element name="setBid" type="tns:setBid"/>
+
+<xs:element name="setBidResponse" type="tns:setBidResponse"/>
+
+<xs:complexType name="activeAucitons">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="activeAucitonsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:auction" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="auction">
+<xs:sequence>
+<xs:element name="bid" type="tns:bid" minOccurs="0"/>
+<xs:element name="duration" type="xs:long" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="initPrice" type="xs:double"/>
+<xs:element name="product" type="tns:product" minOccurs="0"/>
+<xs:element name="published" type="xs:boolean"/>
+<xs:element name="startTime" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="user" type="tns:auctionUser" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bid">
+<xs:sequence>
+<xs:element name="amount" type="xs:double"/>
+<xs:element name="auctionUser" type="tns:auctionUser" minOccurs="0"/>
+<xs:element name="bidDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="auctionUser">
+<xs:sequence>
+<xs:element name="contactinfo" type="tns:contactInfo" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="role" type="xs:string" minOccurs="0"/>
+<xs:element name="sellers_rating" type="xs:double"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="contactInfo">
+<xs:sequence>
+<xs:element name="address" type="tns:address" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="phoneNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="address">
+<xs:sequence>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="street" type="xs:string" minOccurs="0"/>
+<xs:element name="zip" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="product">
+<xs:sequence>
+<xs:element name="category" type="tns:category" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="picturePath" type="xs:string" minOccurs="0"/>
+<xs:element name="productName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBid">
+<xs:sequence>
+<xs:element name="arg0" type="tns:bid" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBidResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="category">
+<xs:restriction base="xs:string">
+<xs:enumeration value="CLOTHING"/>
+<xs:enumeration value="ELECTRONICS"/>
+<xs:enumeration value="WHITE_WARE"/>
+<xs:enumeration value="JEWLERRY"/>
+<xs:enumeration value="GUNS"/>
+<xs:enumeration value="UNDEFINED"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

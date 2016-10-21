@@ -12,3 +12,5 @@ buildNumber.properties
 *.iml
 /nbactions.xml
 /SoapClient/nbproject/private/
+/SoapClient/build/
+/SoapClient/dist/
