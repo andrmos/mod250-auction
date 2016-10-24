@@ -7,6 +7,7 @@ package entities;
 
 import entityListner.MenuChangeListener;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,8 +50,9 @@ public class Auction implements Serializable, Comparable<Auction> {
     @OneToOne
     @JoinColumn(name="PRODUCT_ID", referencedColumnName="PRODUCT_ID")
     protected Product product;
-    @Temporal(TemporalType.DATE)    
-    private Date startTime;
+    
+    @Temporal(TemporalType.TIMESTAMP)    
+    private java.util.Calendar startTime;
     
     @OneToOne
     @JoinColumn(name="AUCTION_USER_ID", referencedColumnName="AUCTION_USER_ID")
@@ -120,11 +122,11 @@ public class Auction implements Serializable, Comparable<Auction> {
         this.product = product;
     }
     
-    public Date getStartTime() {
+    public java.util.Calendar getStartTime() {
         return startTime;
     }
     
-    public void setStartTime(Date startTime) {
+    public void setStartTime(java.util.Calendar startTime) {
         this.startTime = startTime;
     }
     
@@ -150,17 +152,17 @@ public class Auction implements Serializable, Comparable<Auction> {
 
     @Override
     public int compareTo(Auction o) {
-        Date othertime,thisTime;
+        java.util.Calendar othertime,thisTime;
         try{
-            othertime =new Date(o.getStartTime().getTime());            
-            othertime.setTime(othertime.getTime()+(o.getDuration()*1000));
+            othertime =(Calendar) o.getStartTime().clone();            
+            othertime.add(Calendar.SECOND, Math.toIntExact(o.getDuration()));                    
         }
         catch(Exception e){
             return 0;
         }
         try{
-            thisTime =new Date(getStartTime().getTime());            
-            thisTime.setTime(thisTime.getTime()+(getDuration()*1000));        
+            thisTime =(Calendar) getStartTime().clone();            
+            thisTime.add(Calendar.SECOND, Math.toIntExact(getDuration()));        
         }
         catch(Exception e){
             return 0;

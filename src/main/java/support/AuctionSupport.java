@@ -7,6 +7,7 @@ package support;
 
 import entities.Auction;
 import entities.Bid;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -41,12 +42,12 @@ public class AuctionSupport {
         if(auction.getStartTime()==null){
             return 0;
         }
-        else if(auction.getStartTime()!=null){
-            DateTime finsihedDate = new DateTime(auction.getStartTime()).
-                plusSeconds(auction.getDuration().intValue());
-            DateTime now = new DateTime();
-            if (finsihedDate.isAfter(now)) {
-                return Seconds.secondsBetween(now,finsihedDate).getSeconds();
+        else if(auction.getStartTime()!=null){           
+            Calendar timout= (Calendar) auction.getStartTime().clone();
+            timout.add(Calendar.SECOND, Math.toIntExact(auction.getDuration()));
+            
+            if (timout.after(Calendar.getInstance())) {
+                return Math.toIntExact((timout.getTimeInMillis()-Calendar.getInstance().getTimeInMillis())/1000);
             }
         }            
         return 0;

@@ -13,6 +13,7 @@ import entities.Product;
 import enums.Category;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -183,7 +184,8 @@ public class AddAuctionMB implements Serializable {
         auction.setInitPrice(price);
         // All auctions are published. TODO remove field from db
         auction.setPublished(true); 
-        auction.setStartTime(currentTime.toDate());
+        Calendar calendar= Calendar.getInstance();        
+        auction.setStartTime(calendar);
         auction.setProduct(product);
         auction.setUser(userFacade.getAuctionUser());
         return auction;
