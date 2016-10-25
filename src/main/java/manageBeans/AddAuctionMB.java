@@ -22,6 +22,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
+import support.EBlastScheduler;
 
 /**
  *
@@ -33,6 +34,9 @@ public class AddAuctionMB implements Serializable {
     
     @EJB
     AuctionFacade auctionFacade;
+    
+    @EJB
+    EBlastScheduler eBlastScheduler;
     
     @EJB
     ProductFacade productFacade;
@@ -144,7 +148,7 @@ public class AddAuctionMB implements Serializable {
         Auction auction = createAuction(product);
         productFacade.create(product);
         auctionFacade.create(auction);
-        
+        eBlastScheduler.addTimerToAuction(auction);
         // Redirect to profile
         return "/SellerViews/sellerProfile.xhtml";
     }

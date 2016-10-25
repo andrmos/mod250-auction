@@ -7,20 +7,26 @@ package entityListner;
 
 import Servlets.Push;
 import entities.Auction;
+import javax.ejb.EJB;
+import javax.ejb.Singleton;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
+
 
 /**
  *
  * @author Eier
  */
-public class MenuChangeListener {
+@Singleton
+public class MenuChangeListener {              
+    
     @PostPersist
     @PostUpdate
     @PostRemove
     public void onChange(Auction auction) {
         System.out.println("auciotnListnerWorksWeey");
         Push.sendAll("updateMenu");
+    
     }
 }

@@ -9,7 +9,9 @@ import entities.Auction;
 import entities.Bid;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
@@ -26,9 +28,10 @@ public class AuctionSupport {
      * @return boolean
      *          true if finished, else false
      */
-    public static boolean isAuctionFinished(Auction auction){           
-       return auction.isPublished() && (new DateTime(auction.getStartTime()).
-               plusSeconds(auction.getDuration().intValue()).compareTo(new DateTime())<0);
+    public static boolean isAuctionFinished(Auction auction){  
+      Calendar c= (Calendar) auction.getStartTime().clone();
+      c.add(Calendar.SECOND, Math.toIntExact(auction.getDuration()));
+       return auction.isPublished() && (c.compareTo(Calendar.getInstance())<0);
     }
     
     /**
@@ -47,7 +50,9 @@ public class AuctionSupport {
             timout.add(Calendar.SECOND, Math.toIntExact(auction.getDuration()));
             
             if (timout.after(Calendar.getInstance())) {
-                return Math.toIntExact((timout.getTimeInMillis()-Calendar.getInstance().getTimeInMillis())/1000);
+                long diff = timout.getTimeInMillis()-Calendar.getInstance().getTimeInMillis();
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
+                return Math.toIntExact(seconds)-40;
             }
         }            
         return 0;
@@ -81,4 +86,4 @@ public class AuctionSupport {
             return bid.getAmount();
         }
     }
-}
+} 

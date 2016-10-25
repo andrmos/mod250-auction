@@ -222,8 +222,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
      */
     public int getTimeLeftInSeconds(String id){       
         int numberOfDays=getNumberOfDaysUntilDeadline(id);
-        int secondsLeft=(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))-(numberOfDays*86400));
-        System.out.println(secondsLeft+"så mange sekunder");
+        int secondsLeft=(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))-(numberOfDays*86400));        
         return secondsLeft;       
     }      
 
@@ -235,8 +234,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
      * @throws NumberFormatException 
      */
     public int getNumberOfDaysUntilDeadline(String id) throws NumberFormatException {
-        Double numberOfDays=Math.floor(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))/86400);
-        System.out.println(numberOfDays+"så mange dager");
+        Double numberOfDays=Math.floor(AuctionSupport.secondsToAuctionIsFinished(find(Long.parseLong(id,10)))/86400);        
         return  numberOfDays.intValue();
     }
     

@@ -14,3 +14,4 @@ buildNumber.properties
 /SoapClient/nbproject/private/
 /SoapClient/build/
 /SoapClient/dist/
+/nbproject/
