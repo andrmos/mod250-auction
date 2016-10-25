@@ -42,9 +42,6 @@ private List<Auction> activeAuctions;
  public void initialize(){         
   timerBean.cancelTimer("EBlastScheduler");
    activeAuctions=auctionFacade.getActiveAuctions();    
-       Calendar c= Calendar.getInstance();
-     c.add(Calendar.SECOND, 20);     
-     timerBean.createTimer(c.getTime(), activeAuctions.get(0));
     setUpTimers(activeAuctions);
  }
  

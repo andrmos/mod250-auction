@@ -97,12 +97,17 @@ public class Main extends JPanel  {
             XMLGregorianCalendar xmlCalendar = selectedAuction.getStartTime();
             Calendar expireDate= xmlCalendar.toGregorianCalendar();
             expireDate.add(Calendar.SECOND, Math.toIntExact(selectedAuction.getDuration()));
-            return "Price: "+selectedAuction.getBid().getAmount()+"|Initial price"
+            String price="not set yet";
+            if(selectedAuction.getBid()!=null){
+                price=selectedAuction.getBid().getAmount()+"";
+            }
+            return "Price: "+price+"|Initial price"
                     + selectedAuction.getInitPrice()+ "|Expires: "+ expireDate.getTime().toString()+"|Description: " + selectedAuction.getProduct().getDescription()
                     +"|Title: " +selectedAuction.getProduct().getProductName();
         }
+        
         catch(Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             return "no id selected";
         }
         
