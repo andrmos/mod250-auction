@@ -24,8 +24,7 @@ public class MenuChangeListener {
     @PostPersist
     @PostUpdate
     @PostRemove
-    public void onChange(Auction auction) {
-        System.out.println("auciotnListnerWorksWeey");
+    public void onChange(Auction auction) {        
         Push.sendAll("updateMenu");
     
     }

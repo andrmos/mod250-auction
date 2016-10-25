@@ -6,12 +6,15 @@
 package WebServices;
 
 import boundary.AuctionFacade;
+import boundary.AuctionUserFacade;
 import entities.Auction;
+import entities.AuctionUser;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import entities.Bid;
+import java.util.Calendar;
 import java.util.Objects;
 
 
@@ -29,6 +32,9 @@ public class SoapService {
     
     @EJB
     AuctionFacade auctionFacade;
+    
+    @EJB
+    AuctionUserFacade auctionUserFacade;
            
     @WebMethod(operationName = "activeAucitons")
     public List<Auction> getMyActiveAuctions(){
@@ -37,22 +43,27 @@ public class SoapService {
     }
     
     @WebMethod(operationName="setBid")
-    public String setBid(Bid bid){        
-        try{
-            List<Auction> templist=auctionFacade.getActiveAuctions();
-            for(int i=0; i<templist.size();i++){
-                if(Objects.equals(bid.getAuction().getId(), templist.get(i).getId())){
-                    if(bid.getAmount()>templist.get(i).getBid().getAmount()&&
-                            bid.getAmount()>templist.get(i).getInitPrice()){
-                        templist.get(i).setBid(bid);
+    public String setBid(Double amount, long auctionId, long userID){   
+        AuctionUser auctionUser=auctionUserFacade.find(userID);
+        Bid bid=new Bid();
+        try{            
+            Auction auction= auctionFacade.find(auctionId);            
+                if(auctionFacade.getActiveAuctions().contains(auction)){
+                    if(amount>auction.getBid().getAmount()&&
+                            amount>auction.getInitPrice()){
+                        bid.setAmount(amount);
+                        bid.setAuction(auction);
+                        bid.setAuctionUser(auctionUser);
+                        bid.setBidDate(Calendar.getInstance().getTime());
+                        auction.setBid(bid);
+                        auctionFacade.edit(auction);
                         return "Customer " + bid.getAuctionUser().getUsername() + "'s bid "
                                 + "has been successfully placed for product " + bid.getAuction().getProduct();
                     }   
                     else
                         return "The bid for product " + bid.getAuction().getProduct() + " has not been placed"
                                 + "for Customer " + bid.getAuctionUser();
-                }                
-            }            
+                }                                        
             return "failure unknown";
         }
         catch(Exception e){

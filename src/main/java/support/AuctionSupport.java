@@ -28,10 +28,12 @@ public class AuctionSupport {
      * @return boolean
      *          true if finished, else false
      */
-    public static boolean isAuctionFinished(Auction auction){  
+    public static boolean isAuctionFinished(Auction auction){        
       Calendar c= (Calendar) auction.getStartTime().clone();
+        
       c.add(Calendar.SECOND, Math.toIntExact(auction.getDuration()));
-       return auction.isPublished() && (c.compareTo(Calendar.getInstance())<0);
+        
+       return auction.isPublished() && (c.before(Calendar.getInstance()));
     }
     
     /**
@@ -51,8 +53,8 @@ public class AuctionSupport {
             
             if (timout.after(Calendar.getInstance())) {
                 long diff = timout.getTimeInMillis()-Calendar.getInstance().getTimeInMillis();
-                long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
-                return Math.toIntExact(seconds)-40;
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);                
+                return Math.toIntExact(seconds);
             }
         }            
         return 0;

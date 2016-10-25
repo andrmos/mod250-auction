@@ -4,6 +4,8 @@
 
 <xs:element name="activeAucitonsResponse" type="tns:activeAucitonsResponse"/>
 
+<xs:element name="auction" type="tns:auction"/>
+
 <xs:element name="setBid" type="tns:setBid"/>
 
 <xs:element name="setBidResponse" type="tns:setBidResponse"/>
@@ -82,7 +84,9 @@
 
 <xs:complexType name="setBid">
 <xs:sequence>
-<xs:element name="arg0" type="tns:bid" minOccurs="0"/>
+<xs:element name="arg0" type="xs:double" minOccurs="0"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:long"/>
 </xs:sequence>
 </xs:complexType>
 

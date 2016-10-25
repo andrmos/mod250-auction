@@ -39,11 +39,9 @@ AuctionFacade auctionFacade;
 private List<Auction> activeAuctions;
 
 @PostConstruct
- public void initialize(){     
-    System.out.println("Tuing starterrrrr");
+ public void initialize(){         
   timerBean.cancelTimer("EBlastScheduler");
-   activeAuctions=auctionFacade.getActiveAuctions();
-    System.out.println(activeAuctions.size()+" size");
+   activeAuctions=auctionFacade.getActiveAuctions();    
        Calendar c= Calendar.getInstance();
      c.add(Calendar.SECOND, 20);     
      timerBean.createTimer(c.getTime(), activeAuctions.get(0));
@@ -57,7 +55,7 @@ private List<Auction> activeAuctions;
     }
 
     public void addTimerToAuction(Auction auction) {
-        Calendar c= auction.getStartTime();
+        Calendar c= (Calendar)auction.getStartTime().clone();
         c.add(Calendar.SECOND,Math.toIntExact(auction.getDuration()));
         timerBean.createTimer(c.getTime(),auction);        
     }     

@@ -17,7 +17,7 @@ import javax.ejb.Timeout;
  */
 @Stateless
 public class TimerSchedularForActionWinner {
-
+/*
     
     @Resource
     TimerService timerService;

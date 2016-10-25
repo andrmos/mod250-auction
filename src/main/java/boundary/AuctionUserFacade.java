@@ -142,8 +142,8 @@ public class AuctionUserFacade extends AbstractFacade<AuctionUser> {
         //Adding winning auctions to the winningList
         for(int i = 0; i < list.size(); i++){
            auction = em.find(Auction.class, list.get(i));
-           dateTime = new DateTime(auction.getStartTime());
-           dateTime = dateTime.plusSeconds(auction.getDuration().intValue());
+           dateTime = new DateTime(auction.getStartTime().clone());
+           dateTime = dateTime.plusSeconds(Math.toIntExact(auction.getDuration()));
            
            if(isOver){ //if auction is done
                 if(dateTime.compareTo(nowDate) <= 0){
