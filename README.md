@@ -10,6 +10,7 @@ Auction house web application created in Java EE. Developed as part of course MO
 - Overview of your bids
 - Overview of your auctions
 - Use of HTTPS
+- Topic subscription with JMS, the topic notifies when an Auction is finshed
 
 ### Users
 There are two types of users, sellers and customers.
