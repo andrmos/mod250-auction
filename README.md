@@ -47,6 +47,7 @@ Places a bid on an auction, giving a response message if the bid was successful 
 Clone project from GitHub. Build using Maven ex. in Netbeans.
 The project requires:
 - Installation of Glasshfish Server v. 4.1.1.
+  - Include project glassfish resources: ```asadmin add-resources 'path-to-project/src/main/webapp/WEB-INF/glassfish-resources.xml'```
 - Setup postgresql database in Netbeans.
 - Setup of jdbc authentication realm in Glasshfish. If you're familiar with Glassfish, this should be straight forward. More information can be found here: https://dzone.com/articles/jdbc-realm-and-form-based
 
