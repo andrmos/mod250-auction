@@ -38,7 +38,7 @@ List<Auction> getActiveAuctions()
 ```
 Returns list of current active auctions.
 ```
-String bidForAuction(Bid newBid)
+String bidForAuction(Double value, Long auctionId, Long auctionUserID)
 ```
 Places a bid on an auction, giving a response message if the bid was successful or not.
 
